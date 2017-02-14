@@ -1,0 +1,6 @@
+framework module JHKVideoPlayer {
+  umbrella header "JHKVideoPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}

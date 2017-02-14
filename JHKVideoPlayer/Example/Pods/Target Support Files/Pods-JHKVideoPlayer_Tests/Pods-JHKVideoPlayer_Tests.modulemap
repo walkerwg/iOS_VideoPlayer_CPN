@@ -1,0 +1,6 @@
+framework module Pods_JHKVideoPlayer_Tests {
+  umbrella header "Pods-JHKVideoPlayer_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

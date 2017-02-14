@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'JHKVideoPlayer_Example' do
+  pod 'JHKVideoPlayer', :path => ‘../JHKVideoPlayer.podspec’
+
+  target 'JHKVideoPlayer_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,27 @@
+{
+  "name": "JHKVideoPlayer",
+  "version": "0.1.0",
+  "summary": "JHKVideoPlayer - A video player for JHK company.",
+  "description": "This is a video player control written by Swift, which achieved a highly complete function and determined fully interface for user to make self-design.",
+  "homepage": "http://10.18.207.188/#/admin/projects/iOSModules/iOS_VideoPlayer_CPN",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "luis_gin": "hanqing93@gmail.com"
+  },
+  "source": {
+    "git": "http://10.18.207.188/#/admin/projects/iOSModules/iOS_VideoPlayer_CPN.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "JHKVideoPlayer/Classes/**/*",
+  "resource_bundles": {
+    "JHKVideoPlayer": [
+      "JHKVideoPlayer/Assets/*"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+PODS:
+  - JHKVideoPlayer (0.1.0)
+
+DEPENDENCIES:
+  - JHKVideoPlayer (from `../JHKVideoPlayer.podspec`)
+
+EXTERNAL SOURCES:
+  JHKVideoPlayer:
+    :path: ../JHKVideoPlayer.podspec
+
+SPEC CHECKSUMS:
+  JHKVideoPlayer: d1a53d86e93dfe7d3f9b69558cd8390a10dfc949
+
+PODFILE CHECKSUM: 4c0086c91b2934ec14ab1904359a52affc0d6112
+
+COCOAPODS: 1.2.0
