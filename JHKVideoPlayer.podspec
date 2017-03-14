@@ -25,7 +25,7 @@ This is a video player control written by Swift, which achieved a highly complet
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'luis_gin' => 'hanqing93@gmail.com' }
-  s.source           = { :git => 'http://10.18.207.188/#/admin/projects/iOSModules/iOS_VideoPlayer_CPN.git', :tag => s.version.to_s }
+  s.source           = { :path => '~/Desktop/HisenseComponent/iOS_VideoPlayer_CPN', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'

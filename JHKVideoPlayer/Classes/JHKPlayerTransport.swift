@@ -59,8 +59,8 @@ public struct JHKPlayerActionClosure {
     @objc optional func playPreviewsVideo()
     @objc optional func quitVideoPlayer()
     @objc optional func pushScreenAction()
-    @objc optional func moreMenuAction()
-    @objc optional func determinedDefinition()
+    @objc optional func moreMenuAction() -> UIView
+    @objc optional func determinedDefinition() -> UIView
 }
 
 public protocol JHKPlayerDelegate: JHKPlayerActionsDelegate, JHKPlayerGestureHandler, JHKPlayerCallBack {}

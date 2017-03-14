@@ -38,7 +38,7 @@ public enum JHKPlayerContentFillMode: Int {
 /// - Version: v0.1.1
 open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
 
-// MARK: - states signal
+    // MARK: - states signal
     /// Status for video player
     ///
     /// - Default: default value as JHKVideoPlayerState.stop
@@ -74,7 +74,6 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
     public var isFull: JHKPlayerFullScreenMode = .normal {
         didSet {
             if isFull == .normal {
-                self.frame = self.originFrame!
                 let image = UIImage.imageInBundle(named: "player_full")
                 controlView?.fullOrSmallButton.setBackgroundImage(image, for: .normal)
                 if (self.playerDelegate?.responds(to: NSSelectorFromString("playerDidShrink")))! {
@@ -85,9 +84,10 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
                     self.controlView?.moreButton.removeFromSuperview()
                     self.controlView?.topControlsArray.remove(self.controlView?.moreButton)
                 }
+                self.frame = self.originFrame!
+                controlView?.setNeedsLayout()
             }
             else {
-                self.frame = (self.window?.bounds)!
                 let image = UIImage.imageInBundle(named: "player_shrink")
                 controlView?.fullOrSmallButton.setBackgroundImage(image, for: .normal)
                 if (self.playerDelegate?.responds(to: NSSelectorFromString("playerDidFull")))! {
@@ -96,6 +96,8 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
                     self.controlView?.bottomControlsArray.add(self.controlView?.definitionButton)
                     self.controlView?.topControlsArray.add(self.controlView?.moreButton)
                 }
+                self.frame = (self.window?.bounds)!
+                controlView?.setNeedsLayout()
             }
         }
     }
@@ -260,6 +262,15 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         controlView?.menuContentColor = color
     }
 
+    /// Function provide instance for side menu
+    public func setMenuContent(view: UIView) {
+        view.frame = (controlView?.sideMenu.bounds)!
+        for view in (controlView?.sideMenu.subviews)! {
+            view.removeFromSuperview()
+        }
+        controlView?.sideMenu.addSubview(view)
+    }
+
 // MARK: - Manager methods
     // Remove Observers
     public func RemoveObservers() {
@@ -269,10 +280,11 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         }
         playerItem?.removeObserver(self, forKeyPath: "status", context: nil)
         playerItem?.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
-        player?.removeTimeObserver(playbackTimeObserver!)
+        if playbackTimeObserver != nil {
+            player?.removeTimeObserver(playbackTimeObserver!)
+        }
         playbackTimeObserver = nil
         NotificationCenter.default.removeObserver(self)
-        NotificationCenter.default.addObserver(self, selector: #selector(orientChange(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
     
     @objc fileprivate func orientChange(_ notification: NSNotification) {
@@ -526,10 +538,9 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         // Turn back button closure
         JHKPlayerActionClosure.turnBackClosure = { [weak self] in
             guard let sself = self else { return }
+            sself.playState = .stop
             if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("quitVideoPlayer")))! {
                 sself.playerDelegate?.quitVideoPlayer!()
-            } else {
-                sself.playState = .stop
             }
         }
 
@@ -539,7 +550,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("playNextVideo")))! {
                 sself.playerDelegate?.playNextVideo!()
             } else {
-                sself.playState = .stop
+                print("Play next action")
             }
         }
 
@@ -549,7 +560,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("playPreviewsVideo")))! {
                 sself.playerDelegate?.playPreviewsVideo!()
             } else {
-                sself.playState = .stop
+               print("Play previous action")
             }
         }
 
@@ -558,8 +569,6 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             guard let sself = self else { return }
             if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("pushScreenAction")))! {
                 sself.playerDelegate?.pushScreenAction!()
-            } else {
-                sself.playState = .stop
             }
         }
 
@@ -567,9 +576,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         JHKPlayerActionClosure.moreInfoClosure = { [weak self] in
             guard let sself = self else { return }
             if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("moreMenuAction")))! {
-                sself.playerDelegate?.moreMenuAction!()
-            } else {
-                sself.playState = .stop
+                sself.setMenuContent(view: (sself.playerDelegate?.moreMenuAction!())!)
             }
         }
 
@@ -577,9 +584,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         JHKPlayerActionClosure.changeDefinitionClosure = { [weak self] in
             guard let sself = self else { return }
             if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("determinedDefinition")))! {
-                sself.playerDelegate?.determinedDefinition!()
-            } else {
-                sself.playState = .stop
+                sself.setMenuContent(view: (sself.playerDelegate?.determinedDefinition!())!)
             }
         }
 
@@ -604,7 +609,7 @@ extension UIImage {
         let image = UIImage(named: name, in: bundle, compatibleWith: nil)
         return image
     }
-    
+
     /// Extension for determined specific Image resources in the bundle of CocoaPods Component
     ///
     /// - Parameter name: (String) - image name in bundle

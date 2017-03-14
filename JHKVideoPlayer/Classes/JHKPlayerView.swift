@@ -24,6 +24,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
             for subView in subviews {
                 subView.isHidden = isMenuHidden
             }
+            isSideMenuShow = false
         }
     }
     public var autoHiddenMenu: Bool = true
@@ -31,6 +32,16 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     // Signal of gesture directions
     public var horizontalSignal: Bool = false
     public var gestureLeftSignal: Bool = false
+    public var sideMenuForDefinition: Bool?
+    public var isSideMenuShow: Bool = false {
+        didSet {
+            if isSideMenuShow {
+                pushSideMenu()
+            } else {
+                hideSideMenu()
+            }
+        }
+    }
 
 // MARK: - UIControls
     // Collect views into arrays to fit auto layout
@@ -46,16 +57,24 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     }
     /// Top menu of player
     public lazy var topBar: UIView = {
-        let topBar = UIView()
-        topBar.backgroundColor = self.menuContentColor
-        return topBar
+        let view = UIView()
+        view.backgroundColor = self.menuContentColor
+        return view
     }()
 
     /// Bottom menu of player
     public lazy var bottomBar: UIView = {
-        let bottomBar = UIView()
-        bottomBar.backgroundColor = self.menuContentColor
-        return bottomBar
+        let view = UIView()
+        view.backgroundColor = self.menuContentColor
+        return view
+    }()
+
+    /// Side menu of player
+    public lazy var sideMenu: UIView = {
+        let view = UIView()
+        view.backgroundColor = self.menuContentColor
+        view.clipsToBounds = true
+        return view
     }()
 
     /// Title label on top menu
@@ -212,7 +231,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     /// Definion setting
     open lazy var definitionButton: UIButton = {
         let button = UIButton()
-        button.setTitle("高清", for: .normal)
+        button.setTitle("标清", for: .normal)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1
@@ -238,14 +257,13 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         // FIXME:  增添三元条件分支匹配最小值
         bottomBar.frame = CGRect(x: 0, y: self.frame.height * 6 / 7 - 16, width: self.frame.width, height: self.frame.height / 7 + 16)
         returnButton.frame = CGRect(x: 5, y: 5, width: topBar.frame.height - 10, height: topBar.frame.height - 10)
-        titleLabel.frame = CGRect(x: topBar.frame.height + 5, y: 0, width: self.frame.width - topBar.frame.height * 2 - 10, height: topBar.frame.height)
-        titleLabel.font = UIFont.systemFont(ofSize: titleLabel.frame.height * 2 / 3)
-        pushButton.frame = CGRect(x: self.frame.width - topBar.frame.height * 3 / 2, y: 0, width: topBar.frame.height, height: topBar.frame.height)
         for i in 1...topControlsArray.count {
             let view: UIView = topControlsArray[i - 1] as! UIView
             topBar.addSubview(view)
             view.frame = CGRect(x: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count - i) - topBar.frame.height * 1.3, y: 0, width: topBar.frame.height, height: topBar.frame.height)
         }
+        titleLabel.frame = CGRect(x: topBar.frame.height + 5, y: 0, width: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count + 1) - 10, height: topBar.frame.height)
+        titleLabel.font = UIFont.systemFont(ofSize: titleLabel.frame.height * 4 / 7)
         playSlider.frame = CGRect(x: 0, y: 0, width: bottomBar.frame.width, height: 10)
         let insetH: CGFloat = playSlider.frame.height
         loadProgressView.frame = CGRect(x: 0, y: insetH / 2, width: bottomBar.frame.width , height: insetH)
@@ -286,6 +304,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         bottomBar.addSubview(fullOrSmallButton)
         bottomBar.addSubview(currentTimeLabel)
         bottomBar.addSubview(totalTimeLabel)
+        self.addSubview(sideMenu)
         dragHub.addSubview(dragLabel)
         self.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
@@ -459,6 +478,12 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 
     /// More infomation action
     public func moreButtonAction() {
+        if sideMenuForDefinition == false {
+            isSideMenuShow = !isSideMenuShow
+        } else {
+            sideMenuForDefinition = false
+            isSideMenuShow = true
+        }
         if JHKPlayerActionClosure.moreInfoClosure != nil {
             JHKPlayerActionClosure.moreInfoClosure!()
         }
@@ -466,6 +491,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 
     /// Previews action
     public func previewsAction() {
+        isSideMenuShow = false
         if JHKPlayerActionClosure.playPreviousClosure != nil {
             JHKPlayerActionClosure.playPreviousClosure!()
         }
@@ -473,6 +499,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 
     /// Next action
     public func nextAction() {
+        isSideMenuShow = false
         if JHKPlayerActionClosure.playNextClosure != nil {
             JHKPlayerActionClosure.playNextClosure!()
         }
@@ -480,6 +507,12 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 
     /// Change definition
     public func changeDefinitionAction() {
+        if sideMenuForDefinition == true {
+            isSideMenuShow = !isSideMenuShow
+        } else {
+            sideMenuForDefinition = true
+            isSideMenuShow = true
+        }
         if JHKPlayerActionClosure.changeDefinitionClosure != nil {
             JHKPlayerActionClosure.changeDefinitionClosure!()
         }
@@ -520,6 +553,23 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     /// Function to hide all subviews
     public func hideMenu() {
         self.isMenuHidden = true
+    }
+
+    /// Function to push side menu to screen
+    public func pushSideMenu() {
+        sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
+        UIView.animate(withDuration: 0.25, animations: {
+            let q: CGFloat
+            if self.sideMenuForDefinition! { q = 4 } else { q = 3 }
+            self.sideMenu.frame = CGRect(x: self.frame.width * q / 5, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
+        })
+    }
+
+    /// Function to hide side menu from screen
+    public func hideSideMenu() {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
+        })
     }
 
     /// Add control to components array
