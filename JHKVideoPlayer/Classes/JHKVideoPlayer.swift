@@ -1,8 +1,8 @@
 //
 //  JHKVideoPlayer.swift
 //  JHKVideoPlayer
-//  This is the core .swift file for JHKVideoPlayer
 //
+//  This is the core .swift file for JHKVideoPlayer
 //
 //  Created by LuisGin on 17/2/7.
 //  Copyright © 2017 LuisGin. All rights reserved.
@@ -36,7 +36,7 @@ public enum JHKPlayerContentFillMode: Int {
 ///
 /// - Author: Luis Gin
 /// - Version: v0.1.1
-open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
+open class JHKVideoPlayer: UIView {
 
     // MARK: - states signal
     /// Status for video player
@@ -45,27 +45,21 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
     /// - SeeAlso: JHKVideoPlayerState
     public var playState: JHKVideoPlayerState = .stop {
         didSet {
-            if oldValue != playState {
-                switch playState {
-                case .playing:
-                    self.player?.play()
-                    let image = UIImage.imageInBundle(named: "btn_pause")
-                    controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
-                    if link == nil {
-                        link = CADisplayLink(target: self, selector: #selector(checkLag))
-                        link?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
-                    }
-                case .pause:
-                    self.player?.pause()
-                    let image = UIImage.imageInBundle(named: "btn_play")
-                    controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
-                    if link != nil {
-                        link?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
-                        link = nil
-                    }
-                case .stop:
-                    self.stopPlay()
-                }
+            switch playState {
+            case .playing:
+                self.player?.play()
+                let image = UIImage.imageInBundle(named: "btn_pause")
+                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
+            case .pause:
+                self.player?.pause()
+                // 开始监听方法，暂停监听信号，原因是当程序后台运行时及延迟播放时需要不改变信号但执行方法
+                playerPausePlaying()
+                let image = UIImage.imageInBundle(named: "btn_play")
+                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
+            case .stop:
+                let image = UIImage.imageInBundle(named: "btn_play")
+                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
+                controlView?.resetStatus()
             }
         }
     }
@@ -76,26 +70,18 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             if isFull == .normal {
                 let image = UIImage.imageInBundle(named: "player_full")
                 controlView?.fullOrSmallButton.setBackgroundImage(image, for: .normal)
-                if (self.playerDelegate?.responds(to: NSSelectorFromString("playerDidShrink")))! {
-                    self.playerDelegate?.playerDidShrink!()
-                } else {
-                    self.controlView?.definitionButton.removeFromSuperview()
-                    self.controlView?.bottomControlsArray.remove(self.controlView?.definitionButton)
-                    self.controlView?.moreButton.removeFromSuperview()
-                    self.controlView?.topControlsArray.remove(self.controlView?.moreButton)
-                }
-                self.frame = self.originFrame!
+                controlView?.definitionButton.removeFromSuperview()
+                controlView?.bottomControlsArray.remove(self.controlView?.definitionButton)
+                controlView?.moreButton.removeFromSuperview()
+                controlView?.topControlsArray.remove(self.controlView?.moreButton)
+                self.frame = originFrame!
                 controlView?.setNeedsLayout()
             }
             else {
                 let image = UIImage.imageInBundle(named: "player_shrink")
                 controlView?.fullOrSmallButton.setBackgroundImage(image, for: .normal)
-                if (self.playerDelegate?.responds(to: NSSelectorFromString("playerDidFull")))! {
-                    self.playerDelegate?.playerDidFull!()
-                } else {
-                    self.controlView?.bottomControlsArray.add(self.controlView?.definitionButton)
-                    self.controlView?.topControlsArray.add(self.controlView?.moreButton)
-                }
+                controlView?.bottomControlsArray.add(self.controlView?.definitionButton)
+                controlView?.topControlsArray.add(self.controlView?.moreButton)
                 self.frame = (self.window?.bounds)!
                 controlView?.setNeedsLayout()
             }
@@ -104,31 +90,32 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
 
     public var fillMode: JHKPlayerContentFillMode = .normal
 
-// MARK: - delegate
+    // MARK: - delegate
     // player delegate for further use
-    public weak var playerDelegate: JHKPlayerDelegate?
+    public weak var actionDelegate: JHKPlayerActionsDelegate?
 
-// MARK: - custom setting
+    // MARK: - custom setting
     // Custom settings for appearance
     open var autoStart: Bool = true
     open var autoNext: Bool = true
     open var autoDismissMenu: Bool = true
     open var autoLandscape: Bool = UIDevice.current.userInterfaceIdiom == .phone
     open var hideStatusBarWhenFullScreen: Bool = true
+    public var breakPoint: CGFloat?
 
-// MARK: - Core component
+    // MARK: - Core component
     // Lazy load AVPlayer as the core media player
-    public var player: AVPlayer?
-    public var playerLayer: AVPlayerLayer?
-    public var playerItem: AVPlayerItem?
-    public var playerAsset: AVURLAsset?
-    public var snapshotGenerator: AVAssetImageGenerator?
-    public var imageOutPut: AVPlayerItemOutput?
+    private var player: AVPlayer?
+    private var playerLayer: AVPlayerLayer?
+    private var playerItem: AVPlayerItem?
+    private var playerAsset: AVURLAsset?
+    private var snapshotGenerator: AVAssetImageGenerator?
+    private var imageOutPut: AVPlayerItemOutput?
 
     // Control Menu
     public var controlView: JHKPlayerView?
 
-// MARK: - Data
+    // MARK: - Data
     // Origin frame
     fileprivate var originFrame: CGRect?
     
@@ -138,12 +125,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             controlView?.titleLabel.text = videoTitle!
         }
     }
-//    var videoDescription: String? {
-//        didSet {
-//            controlView?.titleLabel.text = videoTitle! + videoDescription!
-//        }
-//    }
-    
+
     // Loaded video length
     public var loadedTime: CGFloat? {
         didSet {
@@ -161,7 +143,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             controlView?.currentTimeLabel.text = "\(timeCurrent)"
         }
     }
-    
+
     // Total video length
     public var totalTime: CGFloat? {
         didSet {
@@ -171,7 +153,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             controlView?.playSlider.maximumValue = Float(totalTime)
         }
     }
-    
+
     // Resources url for the media
     public var mediaURL: URL? {
         didSet {
@@ -179,10 +161,12 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         }
     }
     // Interaction with system flush interval
-    public var link: CADisplayLink?
+    fileprivate var link: CADisplayLink?
     public var localeTime: TimeInterval?
-    
-// MARK: - Air play support
+    // Monitoring playing call back
+    fileprivate var playbackTimeObserver: Any?
+
+    // MARK: - Air play support
 //    var allowsExternalPlayback = true
 //    var isExternalPlaybackActive: Bool {
 //      guard let player = self.player else {
@@ -191,7 +175,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
 //    return player.isExternalPlaybackActive
 //  }
     
-// MARK: - Public Util Function
+    // MARK: - Public Util Function
     public func formatTimer(_ time: CGFloat) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(time))
         let formatter = DateFormatter()
@@ -202,43 +186,20 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         }
         return formatter.string(from: date)
     }
-    
+
+    // Check if network is in lag
     public func checkLag() {
         let current: TimeInterval = CMTimeGetSeconds((player?.currentTime())!)
+        // TODO: 比较条件逻辑未完全完成
         if current == localeTime {
-            if JHKPlayerClosure.playerDelayClosure != nil {
-                JHKPlayerClosure.playerDelayClosure!(true)
-            }
+            playerDelay(true)
         } else {
-            if JHKPlayerClosure.playerDelayClosure != nil {
-                JHKPlayerClosure.playerDelayClosure!(false)
-            }
+            playerDelay(false)
         }
         localeTime = current
     }
-    
-// MARK: - Logical methods
-    // Stop video player and deallocate
-    open func stopPlay() {
-        UIApplication.shared.isIdleTimerDisabled = false
-        RemoveObservers()
-        player?.rate = 0
-        player?.replaceCurrentItem(with: nil)
-        playerItem = nil
-        player = nil
-        let image = UIImage.imageInBundle(named: "btn_play")
-        controlView?.playSlider.setValue(0, animated: true)
-        controlView?.loadProgressView.setProgress(0, animated: false)
-        controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
-    }
 
-    // Player finish playing current video
-    func playfinish(_ notification: NSNotification) {
-        player?.seek(to: kCMTimeZero, completionHandler: {_ in
-            JHKPlayerClosure.playerFinishClosure!()
-        })
-    }
-    
+    // MARK: - Logical methods
     // Calculate cache memory
     fileprivate func playerAvailableDuration() -> TimeInterval {
         let loadedTimeRange = player?.currentItem?.loadedTimeRanges
@@ -248,9 +209,9 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         let result = startSeconds + durationSeconds
         return result
     }
-    
+
     // judge if have local file loaded
-    fileprivate func isFileExistsAtPath(_ url: URL) {
+    fileprivate func checkLocalFileExistsAtPath(_ url: URL) {
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: url.absoluteString) == true {
             mediaURL = URL(fileURLWithPath: url.absoluteString)
@@ -258,7 +219,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
     }
 
     /// Set background color for all menus related to view player
-    fileprivate func setMenuBackgroundColor(color: UIColor) {
+    public func setMenuBackgroundColor(color: UIColor) {
         controlView?.menuContentColor = color
     }
 
@@ -271,55 +232,45 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         controlView?.sideMenu.addSubview(view)
     }
 
-// MARK: - Manager methods
+    // MARK: - Manager methods
     // Remove Observers
     public func RemoveObservers() {
+        if playbackTimeObserver != nil {
+            player?.removeTimeObserver(playbackTimeObserver!)
+            playbackTimeObserver = nil
+        }
         if link != nil {
             link?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
             link = nil
         }
         playerItem?.removeObserver(self, forKeyPath: "status", context: nil)
         playerItem?.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
-        if playbackTimeObserver != nil {
-            player?.removeTimeObserver(playbackTimeObserver!)
-        }
-        playbackTimeObserver = nil
-        NotificationCenter.default.removeObserver(self)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationWillResignActive, object: playerItem)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIApplicationDidBecomeActive, object: playerItem)
     }
     
     @objc fileprivate func orientChange(_ notification: NSNotification) {
-        let origent = UIDevice.current.orientation
-        if JHKPlayerClosure.deviceOrientClosure != nil{
-            JHKPlayerClosure.deviceOrientClosure!(origent)
-        }
+        let orient = UIDevice.current.orientation
+        self.deviceOrient(orient)
     }
     
     @objc fileprivate func playerFinishPlay(_ notification: NSNotification) {
-        player?.seek(to: kCMTimeZero, completionHandler: {_ in
-            JHKPlayerClosure.playerFinishClosure!()
+        player?.seek(to: kCMTimeZero, completionHandler: { _ in
+            self.playerFinishedPlay()
         })
     }
     
     @objc fileprivate func appDidEnterBackground() {
         if playState == .playing {
-            player?.pause()
+            playerPausePlaying()
         }
     }
-    
+
     @objc fileprivate func appDidEnterForeground() {
         if playState == .playing {
-            player?.play()
+            playerStartPlaying()
         }
-    }
-    
-    // Monitoring playing call back
-    fileprivate var playbackTimeObserver: Any?
-    fileprivate func monitoringPlayerBack() {
-        playbackTimeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil, using: { [weak self](time) in
-            guard let sself = self else { return }
-            let currentSecond = CGFloat((sself.playerItem?.currentTime().value)!) / CGFloat((sself.playerItem?.currentTime().timescale)!)
-            sself.currentTime = currentSecond
-        })
     }
     
 // MARK: - init methods
@@ -335,9 +286,9 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
     }
 
     // Init with media url
-    public convenience init(url: NSString) {
-        self.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        let urlFromString = URL(string: url as String)
+    public convenience init(url: String) {
+        self.init(frame: .zero)
+        let urlFromString = URL(string: url)
         self.mediaURL = urlFromString
     }
 
@@ -348,7 +299,8 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
 
     // Destory observers while inallocation
     deinit {
-        RemoveObservers()
+        NotificationCenter.default.removeObserver(self)
+        print("Successfully destory video player")
     }
 
     override open func layoutSubviews() {
@@ -366,16 +318,14 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             player = nil
             RemoveObservers()
         }
-
         if controlView == nil {
             controlView = JHKPlayerView()
             self.addSubview(controlView!)
         }
-        JHKNotificationClosure()
         JHKControlClosure()
 
         // Determined use local file or outside link
-        isFileExistsAtPath(mediaURL!)
+        checkLocalFileExistsAtPath(mediaURL!)
         playerAsset = AVURLAsset(url: mediaURL!, options: nil)
         playerItem = AVPlayerItem(asset: playerAsset!)
 
@@ -394,11 +344,7 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
             self.playerLayer = AVPlayerLayer(player: player)
             self.layer.insertSublayer(playerLayer!, at: 0)
         }
-
         addObservers()
-        if autoStart {
-            player?.play()
-        }
     }
 
     /// Add observes for player status and state value
@@ -408,111 +354,148 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(orientChange(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playerFinishPlay(_:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: Notification.Name.UIApplicationWillResignActive, object: playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(JHKVideoPlayer.appDidEnterBackground), name: Notification.Name.UIApplicationWillResignActive, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterForeground), name: Notification.Name.UIApplicationDidBecomeActive, object: playerItem)
     }
 
+    /// KVO responses. React immediately after playerItem status change and loading cache change.
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         let playerItem = object as? AVPlayerItem
         if keyPath == "status" {
             if playerItem?.status == .readyToPlay {
-                // Player successfully load the video
+                // Player successfully load the video, status readyToPlay
                 let duration = CMTimeGetSeconds((playerItem?.duration)!)
                 totalTime = CGFloat(duration)
-
-                if JHKPlayerClosure.playerSuccessClosure != nil {
-                    JHKPlayerClosure.playerSuccessClosure!()
+                if autoStart {
+                    playerStartPlaying()
                 }
-                monitoringPlayerBack()
             } else {
-                // Player fail to load the video
-                if JHKPlayerClosure.playerFailClosure != nil {
-                    JHKPlayerClosure.playerFailClosure!()
-                }
+                // Player fail to load the video, status unknown or fail
+                playerFailToLoad()
             }
         } else if keyPath == "loadedTimeRanges" {
             let timeInterval = playerAvailableDuration()
             let duration = CMTimeGetSeconds((playerItem?.duration)!)
-
-            self.loadedTime = CGFloat(timeInterval / duration)
+            loadedTime = CGFloat(timeInterval / duration)
         }
     }
 
-// MARK: - Blocks
-    open func JHKNotificationClosure() {
-
-        // Video successfully loaded call back
-        JHKPlayerClosure.playerSuccessClosure = { [weak self] in
-            guard let sself = self else { return }
-            if sself.autoStart == true {
-                //sself.controlView?.loadingIndicator.stopAnimating()
-                //sself.controlView?.loadingIndicator.hidesWhenStopped = true
-                sself.playState = .playing
-            }
-        }
-
-        // Video fail to init resource call back
-        JHKPlayerClosure.playerFailClosure = { [weak self] in
-            guard let sself = self else { return }
-            sself.playState = .stop
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 5.0, execute: {
-                sself.controlView?.loadingIndicator.stopAnimating()
-                sself.controlView?.loadingIndicator.hidesWhenStopped = true
-                sself.playState = .stop
+    /// Call when video successfully loaded, anounced that player is ready to play.
+    public func playerStartPlaying() {
+        controlView?.loadingIndicator.stopAnimating()
+        playState = .playing
+        if playbackTimeObserver == nil {
+            playbackTimeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil, using: { [weak self](time) in
+                guard let sself = self else { return }
+                let currentSecond = CGFloat((sself.playerItem?.currentTime().value)!) / CGFloat((sself.playerItem?.currentTime().timescale)!)
+                sself.currentTime = currentSecond
+                // TODO: 暂时使用的是传入断点的方式，若逻辑趋于复杂，可使用传出监听方式
+                if sself.breakPoint != nil && currentSecond >= sself.breakPoint! {
+                    sself.lockPlayer(with: "锁屏提示语", action: "超链接", handler: nil)
+                }
+                //self?.actionDelegate?.breakPointListener(time: currentSecond)
             })
         }
+        if link == nil {
+            link = CADisplayLink(target: self, selector: #selector(checkLag))
+            link?.add(to: RunLoop.main, forMode: .defaultRunLoopMode)
+        }
+        actionDelegate?.startPlayingListener()
+    }
 
-        // Player finish closure
-        JHKPlayerClosure.playerFinishClosure = { [weak self] in
-            guard let sself = self else { return }
-            sself.playState = .stop
-            if sself.autoNext && (sself.playerDelegate?.responds(to: NSSelectorFromString("playNextVideo")))! {
-                sself.playerDelegate?.playNextVideo!()
+    /// Call when video pause play, anounced that player is paused and.
+    public func playerPausePlaying() {
+        if playbackTimeObserver != nil {
+            player?.removeTimeObserver(playbackTimeObserver!)
+            playbackTimeObserver = nil
+        }
+        if link != nil {
+            link?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
+            link = nil
+        }
+    }
+
+    // Stop video player and deallocate
+    public func playerStopPlaying() {
+        UIApplication.shared.isIdleTimerDisabled = false
+        RemoveObservers()
+        playState = .stop
+        player?.rate = 0
+        player?.replaceCurrentItem(with: nil)
+        playerItem = nil
+        player = nil
+    }
+
+    /// Call when player fail to load resource, anounced that resource is not valid.
+    private func playerFailToLoad() {
+        playState = .stop
+        controlView?.loadingIndicator.stopAnimating()
+    }
+
+    /// Call when player finished playing current video, anounced for further setting.
+    private func playerFinishedPlay() {
+        playState = .stop
+        if autoNext {
+            actionDelegate?.playNextAction()
+        }
+    }
+
+    public func lockPlayer(with warning: String?, action: String?, handler: (() -> (Void))?) {
+        playerStopPlaying()
+        controlView?.setUpLockMask(message: warning!, button: action)
+        controlView?.insertSubview((controlView?.lockMaskView)!, at: 0)
+
+        controlView?.autoHiddenMenu = false
+        controlView?.bottomBar.isUserInteractionEnabled = false
+    }
+
+    public func unlocakPlayer() {
+        controlView?.lockMaskView.removeFromSuperview()
+
+        controlView?.autoHiddenMenu = true
+        controlView?.bottomBar.isUserInteractionEnabled = true
+    }
+
+    /// Orient change response
+    private func deviceOrient(_ orient: UIDeviceOrientation) {
+        if autoLandscape {
+            if orient == .portrait {
+                isFull = .normal
+            } else if orient == .landscapeLeft || orient == .landscapeRight {
+                isFull = .full
             }
         }
+    }
 
-        // Orient change closure
-        JHKPlayerClosure.deviceOrientClosure = {[weak self] (origent) in
-            guard let sself = self else { return }
-            if sself.autoLandscape == true {
-                if origent == UIDeviceOrientation.portrait {
-                    sself.isFull = .normal
-                } else if origent == UIDeviceOrientation.landscapeLeft || origent == UIDeviceOrientation.landscapeRight {
-                    sself.isFull = .full
-                }
-            }
+    /// Delay player playing until checkLag return true
+    private func playerDelay(_ flag: Bool) {
+        if flag == true && playState == .stop {
+            self.controlView?.loadingIndicator.startAnimating()
+            playerPausePlaying()
+        } else {
+            self.controlView?.loadingIndicator.stopAnimating()
         }
+    }
 
-        // Delay play if there is lag
-        JHKPlayerClosure.playerDelayClosure = { [weak self] (flag) in
-            guard let sself = self else { return }
-            if flag == true && sself.playState == .stop {
-                sself.controlView?.loadingIndicator.startAnimating()
-            } else {
-                sself.controlView?.loadingIndicator.stopAnimating()
-                sself.controlView?.loadingIndicator.hidesWhenStopped = true
-            }
-        }
+    // MARK: - Blocks, Implement closures for player controls
+    open func JHKControlClosure() {
 
         // Processor changing closure
         JHKPlayerClosure.sliderValueChangeClosure = { [weak self] (time) in
             guard let sself = self else { return }
             sself.player?.seek(to: CMTime.init(seconds: Double(time), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
+            sself.currentTime = CGFloat(time)
             sself.playState = .pause
         }
 
         // Processor change end closure
         JHKPlayerClosure.sliderDragedClosure = { [weak self] in
             guard let sself = self else { return }
-            sself.playState = .playing
+            sself.playerStartPlaying()
         }
-    }
-
-    /// Implement closures for player controls
-    open func JHKControlClosure() {
 
         // Change mode of full screen or shrink screen
-        JHKPlayerActionClosure.fullOrShrinkClosure = { [weak self] in
+        JHKPlayerClosure.fullOrShrinkClosure = { [weak self] in
             guard let sself = self else { return }
             if sself.isFull == .normal {
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
@@ -522,13 +505,13 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         }
 
         // Change playing states closure
-        JHKPlayerActionClosure.playOrPauseClosure = { [weak self] in
+        JHKPlayerClosure.playOrPauseClosure = { [weak self] in
             guard let sself = self else { return }
             switch sself.playState {
             case .playing:
                 sself.playState = .pause
             case .pause:
-                sself.playState = .playing
+                sself.playerStartPlaying()
             case .stop:
                 sself.initPlayer()
                 print("Vidoe is on the loading")
@@ -536,60 +519,48 @@ open class JHKVideoPlayer: UIView, JHKPlayerDelegate {
         }
 
         // Turn back button closure
-        JHKPlayerActionClosure.turnBackClosure = { [weak self] in
+        JHKPlayerClosure.turnBackClosure = { [weak self] in
             guard let sself = self else { return }
-            sself.playState = .stop
-            if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("quitVideoPlayer")))! {
-                sself.playerDelegate?.quitVideoPlayer!()
-            }
+            sself.playerStopPlaying()
+            sself.actionDelegate?.playerQuitAction()
         }
 
         // Play next button closure
-        JHKPlayerActionClosure.playNextClosure = { [weak self] in
+        JHKPlayerClosure.playNextClosure = { [weak self] in
             guard let sself = self else { return }
-            if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("playNextVideo")))! {
-                sself.playerDelegate?.playNextVideo!()
-            } else {
-                print("Play next action")
-            }
+            sself.actionDelegate?.playNextAction()
         }
 
         /// Play previous button closure
-        JHKPlayerActionClosure.playPreviousClosure = { [weak self] in
+        JHKPlayerClosure.playPreviousClosure = { [weak self] in
             guard let sself = self else { return }
-            if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("playPreviewsVideo")))! {
-                sself.playerDelegate?.playPreviewsVideo!()
-            } else {
-               print("Play previous action")
-            }
+            sself.actionDelegate?.playPreviousAction()
         }
 
         /// Push screen button closure
-        JHKPlayerActionClosure.pushScreenClosure = { [weak self] in
+        JHKPlayerClosure.pushScreenClosure = { [weak self] in
             guard let sself = self else { return }
-            if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("pushScreenAction")))! {
-                sself.playerDelegate?.pushScreenAction!()
-            }
+            sself.actionDelegate?.pushScreenAction()
         }
 
         /// More info button closure
-        JHKPlayerActionClosure.moreInfoClosure = { [weak self] in
+        JHKPlayerClosure.moreInfoClosure = { [weak self] in
             guard let sself = self else { return }
-            if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("moreMenuAction")))! {
-                sself.setMenuContent(view: (sself.playerDelegate?.moreMenuAction!())!)
+            if sself.actionDelegate != nil {
+                sself.setMenuContent(view: (sself.actionDelegate!.moreMenuAction()))
             }
         }
 
         /// Change definition closure
-        JHKPlayerActionClosure.changeDefinitionClosure = { [weak self] in
+        JHKPlayerClosure.changeDefinitionClosure = { [weak self] in
             guard let sself = self else { return }
-            if sself.playerDelegate != nil && (sself.playerDelegate?.responds(to: NSSelectorFromString("determinedDefinition")))! {
-                sself.setMenuContent(view: (sself.playerDelegate?.determinedDefinition!())!)
+            if sself.actionDelegate != nil {
+                sself.setMenuContent(view: (sself.actionDelegate!.determinedDefinition()))
             }
         }
 
         /// Reset current time to schedule
-        JHKPlayerActionClosure.scheduledPlayerClosure = { [weak self] (time) in
+        JHKPlayerClosure.scheduledPlayerClosure = { [weak self] (time) in
             guard let sself = self else { return }
             sself.player?.seek(to: CMTime.init(seconds: Double(time), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
         }
@@ -600,23 +571,13 @@ extension UIImage {
     /// Extension for determined specific Image resources in the bundle of CocoaPods Component
     ///
     /// - Parameter name: (String) - image name in bundle
+    /// - Parameter bundle: (String) - bundle name in specific
     /// - Returns: image: UIImage
     /// - Warning: for internal use only
     /// - SeeAlso: `imageInBundle()`
-    internal class func imageInBundle(named name: String) -> UIImage?{
-        let bundleUrl = Bundle.main.url(forResource: "JHKPlayerBundle", withExtension: "bundle")
-        let bundle = Bundle(url: bundleUrl!)
-        let image = UIImage(named: name, in: bundle, compatibleWith: nil)
-        return image
-    }
-
-    /// Extension for determined specific Image resources in the bundle of CocoaPods Component
-    ///
-    /// - Parameter name: (String) - image name in bundle
-    /// - Parameter bundle: (String) - bundle name in specific
-    /// - Returns: image: UIImage
-    internal class func imageInBundle(named name: String, from bundle: String) -> UIImage?{
-        let bundleUrl = Bundle.main.url(forResource: bundle, withExtension: "bundle")
+    internal class func imageInBundle(named name: String, from bundle: String? = nil) -> UIImage? {
+        let searchUrl = Bundle(for: JHKVideoPlayer.self).url(forResource: bundle ?? "JHKVideoPlayer", withExtension: "bundle")
+        let bundleUrl = Bundle(url: searchUrl!)?.url(forResource: "JHKPlayerBundle", withExtension: "bundle")
         let bundle = Bundle(url: bundleUrl!)
         let image = UIImage(named: name, in: bundle, compatibleWith: nil)
         return image

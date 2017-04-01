@@ -5,7 +5,6 @@ target 'JHKVideoPlayer_Example' do
 
   target 'JHKVideoPlayer_Tests' do
     inherit! :search_paths
-
     
   end
 end

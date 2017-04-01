@@ -12,7 +12,7 @@
     "luis_gin": "hanqing93@gmail.com"
   },
   "source": {
-    "git": "http://10.18.207.188/#/admin/projects/iOSModules/iOS_VideoPlayer_CPN.git",
+    "git": "http://192.168.1.188:8088/iOS/iOS_VideoPlayer_CPN.git",
     "tag": "0.1.0"
   },
   "platforms": {
@@ -21,7 +21,7 @@
   "source_files": "JHKVideoPlayer/Classes/**/*",
   "resource_bundles": {
     "JHKVideoPlayer": [
-      "JHKVideoPlayer/Assets/*"
+      "JHKVideoPlayer/Assets/**/*"
     ]
   }
 }

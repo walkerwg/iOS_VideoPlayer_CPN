@@ -9,39 +9,10 @@
 import Foundation
 import UIKit
 
-/// Delegate on video processing
-@objc public protocol JHKPlayerCallBack: NSObjectProtocol {
-    @objc optional func videoDidReadyPlay()
-    @objc optional func videoWillBeginPlay()
-    @objc optional func videoPlayDidEnd()
-    @objc optional func videoPlayDidPause()
-    @objc optional func videoPlayWillContinue()
-    @objc optional func playerDidFull()
-    @objc optional func playerDidShrink()
-}
-
-/// Handler on screen guesture
-@objc public protocol JHKPlayerGestureHandler: NSObjectProtocol {
-    @objc optional func player(_ player: JHKVideoPlayer, singleTapGesture singleTap: UITapGestureRecognizer)
-    @objc optional func player(_ player: JHKVideoPlayer, doubleTapGesture doubleTap: UITapGestureRecognizer)
-    @objc optional func player(_ player: JHKVideoPlayer, movedHorizontal value: TimeInterval)
-    @objc optional func player(_ player: JHKVideoPlayer, movedVerticalLeft value: TimeInterval)
-    @objc optional func player(_ player: JHKVideoPlayer, movedVerticalRight value: TimeInterval)
-}
-
 /// Closure, use struct and closure is because @optional protocol is not supported by Swift(only if with @objc class)
 public struct JHKPlayerClosure {
-    static var playerSuccessClosure: (() ->())?
-    static var playerFailClosure: (() ->())?
-    static var playerFinishClosure: (() ->())?
-    static var playerStopClosure: (() ->())?
-    static var deviceOrientClosure: ((_ origent: UIDeviceOrientation) -> ())?
-    static var playerDelayClosure: ((_ flag: Bool) -> ())?
     static var sliderValueChangeClosure: ((_ value: Float) -> ())?
     static var sliderDragedClosure: (() -> ())?
-}
-
-public struct JHKPlayerActionClosure {
     static var turnBackClosure: (() -> ())?
     static var playOrPauseClosure: (() -> ())?
     static var fullOrShrinkClosure: (() -> ())?
@@ -53,14 +24,53 @@ public struct JHKPlayerActionClosure {
     static var scheduledPlayerClosure: ((_ value: Float) -> ())?
 }
 
-/// Exposed delegate to instance
-@objc public protocol JHKPlayerActionsDelegate: NSObjectProtocol {
-    @objc optional func playNextVideo()
-    @objc optional func playPreviewsVideo()
-    @objc optional func quitVideoPlayer()
-    @objc optional func pushScreenAction()
-    @objc optional func moreMenuAction() -> UIView
-    @objc optional func determinedDefinition() -> UIView
+/// Handler on screen guesture
+public protocol JHKPlayerGestureHandler: class {
+    func player(_ player: JHKVideoPlayer, singleTapGesture singleTap: UITapGestureRecognizer)
+    func player(_ player: JHKVideoPlayer, doubleTapGesture doubleTap: UITapGestureRecognizer)
+    func player(_ player: JHKVideoPlayer, movedHorizontal value: TimeInterval)
+    func player(_ player: JHKVideoPlayer, movedVerticalLeft value: TimeInterval)
+    func player(_ player: JHKVideoPlayer, movedVerticalRight value: TimeInterval)
 }
 
-public protocol JHKPlayerDelegate: JHKPlayerActionsDelegate, JHKPlayerGestureHandler, JHKPlayerCallBack {}
+/// Protocol to be implement by classes which have JHKVideoPlayer as property
+public protocol JHKPlayerActionsDelegate: class {
+    func breakPointListener(time: CGFloat)
+    func startPlayingListener()
+    func playPreviousAction()
+    func playNextAction()
+    func playerQuitAction()
+    func pushScreenAction()
+    func moreMenuAction() -> UIView
+    func determinedDefinition() -> UIView
+}
+
+// Swift建议写法，不破坏封装可以直接写在module外
+extension JHKPlayerActionsDelegate {
+    public func breakPointListener(time: CGFloat) {
+        print("###defult implement###")
+    }
+    public func startPlayingListener() {
+        print("###player start playing###")
+    }
+    public func playPreviousAction() {
+        print("###play previous video###")
+    }
+    public func playNextAction() {
+        print("###play next video###")
+    }
+    public func playerQuitAction() {
+        print("###quit player###")
+    }
+    public func pushScreenAction() {
+        print("###push screen###")
+    }
+    public func moreMenuAction() -> UIView {
+        let view = UIView()
+        return view
+    }
+    public func determinedDefinition() -> UIView {
+        let view = UIView()
+        return view
+    }
+}

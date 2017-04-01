@@ -7,21 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		028F86653889521A7A5180D00CA02828 /* JHKVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B87B1E0FCEF36A1B51CB74013BDE297 /* JHKVideoPlayer.swift */; };
 		1B9B6160EF934CE630AEC0AD87D777EE /* Pods-JHKVideoPlayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BABAF2AC7F5334C0BFCA18474931486 /* Pods-JHKVideoPlayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		24A44586B870C665FEE8D948192FA3D1 /* JHKPlayerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74FB7F814738C6AAB51817B45A553D37 /* JHKPlayerTransport.swift */; };
+		2D0A62540A46F0C8B35A6F519F4ECA51 /* JHKVideoPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A0082106431B6840E7D9D979188E9B95 /* JHKVideoPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AB0B6A2BDCCF50C041347A6339F0E10 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		4677D8DFC54150887B16681FF690065E /* JHKVideoPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A0082106431B6840E7D9D979188E9B95 /* JHKVideoPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48A37698ED6795C1EEA184F3E63AF5C5 /* JHKPlayerBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 22EDB45837F853E110E70904460FF474 /* JHKPlayerBundle.bundle */; };
-		51F21BC1711ECB4DE75B00A111E6AC74 /* JHKVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0FADD05A770922DB3A702C8794B13BA5 /* JHKVideoPlayer.bundle */; };
+		63C7B4B395ECC0C630CB85DAEFE5DB5B /* JHKVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0FADD05A770922DB3A702C8794B13BA5 /* JHKVideoPlayer.bundle */; };
 		69388A079816BD5EB3513C2DCBAB5CB1 /* Pods-JHKVideoPlayer_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 00065358B37FC9A67AB4F10364234039 /* Pods-JHKVideoPlayer_Tests-dummy.m */; };
 		77C86F085AC23A1054C4668E0326F8E8 /* Pods-JHKVideoPlayer_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4346B390E86CA447EF0150817AC5DEA0 /* Pods-JHKVideoPlayer_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93C31A6F96B1C877E9934B01A3A9D444 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		976759CE84D169DDD75E958B868C4BF6 /* Pods-JHKVideoPlayer_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F35A1F7742659E9D2C3FFED743C85 /* Pods-JHKVideoPlayer_Example-dummy.m */; };
-		B09ADBD36582431891EB86B71498F1AC /* JHKPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC253378D477AC46B46D45D90254B13 /* JHKPlayerView.swift */; };
-		B2F82DAD7E7EBCE2FB5842648D770338 /* menu_quit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73373058E201F56115194254B0D6C1E3 /* menu_quit@2x.png */; };
-		BA3165D7D35417C1451943285B182143 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		DDE5BED6F195B1AF477AD99F066A81F3 /* JHKVideoPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29744E59A1DED9B2AD7E485BD940DFE8 /* JHKVideoPlayer-dummy.m */; };
-		E5D52321C71E838C3AB8A39BA233A6E0 /* JHKPlayerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10567EB1DEE5254FE7427ED033F9D381 /* JHKPlayerTransport.swift */; };
+		B766E2469FDDDE6E29BC0920D1030386 /* JHKVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC0267D459A594DBFEFF1087A78BAFC6 /* JHKVideoPlayer.swift */; };
+		C0EEE74A072C068CF19B8D1A1D4C88AE /* JHKVideoPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29744E59A1DED9B2AD7E485BD940DFE8 /* JHKVideoPlayer-dummy.m */; };
+		D166978C37232C8FD18F005E6AB91A2D /* JHKPlayerBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2BBFF7A8ECEBD5E13E15CCFF8A3DB1EA /* JHKPlayerBundle.bundle */; };
+		DC7EC9B95D5EF925D6FD152801D903B7 /* JHKPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762F602B566A88CAFD9387593DBA05D0 /* JHKPlayerView.swift */; };
+		E8210F1CEA16B288CBC7018778022A4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,14 +28,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 481C87485C7DCFB2770D7651757FBD28;
+			remoteGlobalIDString = 21232C48526E217588EDBB797F787E69;
 			remoteInfo = JHKVideoPlayer;
 		};
-		47F7DE50F0CC5232C6840E4F8F4B3A0C /* PBXContainerItemProxy */ = {
+		F89D0A65292828E4AB88B61F03636742 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8221B0812067E15427B7846C721E2157;
+			remoteGlobalIDString = 04BF2B17032C2768AB702193456EEFF9;
 			remoteInfo = "JHKVideoPlayer-JHKVideoPlayer";
 		};
 /* End PBXContainerItemProxy section */
@@ -45,25 +44,23 @@
 		00065358B37FC9A67AB4F10364234039 /* Pods-JHKVideoPlayer_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JHKVideoPlayer_Tests-dummy.m"; sourceTree = "<group>"; };
 		0EF877D928D160CFF10A6A53ADB8E5E3 /* JHKVideoPlayer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JHKVideoPlayer.xcconfig; sourceTree = "<group>"; };
 		0FADD05A770922DB3A702C8794B13BA5 /* JHKVideoPlayer.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JHKVideoPlayer.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		10567EB1DEE5254FE7427ED033F9D381 /* JHKPlayerTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JHKPlayerTransport.swift; sourceTree = "<group>"; };
-		22EDB45837F853E110E70904460FF474 /* JHKPlayerBundle.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = JHKPlayerBundle.bundle; sourceTree = "<group>"; };
 		27A131DAA3F0E712BF792C5CD3B0449A /* ResourceBundle-JHKVideoPlayer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-JHKVideoPlayer-Info.plist"; sourceTree = "<group>"; };
 		29744E59A1DED9B2AD7E485BD940DFE8 /* JHKVideoPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JHKVideoPlayer-dummy.m"; sourceTree = "<group>"; };
-		2B87B1E0FCEF36A1B51CB74013BDE297 /* JHKVideoPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JHKVideoPlayer.swift; sourceTree = "<group>"; };
+		2BBFF7A8ECEBD5E13E15CCFF8A3DB1EA /* JHKPlayerBundle.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; path = JHKPlayerBundle.bundle; sourceTree = "<group>"; };
 		2C7AF8306587A0EB18D9527AD438F4F7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AA1698AC831E1BDB4FBA7D57D00550E /* Pods-JHKVideoPlayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3D60689B1C95A93EE6D57F0C5CBBA336 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40D53ABEC025999B2901FE120E5F2C60 /* Pods-JHKVideoPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		414C203E97F52B60A1ADC76A64732ABC /* Pods-JHKVideoPlayer_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-JHKVideoPlayer_Tests.modulemap"; sourceTree = "<group>"; };
 		4346B390E86CA447EF0150817AC5DEA0 /* Pods-JHKVideoPlayer_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JHKVideoPlayer_Example-umbrella.h"; sourceTree = "<group>"; };
-		4CC253378D477AC46B46D45D90254B13 /* JHKPlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JHKPlayerView.swift; sourceTree = "<group>"; };
 		5628ADCDB906FAE72D9F073C247E664D /* JHKVideoPlayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JHKVideoPlayer-prefix.pch"; sourceTree = "<group>"; };
 		65994872963BA2B2173C6C519F3F65EA /* Pods_JHKVideoPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHKVideoPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65BB6BA25FFD7CA83065F83547DC57AB /* Pods-JHKVideoPlayer_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JHKVideoPlayer_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		65EFD8EAEC1CCC307C1817BC7407F6B2 /* Pods-JHKVideoPlayer_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JHKVideoPlayer_Tests-resources.sh"; sourceTree = "<group>"; };
 		68F69A5F9A6A816EBC11AA930071EF47 /* Pods-JHKVideoPlayer_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JHKVideoPlayer_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		6F6FDF1DE9190D7ECCF58165D887B4EA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		73373058E201F56115194254B0D6C1E3 /* menu_quit@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "menu_quit@2x.png"; sourceTree = "<group>"; };
+		74FB7F814738C6AAB51817B45A553D37 /* JHKPlayerTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JHKPlayerTransport.swift; sourceTree = "<group>"; };
+		762F602B566A88CAFD9387593DBA05D0 /* JHKPlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JHKPlayerView.swift; sourceTree = "<group>"; };
 		772D62601C47E4FFC709C1A6BF995819 /* Pods-JHKVideoPlayer_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JHKVideoPlayer_Example-resources.sh"; sourceTree = "<group>"; };
 		785CB53E2E4B54AC336ED2D07BFC6A7B /* Pods-JHKVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
 		794F35A1F7742659E9D2C3FFED743C85 /* Pods-JHKVideoPlayer_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JHKVideoPlayer_Example-dummy.m"; sourceTree = "<group>"; };
@@ -78,16 +75,17 @@
 		C479501F276B7827DB248F8E388A3441 /* JHKVideoPlayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = JHKVideoPlayer.modulemap; sourceTree = "<group>"; };
 		C488A0504231E492F82F80A63ED8170B /* Pods-JHKVideoPlayer_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JHKVideoPlayer_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		EC0267D459A594DBFEFF1087A78BAFC6 /* JHKVideoPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JHKVideoPlayer.swift; sourceTree = "<group>"; };
 		EF299B916D82BFC578171E3B4F61349D /* Pods-JHKVideoPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		F5957A0A5EBDB9E147A53CB2BE03A912 /* Pods-JHKVideoPlayer_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JHKVideoPlayer_Tests-frameworks.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3AF74526046780D55B5092AED8995605 /* Frameworks */ = {
+		7534D435646CA58B2B6BA60A77265BE0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA3165D7D35417C1451943285B182143 /* Foundation.framework in Frameworks */,
+				E8210F1CEA16B288CBC7018778022A4B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,18 +97,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C9FB26684199AE32AC8044EEA79EFD52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E2FB574120A0E59D31DA68CE8A165075 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				93C31A6F96B1C877E9934B01A3A9D444 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E3CEF306570A9851564006308E992E2C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +118,7 @@
 		05B2E8C0F7FA9E8A123DD157B2F74CBA /* JHKVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				60682C88F3F28CF0313C883FAA5877F6 /* JHKVideoPlayer */,
+				88CC06C775531E85509279F994C80486 /* JHKVideoPlayer */,
 				10A1AE738B1FD1DEFFE3D4845906DF9D /* Resources */,
 				C9EA60873C07C9EBAAFD1116F7340BA9 /* Support Files */,
 			);
@@ -145,16 +143,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		38A8834E6466E8C6E4F2AF370E4E6AA1 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				10567EB1DEE5254FE7427ED033F9D381 /* JHKPlayerTransport.swift */,
-				4CC253378D477AC46B46D45D90254B13 /* JHKPlayerView.swift */,
-				2B87B1E0FCEF36A1B51CB74013BDE297 /* JHKVideoPlayer.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		4F9EF4ECF53CBCF42AA666D800AA3AEB /* Pods-JHKVideoPlayer_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,21 +161,12 @@
 			path = "Target Support Files/Pods-JHKVideoPlayer_Tests";
 			sourceTree = "<group>";
 		};
-		506F975E45705615A07855C45662842A /* Assets */ = {
+		56DCACD4B4607562BA840CF518CC80A4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				22EDB45837F853E110E70904460FF474 /* JHKPlayerBundle.bundle */,
-				73373058E201F56115194254B0D6C1E3 /* menu_quit@2x.png */,
+				2BBFF7A8ECEBD5E13E15CCFF8A3DB1EA /* JHKPlayerBundle.bundle */,
 			);
 			path = Assets;
-			sourceTree = "<group>";
-		};
-		60682C88F3F28CF0313C883FAA5877F6 /* JHKVideoPlayer */ = {
-			isa = PBXGroup;
-			children = (
-				38A8834E6466E8C6E4F2AF370E4E6AA1 /* Classes */,
-			);
-			path = JHKVideoPlayer;
 			sourceTree = "<group>";
 		};
 		63B229ED46CD19388C0D0FDCD21B59B8 /* Development Pods */ = {
@@ -228,6 +207,14 @@
 			);
 			sourceTree = "<group>";
 		};
+		88CC06C775531E85509279F994C80486 /* JHKVideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				CC30E68B3D3D04E3A3F4B7F5D743B93C /* Classes */,
+			);
+			path = JHKVideoPlayer;
+			sourceTree = "<group>";
+		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,10 +238,20 @@
 			path = "Example/Pods/Target Support Files/JHKVideoPlayer";
 			sourceTree = "<group>";
 		};
+		CC30E68B3D3D04E3A3F4B7F5D743B93C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				74FB7F814738C6AAB51817B45A553D37 /* JHKPlayerTransport.swift */,
+				762F602B566A88CAFD9387593DBA05D0 /* JHKPlayerView.swift */,
+				EC0267D459A594DBFEFF1087A78BAFC6 /* JHKVideoPlayer.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		ECA503C6632EB0D2EE5A266A770AA25A /* JHKVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				506F975E45705615A07855C45662842A /* Assets */,
+				56DCACD4B4607562BA840CF518CC80A4 /* Assets */,
 			);
 			path = JHKVideoPlayer;
 			sourceTree = "<group>";
@@ -288,11 +285,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A8AFF4579EF45BEA18ADD3EAB29BA293 /* Headers */ = {
+		823BF9DC622289B8FFC128E4D7E7D6EA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4677D8DFC54150887B16681FF690065E /* JHKVideoPlayer-umbrella.h in Headers */,
+				2D0A62540A46F0C8B35A6F519F4ECA51 /* JHKVideoPlayer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,19 +304,36 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		481C87485C7DCFB2770D7651757FBD28 /* JHKVideoPlayer */ = {
+		04BF2B17032C2768AB702193456EEFF9 /* JHKVideoPlayer-JHKVideoPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 53F2E9DFDCA173140011137AC31A8FA2 /* Build configuration list for PBXNativeTarget "JHKVideoPlayer" */;
+			buildConfigurationList = 7BAB6236738B16EDF70D436EC370F55D /* Build configuration list for PBXNativeTarget "JHKVideoPlayer-JHKVideoPlayer" */;
 			buildPhases = (
-				278457C17AFF9FDB151C9E7172EF92A4 /* Sources */,
-				3AF74526046780D55B5092AED8995605 /* Frameworks */,
-				2D50AD7AD8ACEDA2DB33FFA7985845E3 /* Resources */,
-				A8AFF4579EF45BEA18ADD3EAB29BA293 /* Headers */,
+				07800B2DA33646441BDFFA6C24760ECB /* Sources */,
+				C9FB26684199AE32AC8044EEA79EFD52 /* Frameworks */,
+				23D0771C62FC0AA484C45641D4007A5F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				138F73D24F395FB54694F25304B27FC6 /* PBXTargetDependency */,
+			);
+			name = "JHKVideoPlayer-JHKVideoPlayer";
+			productName = "JHKVideoPlayer-JHKVideoPlayer";
+			productReference = 0FADD05A770922DB3A702C8794B13BA5 /* JHKVideoPlayer.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		21232C48526E217588EDBB797F787E69 /* JHKVideoPlayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E1BC892F66005E1F9BBE089C5352703 /* Build configuration list for PBXNativeTarget "JHKVideoPlayer" */;
+			buildPhases = (
+				CF7458C1033FDF6BF427393C58F88486 /* Sources */,
+				7534D435646CA58B2B6BA60A77265BE0 /* Frameworks */,
+				9CDB6ECBEB5D9D90A7A14E424E839E5B /* Resources */,
+				823BF9DC622289B8FFC128E4D7E7D6EA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4F3BF603A074D35DAE1B290DED20A771 /* PBXTargetDependency */,
 			);
 			name = JHKVideoPlayer;
 			productName = JHKVideoPlayer;
@@ -342,23 +356,6 @@
 			productName = "Pods-JHKVideoPlayer_Tests";
 			productReference = 8D662422BB1E64B81E3705D96755C71F /* Pods_JHKVideoPlayer_Tests.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		8221B0812067E15427B7846C721E2157 /* JHKVideoPlayer-JHKVideoPlayer */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CD4EE29A0B6FC450B7073A429B012C8D /* Build configuration list for PBXNativeTarget "JHKVideoPlayer-JHKVideoPlayer" */;
-			buildPhases = (
-				9575D9B6785249CB8C6D8101BA42405D /* Sources */,
-				E3CEF306570A9851564006308E992E2C /* Frameworks */,
-				720315BC805961E120E9603E0B7FED65 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "JHKVideoPlayer-JHKVideoPlayer";
-			productName = "JHKVideoPlayer-JHKVideoPlayer";
-			productReference = 0FADD05A770922DB3A702C8794B13BA5 /* JHKVideoPlayer.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 		DA9C3904BE4DEA707A5CF2A62792A8DB /* Pods-JHKVideoPlayer_Example */ = {
 			isa = PBXNativeTarget;
@@ -399,8 +396,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				481C87485C7DCFB2770D7651757FBD28 /* JHKVideoPlayer */,
-				8221B0812067E15427B7846C721E2157 /* JHKVideoPlayer-JHKVideoPlayer */,
+				21232C48526E217588EDBB797F787E69 /* JHKVideoPlayer */,
+				04BF2B17032C2768AB702193456EEFF9 /* JHKVideoPlayer-JHKVideoPlayer */,
 				DA9C3904BE4DEA707A5CF2A62792A8DB /* Pods-JHKVideoPlayer_Example */,
 				5883264D6D9CB7A9C7C57B700A3864E4 /* Pods-JHKVideoPlayer_Tests */,
 			);
@@ -408,34 +405,29 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2D50AD7AD8ACEDA2DB33FFA7985845E3 /* Resources */ = {
+		23D0771C62FC0AA484C45641D4007A5F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51F21BC1711ECB4DE75B00A111E6AC74 /* JHKVideoPlayer.bundle in Resources */,
+				D166978C37232C8FD18F005E6AB91A2D /* JHKPlayerBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		720315BC805961E120E9603E0B7FED65 /* Resources */ = {
+		9CDB6ECBEB5D9D90A7A14E424E839E5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48A37698ED6795C1EEA184F3E63AF5C5 /* JHKPlayerBundle.bundle in Resources */,
-				B2F82DAD7E7EBCE2FB5842648D770338 /* menu_quit@2x.png in Resources */,
+				63C7B4B395ECC0C630CB85DAEFE5DB5B /* JHKVideoPlayer.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		278457C17AFF9FDB151C9E7172EF92A4 /* Sources */ = {
+		07800B2DA33646441BDFFA6C24760ECB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDE5BED6F195B1AF477AD99F066A81F3 /* JHKVideoPlayer-dummy.m in Sources */,
-				E5D52321C71E838C3AB8A39BA233A6E0 /* JHKPlayerTransport.swift in Sources */,
-				B09ADBD36582431891EB86B71498F1AC /* JHKPlayerView.swift in Sources */,
-				028F86653889521A7A5180D00CA02828 /* JHKVideoPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,13 +439,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9575D9B6785249CB8C6D8101BA42405D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C4025F1984C1415A9C809C6EDE8A204B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -462,25 +447,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CF7458C1033FDF6BF427393C58F88486 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24A44586B870C665FEE8D948192FA3D1 /* JHKPlayerTransport.swift in Sources */,
+				DC7EC9B95D5EF925D6FD152801D903B7 /* JHKPlayerView.swift in Sources */,
+				C0EEE74A072C068CF19B8D1A1D4C88AE /* JHKVideoPlayer-dummy.m in Sources */,
+				B766E2469FDDDE6E29BC0920D1030386 /* JHKVideoPlayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		138F73D24F395FB54694F25304B27FC6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "JHKVideoPlayer-JHKVideoPlayer";
-			target = 8221B0812067E15427B7846C721E2157 /* JHKVideoPlayer-JHKVideoPlayer */;
-			targetProxy = 47F7DE50F0CC5232C6840E4F8F4B3A0C /* PBXContainerItemProxy */;
-		};
 		43E73C83078B00B4F13C037AC8DAA0F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JHKVideoPlayer;
-			target = 481C87485C7DCFB2770D7651757FBD28 /* JHKVideoPlayer */;
+			target = 21232C48526E217588EDBB797F787E69 /* JHKVideoPlayer */;
 			targetProxy = 037DC42EAA6223B8E037BC786DCE2794 /* PBXContainerItemProxy */;
+		};
+		4F3BF603A074D35DAE1B290DED20A771 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "JHKVideoPlayer-JHKVideoPlayer";
+			target = 04BF2B17032C2768AB702193456EEFF9 /* JHKVideoPlayer-JHKVideoPlayer */;
+			targetProxy = F89D0A65292828E4AB88B61F03636742 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		081EF137197AC7441C1006D73EF9F55D /* Debug */ = {
+		0A207E23D77FA594A53B3D52BBEB3750 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0EF877D928D160CFF10A6A53ADB8E5E3 /* JHKVideoPlayer.xcconfig */;
 			buildSettings = {
@@ -548,55 +544,6 @@
 			};
 			name = Release;
 		};
-		2CB6C906E2EF789E2BE6A4BCD98D2BD1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EF877D928D160CFF10A6A53ADB8E5E3 /* JHKVideoPlayer.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/JHKVideoPlayer/JHKVideoPlayer-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JHKVideoPlayer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JHKVideoPlayer/JHKVideoPlayer.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = JHKVideoPlayer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		2EF6AC95F010D20A56977124E94252A4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0EF877D928D160CFF10A6A53ADB8E5E3 /* JHKVideoPlayer.xcconfig */;
-			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/JHKVideoPlayer";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/JHKVideoPlayer/ResourceBundle-JHKVideoPlayer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = JHKVideoPlayer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
 		32879247E46EF75137190D5D0B2E9D1D /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 785CB53E2E4B54AC336ED2D07BFC6A7B /* Pods-JHKVideoPlayer_Example.release.xcconfig */;
@@ -626,6 +573,55 @@
 				PRODUCT_NAME = Pods_JHKVideoPlayer_Example;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		40333DC6030954706CACD69F89BF0F47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EF877D928D160CFF10A6A53ADB8E5E3 /* JHKVideoPlayer.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/JHKVideoPlayer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/JHKVideoPlayer/ResourceBundle-JHKVideoPlayer-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = JHKVideoPlayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		488C55654CF25BB0F086119A10ACBC28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EF877D928D160CFF10A6A53ADB8E5E3 /* JHKVideoPlayer.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JHKVideoPlayer/JHKVideoPlayer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JHKVideoPlayer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JHKVideoPlayer/JHKVideoPlayer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = JHKVideoPlayer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -787,7 +783,7 @@
 			};
 			name = Debug;
 		};
-		A3DB4E4A71B419B9A7EAA1D7DF759A75 /* Release */ = {
+		FAD1469B1511DEBB93CFA887E0373E93 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0EF877D928D160CFF10A6A53ADB8E5E3 /* JHKVideoPlayer.xcconfig */;
 			buildSettings = {
@@ -802,7 +798,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = Release;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -825,20 +821,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		53F2E9DFDCA173140011137AC31A8FA2 /* Build configuration list for PBXNativeTarget "JHKVideoPlayer" */ = {
+		7BAB6236738B16EDF70D436EC370F55D /* Build configuration list for PBXNativeTarget "JHKVideoPlayer-JHKVideoPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				081EF137197AC7441C1006D73EF9F55D /* Debug */,
-				2CB6C906E2EF789E2BE6A4BCD98D2BD1 /* Release */,
+				FAD1469B1511DEBB93CFA887E0373E93 /* Debug */,
+				40333DC6030954706CACD69F89BF0F47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CD4EE29A0B6FC450B7073A429B012C8D /* Build configuration list for PBXNativeTarget "JHKVideoPlayer-JHKVideoPlayer" */ = {
+		8E1BC892F66005E1F9BBE089C5352703 /* Build configuration list for PBXNativeTarget "JHKVideoPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2EF6AC95F010D20A56977124E94252A4 /* Debug */,
-				A3DB4E4A71B419B9A7EAA1D7DF759A75 /* Release */,
+				0A207E23D77FA594A53B3D52BBEB3750 /* Debug */,
+				488C55654CF25BB0F086119A10ACBC28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

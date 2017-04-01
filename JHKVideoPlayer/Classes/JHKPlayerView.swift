@@ -17,12 +17,14 @@ import MediaPlayer
 /// - Version: v0.1.1
 open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 
-// MARK: - Signal
+    // MARK: - Signal
     /// Signal of whether hide all the menu
-    public var isMenuHidden: Bool = false {
+    private var isMenuHidden: Bool = false {
         didSet{
             for subView in subviews {
-                subView.isHidden = isMenuHidden
+                if subView != loadingIndicator && subView != lockMaskView {
+                    subView.isHidden = isMenuHidden
+                }
             }
             isSideMenuShow = false
         }
@@ -43,7 +45,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         }
     }
 
-// MARK: - UIControls
+    // MARK: - UIControls
     // Collect views into arrays to fit auto layout
     public var topControlsArray = NSMutableArray()
     public var bottomControlsArray = NSMutableArray()
@@ -96,8 +98,8 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     /// Push button on top menu right side
     open lazy var pushButton: UIButton = {
         let button = UIButton()
-        button.setTitle("投屏", for: .normal)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+        let image = UIImage.imageInBundle(named: "btn_pane")
+        button.setBackgroundImage(image, for: .normal)
         button.addTarget(self, action: #selector(pushButtonAction), for: .touchUpInside)
         return button
     }()
@@ -106,6 +108,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     open lazy var moreButton: UIButton = {
         let button = UIButton()
         let image = UIImage.imageInBundle(named: "menu_more")
+        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         button.setBackgroundImage(image, for: .normal)
         button.addTarget(self, action: #selector(moreButtonAction), for: .touchUpInside)
         return button
@@ -132,6 +135,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     /// Load progressor
     open lazy var loadProgressView: UIProgressView = {
         let progressView = UIProgressView()
+        progressView.progressTintColor = .cyan
         return progressView
     }()
 
@@ -193,15 +197,17 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 
     /// Indicator
     open lazy var loadingIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        indicator.hidesWhenStopped = true
         indicator.startAnimating()
         return indicator
     }()
 
     /// Drag hub
-    open lazy var dragHub: UIImageView = {
+    open lazy var dragHud: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = self.menuContentColor
+        imageView.layer.cornerRadius = 5
         return imageView
     }()
     
@@ -239,6 +245,24 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         return button
     }()
 
+    open lazy var lockMaskView: UIView = { [weak self] in
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+
+    open lazy var lockMessageLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        return label
+    }()
+
+    open lazy var lockTransButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.textColor = .blue
+        return button
+    }()
+
 // MARK: - Init methods
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -252,49 +276,55 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 
     override open func layoutSubviews() {
         super.layoutSubviews()
-
         topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 8)
-        // FIXME:  增添三元条件分支匹配最小值
-        bottomBar.frame = CGRect(x: 0, y: self.frame.height * 6 / 7 - 16, width: self.frame.width, height: self.frame.height / 7 + 16)
-        returnButton.frame = CGRect(x: 5, y: 5, width: topBar.frame.height - 10, height: topBar.frame.height - 10)
-        for i in 1...topControlsArray.count {
-            let view: UIView = topControlsArray[i - 1] as! UIView
-            topBar.addSubview(view)
-            view.frame = CGRect(x: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count - i) - topBar.frame.height * 1.3, y: 0, width: topBar.frame.height, height: topBar.frame.height)
+        // TODO:  增添三元条件分支匹配最小值
+        bottomBar.frame = CGRect(x: 0, y: self.frame.height * 5 / 6 - 16, width: self.frame.width, height: self.frame.height / 6 + 16)
+        returnButton.frame = CGRect(x: topBar.frame.height * 0.2, y: topBar.frame.height * 0.2, width: topBar.frame.height * 0.6, height: topBar.frame.height * 0.6)
+        if topControlsArray.count > 0 {
+            for i in 1...topControlsArray.count {
+                let view: UIView = topControlsArray[i - 1] as! UIView
+                topBar.addSubview(view)
+                view.frame = CGRect(x: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count - i) - topBar.frame.height, y: topBar.frame.height * 0.1, width: topBar.frame.height * 0.8, height: topBar.frame.height * 0.8)
+            }
         }
-        titleLabel.frame = CGRect(x: topBar.frame.height + 5, y: 0, width: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count + 1) - 10, height: topBar.frame.height)
-        titleLabel.font = UIFont.systemFont(ofSize: titleLabel.frame.height * 4 / 7)
+        titleLabel.frame = CGRect(x: topBar.frame.height, y: 0, width: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count + 1) - 10, height: topBar.frame.height)
+        titleLabel.font = UIFont.systemFont(ofSize: titleLabel.frame.height * 4 / 9)
         playSlider.frame = CGRect(x: 0, y: 0, width: bottomBar.frame.width, height: 10)
         let insetH: CGFloat = playSlider.frame.height
         loadProgressView.frame = CGRect(x: 0, y: insetH / 2, width: bottomBar.frame.width , height: insetH)
         playOrPauseButton.frame = CGRect(x: 0, y: 0, width: (bottomBar.frame.height - insetH) * 0.82, height: (bottomBar.frame.height - insetH) * 0.82)
         playOrPauseButton.center = CGPoint(x: bottomBar.frame.width / 2, y: (bottomBar.frame.height + insetH) / 2)
-        fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - bottomBar.frame.height * 3 / 4, y: insetH + 10, width: bottomBar.frame.height / 2, height: bottomBar.frame.height / 2)
-        previewsButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 2 / 3, height: playOrPauseButton.frame.height * 2 / 3)
-        previewsButton.center = CGPoint(x: playOrPauseButton.center.x - playOrPauseButton.frame.width * 2, y: playOrPauseButton.center.y)
-        nextButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 2 / 3, height: playOrPauseButton.frame.height * 2 / 3)
-        nextButton.center = CGPoint(x: playOrPauseButton.center.x + playOrPauseButton.frame.width * 2, y: playOrPauseButton.center.y)
+        previewsButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 0.7, height: playOrPauseButton.frame.height * 0.7)
+        previewsButton.center = CGPoint(x: playOrPauseButton.center.x - playOrPauseButton.frame.width * 1.75, y: playOrPauseButton.center.y)
+        nextButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 0.7, height: playOrPauseButton.frame.height * 0.7)
+        nextButton.center = CGPoint(x: playOrPauseButton.center.x + playOrPauseButton.frame.width * 1.75, y: playOrPauseButton.center.y)
+        fullOrSmallButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 0.58, height: playOrPauseButton.frame.height * 0.58)
+        fullOrSmallButton.center = CGPoint(x: playOrPauseButton.center.x + playOrPauseButton.frame.width * 3, y: playOrPauseButton.center.y)
+        pushButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 0.58, height: playOrPauseButton.frame.height * 0.58)
+        pushButton.center = CGPoint(x: playOrPauseButton.center.x - playOrPauseButton.frame.width * 3, y: playOrPauseButton.center.y)
+        definitionButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 2 / 3, height: playOrPauseButton.frame.height * 2 / 5)
+        definitionButton.center = CGPoint(x: playOrPauseButton.center.x - playOrPauseButton.frame.width * 4.5, y: playOrPauseButton.center.y)
+        definitionButton.titleLabel!.font = UIFont.systemFont(ofSize: definitionButton.frame.height * 2 / 3)
         for view in bottomControlsArray {
             bottomBar.addSubview(view as! UIView)
         }
-        definitionButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 2 / 3, height: playOrPauseButton.frame.height * 2 / 5)
-        definitionButton.center = CGPoint(x: playOrPauseButton.center.x - playOrPauseButton.frame.width * 4, y: playOrPauseButton.center.y)
-        definitionButton.titleLabel!.font = UIFont.systemFont(ofSize: definitionButton.frame.height * 2 / 3)
         currentTimeLabel.frame = CGRect(x: 5, y: insetH - 2, width: 55, height: 14)
         totalTimeLabel.frame = CGRect(x: bottomBar.frame.width - 60, y: insetH - 2, width: 55, height: 14)
         loadingIndicator.center = CGPoint(x: self.center.x, y: self.center.y)
-        dragHub.frame = CGRect(x: 0, y: 0, width: self.frame.height / 5, height: self.frame.height / 5)
-        dragHub.center = self.center
-        dragLabel.frame = CGRect(x: 0, y: dragHub.frame.height, width: dragHub.frame.width, height: dragHub.frame.height * 2 / 5)
+        dragHud.frame = CGRect(x: 0, y: 0, width: self.frame.height / 5, height: self.frame.height / 5)
+        dragHud.center = self.center
+        dragLabel.frame = CGRect(x: 0, y: dragHud.frame.height, width: dragHud.frame.width, height: dragHud.frame.height * 2 / 5)
         dragLabel.font = UIFont.systemFont(ofSize: dragLabel.frame.height)
         volumeControl.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
+        lockMaskView.frame = CGRect(x: 0, y: topBar.frame.height, width: self.frame.width, height: self.frame.height - topBar.frame.height - bottomBar.frame.height)
+        lockMessageLabel.frame = CGRect(x: self.frame.width / 4, y: 0, width: self.frame.width / 2, height: lockMaskView.frame.height)
+        lockMaskView.addSubview(lockMessageLabel)
     }
 
     open func addAllViews() {
         self.addSubview(topBar)
         topBar.addSubview(titleLabel)
         topBar.addSubview(returnButton)
-        topControlsArray.add(pushButton)
         self.addSubview(bottomBar)
         bottomBar.addSubview(loadProgressView)
         bottomBar.addSubview(playSlider)
@@ -302,10 +332,10 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         bottomBar.addSubview(nextButton)
         bottomBar.addSubview(playOrPauseButton)
         bottomBar.addSubview(fullOrSmallButton)
+        bottomBar.addSubview(pushButton)
         bottomBar.addSubview(currentTimeLabel)
         bottomBar.addSubview(totalTimeLabel)
-        self.addSubview(sideMenu)
-        dragHub.addSubview(dragLabel)
+        dragHud.addSubview(dragLabel)
         self.addSubview(loadingIndicator)
         loadingIndicator.startAnimating()
     }
@@ -330,7 +360,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(panGesture)
     }
 
-// MARK: - Gesture Handler
+    // MARK: - Gesture Handler
     // Discard gesture responser if touch event is tring to make state possible
     open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if autoHiddenMenu {
@@ -341,8 +371,8 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         let hitView = self.hitTest(startPoint, with: nil)
         if self == hitView {
             return true
-        } else if let panGesture = gestureRecognizer as? UITapGestureRecognizer {
-            if playSlider == hitView {
+        } else if let gesture = gestureRecognizer as? UITapGestureRecognizer {
+            if playSlider == hitView || lockMaskView == hitView {
                 return true
             }
         }
@@ -352,8 +382,8 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     open func sliderGestureHandler(_ tap:UITapGestureRecognizer) {
         let touchPoint = tap.location(in: self.playSlider)
         let value = (playSlider.maximumValue - playSlider.minimumValue) * Float(touchPoint.x / playSlider.frame.size.width)
-        if JHKPlayerActionClosure.scheduledPlayerClosure != nil {
-            JHKPlayerActionClosure.scheduledPlayerClosure!(value)
+        if JHKPlayerClosure.scheduledPlayerClosure != nil {
+            JHKPlayerClosure.scheduledPlayerClosure!(value)
         }
     }
 
@@ -405,29 +435,30 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
                 // do horizontal action
                 if valueX > 0 {
                     let image = UIImage.imageInBundle(named: "btn_forward")
-                    dragHub.image = image
+                    dragHud.image = image
                 } else {
                     let image = UIImage.imageInBundle(named: "btn_backward")
-                    dragHub.image = image
+                    dragHud.image = image
                 }
                 dragLabel.text = currentTimeLabel.text
+                playSlider.value = newValue
                 if JHKPlayerClosure.sliderValueChangeClosure != nil {
                     JHKPlayerClosure.sliderValueChangeClosure!(newValue)
                 }
             } else if gestureLeftSignal {
                 // do left gesture action
                 let image = UIImage.imageInBundle(named: "icon_brightness")
-                dragHub.image = image
+                dragHud.image = image
                 UIScreen.main.brightness -= valueY / 8000
                 dragLabel.text = String(format: "%.0f%%", (UIScreen.main.brightness * 100))
             } else {
                 // do right gesture action
                 let image = UIImage.imageInBundle(named: "icon_sound")
-                dragHub.image = image
+                dragHud.image = image
                 volumeViewSlider?.value -= Float(valueY) / 8000
                 dragLabel.text = String(format: "%.0f%%", ((volumeViewSlider?.value)! * 100))
             }
-            self.addSubview(dragHub)
+            self.addSubview(dragHud)
         case .ended:
             if autoHiddenMenu {
                 self.perform(#selector(hideMenu), with: nil, afterDelay: 5)
@@ -442,7 +473,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
             } else {
                 // TODO: do right gesture action
             }
-            dragHub.removeFromSuperview()
+            dragHud.removeFromSuperview()
         default: break
         }
     }
@@ -450,29 +481,29 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
 // MARK: - First response action
     /// Full or shrink screen
     public func fullOrShrinkAction() {
-        if JHKPlayerActionClosure.fullOrShrinkClosure != nil {
-            JHKPlayerActionClosure.fullOrShrinkClosure!()
+        if JHKPlayerClosure.fullOrShrinkClosure != nil {
+            JHKPlayerClosure.fullOrShrinkClosure!()
         }
     }
 
     /// Play or Pause video
     public func playOrPauseAction() {
-        if JHKPlayerActionClosure.playOrPauseClosure != nil {
-            JHKPlayerActionClosure.playOrPauseClosure!()
+        if JHKPlayerClosure.playOrPauseClosure != nil {
+            JHKPlayerClosure.playOrPauseClosure!()
         }
     }
 
     /// Push to remote screen
     public func pushButtonAction() {
-        if JHKPlayerActionClosure.pushScreenClosure != nil {
-            JHKPlayerActionClosure.pushScreenClosure!()
+        if JHKPlayerClosure.pushScreenClosure != nil {
+            JHKPlayerClosure.pushScreenClosure!()
         }
     }
 
     /// Return back action
     public func returnButtonAction() {
-        if JHKPlayerActionClosure.turnBackClosure != nil {
-            JHKPlayerActionClosure.turnBackClosure!()
+        if JHKPlayerClosure.turnBackClosure != nil {
+            JHKPlayerClosure.turnBackClosure!()
         }
     }
 
@@ -484,24 +515,24 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
             sideMenuForDefinition = false
             isSideMenuShow = true
         }
-        if JHKPlayerActionClosure.moreInfoClosure != nil {
-            JHKPlayerActionClosure.moreInfoClosure!()
+        if JHKPlayerClosure.moreInfoClosure != nil {
+            JHKPlayerClosure.moreInfoClosure!()
         }
     }
 
     /// Previews action
     public func previewsAction() {
         isSideMenuShow = false
-        if JHKPlayerActionClosure.playPreviousClosure != nil {
-            JHKPlayerActionClosure.playPreviousClosure!()
+        if JHKPlayerClosure.playPreviousClosure != nil {
+            JHKPlayerClosure.playPreviousClosure!()
         }
     }
 
     /// Next action
     public func nextAction() {
         isSideMenuShow = false
-        if JHKPlayerActionClosure.playNextClosure != nil {
-            JHKPlayerActionClosure.playNextClosure!()
+        if JHKPlayerClosure.playNextClosure != nil {
+            JHKPlayerClosure.playNextClosure!()
         }
     }
 
@@ -513,8 +544,8 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
             sideMenuForDefinition = true
             isSideMenuShow = true
         }
-        if JHKPlayerActionClosure.changeDefinitionClosure != nil {
-            JHKPlayerActionClosure.changeDefinitionClosure!()
+        if JHKPlayerClosure.changeDefinitionClosure != nil {
+            JHKPlayerClosure.changeDefinitionClosure!()
         }
     }
 
@@ -555,8 +586,19 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         self.isMenuHidden = true
     }
 
+    /// Reset all status and clean view
+    public func resetStatus() {
+        playSlider.setValue(0, animated: true)
+        loadProgressView.setProgress(0, animated: false)
+        currentTimeLabel.text = "00:00"
+    }
+
     /// Function to push side menu to screen
     public func pushSideMenu() {
+        if sideMenu.superview == nil {
+            self.addSubview(sideMenu)
+            setNeedsLayout()
+        }
         sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
         UIView.animate(withDuration: 0.25, animations: {
             let q: CGFloat
@@ -566,7 +608,7 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
     }
 
     /// Function to hide side menu from screen
-    public func hideSideMenu() {
+    private func hideSideMenu() {
         UIView.animate(withDuration: 0.25, animations: {
             self.sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
         })
@@ -582,6 +624,14 @@ open class JHKPlayerView: UIView, UIGestureRecognizerDelegate {
         } else {
             bottomControlsArray.add(action)
         }
+    }
+
+    public func setUpLockMask(message: String, button: String?) {
+        let normalAttrs = [NSFontAttributeName : UIFont.systemFont(ofSize: 10.0),  NSForegroundColorAttributeName : UIColor.white]
+        var attributedString = NSMutableAttributedString(string: message, attributes: normalAttrs)
+        let hyperAttrs = [NSFontAttributeName : UIFont.systemFont(ofSize: 11.0),  NSForegroundColorAttributeName : UIColor.blue]
+        attributedString.append(NSAttributedString(string: button!, attributes: hyperAttrs))
+        lockMessageLabel.attributedText = attributedString
     }
 }
 
