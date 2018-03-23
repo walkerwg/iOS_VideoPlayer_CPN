@@ -18,13 +18,13 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(pushView), for: .touchUpInside)
         self.view.addSubview(button)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func pushView() {
+    @objc func pushView() {
         let view2 = MenuController(nibName: nil, bundle: nil)
         self.present(view2, animated: true, completion: nil)
     }

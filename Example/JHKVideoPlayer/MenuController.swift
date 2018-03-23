@@ -10,6 +10,10 @@ import UIKit
 import JHKVideoPlayer
 
 class MenuController: UIViewController, JHKPlayerActionsDelegate {
+    func shareAction() {
+        print("点击了 shareAction")
+    }
+    
 
     fileprivate lazy var playerView: JHKVideoPlayer = {
         [unowned self] in
@@ -26,13 +30,13 @@ class MenuController: UIViewController, JHKPlayerActionsDelegate {
             fatalError("连接错误")
         }
         //let localUrl = Bundle.main.url(forResource: "music-box", withExtension: "mp4")
-
+        //playerView = JHKVideoPlayer.init(url: "http://bos.nj.bpc.baidu.com/tieba-smallvideo/11772_3c435014fb2dd9a5fd56a57cc369f6a0.mp4")
         playerView.mediaURL = url//(localUrl! as URL)
         playerView.videoTitle = "This is a temp title"
         playerView.actionDelegate = self
-        playerView.autoDismissMenu = false
-        playerView.controlView?.autoHiddenMenu = false
+        playerView.startPoint = CGFloat.init(15)
         self.view.addSubview(playerView)
+        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,8 +55,6 @@ extension JHKPlayerActionsDelegate where Self: MenuController {
     }
 
     func pushScreenAction() {
-        playerView.lockPlayer(with: "已成功锁定播放器", action: "开通Vip", handler: {
-            print("暂无链接")
-        })
+        playerView.lockPlayer(with: "已成功锁定播放器\n若继续播放请开通Vip\n", isStopPlaying: false, actions: [LockAction.action(title: "立即开通\n", attributes: [:], handler: { print("外部打印")})])
     }
 }

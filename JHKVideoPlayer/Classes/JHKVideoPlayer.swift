@@ -2,7 +2,7 @@
 //  JHKVideoPlayer.swift
 //  JHKVideoPlayer
 //
-//  This is the core .swift file for JHKVideoPlayer
+//  This is the core Swift file for JHKVideoPlayer, containing logical methods and structure functions.
 //
 //  Created by LuisGin on 17/2/7.
 //  Copyright © 2017 LuisGin. All rights reserved.
@@ -17,6 +17,12 @@ public enum JHKVideoPlayerState: Int {
     case playing = 0
     case pause
     case stop
+}
+
+/// Enums for lock status
+public enum JHKVideoPlayerLockState: Int {
+    case notLocked = 0
+    case locked
 }
 
 /// Enums whether Player is on full screen mode
@@ -36,9 +42,9 @@ public enum JHKPlayerContentFillMode: Int {
 ///
 /// - Author: Luis Gin
 /// - Version: v0.1.1
-open class JHKVideoPlayer: UIView {
+open class JHKVideoPlayer: UIView, JHKInternalTransport {
 
-    // MARK: - states signal
+    // MARK: - Status signal
     /// Status for video player
     ///
     /// - Default: default value as JHKVideoPlayerState.stop
@@ -48,46 +54,123 @@ open class JHKVideoPlayer: UIView {
             switch playState {
             case .playing:
                 self.player?.play()
-                let image = UIImage.imageInBundle(named: "btn_pause")
-                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
+                let imageNormal = UIImage.imageInBundle(named: "暂停")
+                controlView?.playOrPauseButton.setBackgroundImage(imageNormal, for: .normal)
+                let imagePressDown = UIImage.imageInBundle(named: "暂停 按下")
+                controlView?.playOrPauseButton.setBackgroundImage(imagePressDown, for: .highlighted)
             case .pause:
                 self.player?.pause()
                 // 开始监听方法，暂停监听信号，原因是当程序后台运行时及延迟播放时需要不改变信号但执行方法
                 playerPausePlaying()
-                let image = UIImage.imageInBundle(named: "btn_play")
-                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
+                let imageNormal = UIImage.imageInBundle(named: "播放")
+                controlView?.playOrPauseButton.setBackgroundImage(imageNormal, for: .normal)
+                let imagePressDown = UIImage.imageInBundle(named: "播放 按下")
+                controlView?.playOrPauseButton.setBackgroundImage(imagePressDown, for: .highlighted)
             case .stop:
-                let image = UIImage.imageInBundle(named: "btn_play")
-                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
+                let imageNormal = UIImage.imageInBundle(named: "播放")
+                controlView?.playOrPauseButton.setBackgroundImage(imageNormal, for: .normal)
+                let imagePressDown = UIImage.imageInBundle(named: "播放 按下")
+                controlView?.playOrPauseButton.setBackgroundImage(imagePressDown, for: .highlighted)
                 controlView?.resetStatus()
             }
         }
     }
 
-    // whether view is on full screen mode
+    public var playLockState: JHKVideoPlayerLockState = .notLocked {
+        didSet {
+            switch playLockState {
+            case .notLocked:
+                print("锁屏状态：没有锁�")
+                controlView?.topBar.isHidden = false
+                controlView?.bottomBar.isHidden = false
+                controlView?.playOrPauseButton.isHidden = false
+                
+                let imageNormal = UIImage.imageInBundle(named: "解锁")
+                controlView?.lockPlayScreenButton.setBackgroundImage(imageNormal, for: .normal)
+                // 允许点击开通会员按钮
+                self.controlView?.lockMessageView.isUserInteractionEnabled = true
+                // 已经解锁锁屏，屏幕可以任意旋转
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setValuesInterfaceOrientationMaskNoti"), object: "3")
+
+            case .locked:
+                print("锁屏状态：锁屏")
+                // 屏蔽界面所有操作
+                controlView?.topBar.isHidden = true
+                controlView?.bottomBar.isHidden = true
+                controlView?.playOrPauseButton.isHidden = true
+                
+                let imageNormal = UIImage.imageInBundle(named: "锁定")
+                controlView?.lockPlayScreenButton.setBackgroundImage(imageNormal, for: .normal)
+                // 不允许点击开通会员按钮
+                self.controlView?.lockMessageView.isUserInteractionEnabled = false
+                // 已经锁屏，屏幕只允许横向全屏
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setValuesInterfaceOrientationMaskNoti"), object: "2")
+
+            }
+        }
+    }
+    
+    /// Whether view is on full screen mode
+    /// - Default: default value as JHKPlayerFullScreenMode.normal
     public var isFull: JHKPlayerFullScreenMode = .normal {
         didSet {
-            if isFull == .normal {
-                let image = UIImage.imageInBundle(named: "player_full")
-                controlView?.fullOrSmallButton.setBackgroundImage(image, for: .normal)
+            if isFull == .normal { // 小屏幕时
+                // 放大全屏按钮
+                let imageNormal = UIImage.imageInBundle(named: "全屏")
+                controlView?.fullOrSmallButton.setBackgroundImage(imageNormal, for: .normal)
+                let imagePressDown = UIImage.imageInBundle(named: "全屏 按下")
+                controlView?.fullOrSmallButton.setBackgroundImage(imagePressDown, for: .highlighted)
+//                // 暂停按钮
+//                let image = UIImage.imageInBundle(named: "btn_pause")
+//                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
+                // 返回退出按钮
+                let imageNormal_Back = UIImage.imageInBundle(named: "返回")
+                controlView?.returnButton.setBackgroundImage(imageNormal_Back, for: .normal)
+                let imagePressDown_Back = UIImage.imageInBundle(named: "返回 按下")
+                controlView?.returnButton.setBackgroundImage(imagePressDown_Back, for: .highlighted)
+                // 位于主屏幕上的按钮
+                let imageNormal_BackScreen = UIImage.imageInBundle(named: "返回")
+                controlView?.returnButtonHalfOnScreen.setBackgroundImage(imageNormal_BackScreen, for: .normal)
+                let imagePressDown_BackScreen = UIImage.imageInBundle(named: "返回 按下")
+                controlView?.returnButtonHalfOnScreen.setBackgroundImage(imagePressDown_BackScreen, for: .highlighted)
+
                 controlView?.definitionButton.removeFromSuperview()
-                controlView?.bottomControlsArray.remove(self.controlView?.definitionButton)
-                controlView?.moreButton.removeFromSuperview()
-                controlView?.topControlsArray.remove(self.controlView?.moreButton)
-                self.frame = originFrame!
+                controlView?.bottomControlsArray.remove(self.controlView!.definitionButton)
+//                controlView?.moreButton.removeFromSuperview()
+//                controlView?.pushButton.removeFromSuperview()
+                controlView?.topControlsArray.remove(self.controlView!.moreButton)
+                if originFrame != nil {
+                    self.frame = originFrame!
+                }
                 controlView?.setNeedsLayout()
             }
-            else {
-                let image = UIImage.imageInBundle(named: "player_shrink")
-                controlView?.fullOrSmallButton.setBackgroundImage(image, for: .normal)
-                controlView?.bottomControlsArray.add(self.controlView?.definitionButton)
-                controlView?.topControlsArray.add(self.controlView?.moreButton)
-                self.frame = (self.window?.bounds)!
+            else {// 全屏时
+                // 缩小至小屏幕按钮
+                let imageNormal = UIImage.imageInBundle(named: "缩小")
+                controlView?.fullOrSmallButton.setBackgroundImage(imageNormal, for: .normal)
+                let imagePressDown = UIImage.imageInBundle(named: "缩小 按下")
+                controlView?.fullOrSmallButton.setBackgroundImage(imagePressDown, for: .highlighted)
+                // 返回退出按钮
+                let imageNormal_Back = UIImage.imageInBundle(named: "返回")
+                controlView?.returnButton.setBackgroundImage(imageNormal_Back, for: .normal)
+                let imagePressDown_Back = UIImage.imageInBundle(named: "返回 按下")
+                controlView?.returnButton.setBackgroundImage(imagePressDown_Back, for: .highlighted)
+
+                controlView?.bottomControlsArray.add(self.controlView!.definitionButton)
+//                controlView?.topControlsArray.add(self.controlView!.moreButton)
+//                controlView?.topControlsArray.add(self.controlView!.pushButton)
+                originFrame = self.frame
+                if self.window != nil {
+                    self.frame = self.window!.bounds
+                } else {
+                    self.frame = UIScreen.main.bounds
+                }
                 controlView?.setNeedsLayout()
             }
         }
     }
-
+    
+    // Content fill mode, default is normal
     public var fillMode: JHKPlayerContentFillMode = .normal
 
     // MARK: - delegate
@@ -98,10 +181,8 @@ open class JHKVideoPlayer: UIView {
     // Custom settings for appearance
     open var autoStart: Bool = true
     open var autoNext: Bool = true
-    open var autoDismissMenu: Bool = true
+    open var autoHiddenMenu: Bool = true
     open var autoLandscape: Bool = UIDevice.current.userInterfaceIdiom == .phone
-    open var hideStatusBarWhenFullScreen: Bool = true
-    public var breakPoint: CGFloat?
 
     // MARK: - Core component
     // Lazy load AVPlayer as the core media player
@@ -113,7 +194,7 @@ open class JHKVideoPlayer: UIView {
     private var imageOutPut: AVPlayerItemOutput?
 
     // Control Menu
-    public var controlView: JHKPlayerView?
+    fileprivate var controlView: JHKPlayerView?
 
     // MARK: - Data
     // Origin frame
@@ -122,10 +203,17 @@ open class JHKVideoPlayer: UIView {
     // Title description
     public var videoTitle: String? {
         didSet {
-            controlView?.titleLabel.text = videoTitle!
+            controlView?.titleLabel.text = videoTitle ?? ""
         }
     }
-
+    
+    // 清晰度按钮名字设置
+    public var definitBTNTitle: String? {
+        didSet {
+            controlView?.definitionButton.titleLabel?.text  = definitBTNTitle ?? "标清123"
+        }
+    }
+    
     // Loaded video length
     public var loadedTime: CGFloat? {
         didSet {
@@ -133,16 +221,39 @@ open class JHKVideoPlayer: UIView {
             controlView?.loadProgressView.setProgress(Float(loadedTime), animated: true)
         }
     }
-    
+
+    // Title description
+    public var playRate: Float? {
+        didSet {
+            if #available(iOS 10.0, *) {
+                player?.automaticallyWaitsToMinimizeStalling = false
+            } else {
+                // Fallback on earlier versions
+            }
+            player?.rate = playRate!
+            print("播放速率: \(player?.rate)")
+            print(player?.rate)
+            print(playRate!)
+        }
+    }
+
     // Played video length
     public var currentTime: CGFloat? {
         didSet {
             guard let currentTime = currentTime else { return }
             controlView?.playSlider.setValue(Float(currentTime), animated: true)
             let timeCurrent :String = formatTimer(currentTime)
-            controlView?.currentTimeLabel.text = "\(timeCurrent)"
+            if isFull == .full {
+                controlView?.currentTimeLabel.text = "\(timeCurrent)" // "23:23:59"//
+            }else {
+                guard let totalTime = totalTime else { return }
+                let timeTotal = formatTimer(totalTime)
+                controlView?.currentTimeLabel.text = "\(timeCurrent)/\(timeTotal)"
+            }
+            
         }
     }
+    public var startPoint: CGFloat?
 
     // Total video length
     public var totalTime: CGFloat? {
@@ -158,6 +269,8 @@ open class JHKVideoPlayer: UIView {
     public var mediaURL: URL? {
         didSet {
             initPlayer()
+            // add by wjw
+            self.controlView?.loadingIndicator.startAnimating()
         }
     }
     // Interaction with system flush interval
@@ -165,15 +278,6 @@ open class JHKVideoPlayer: UIView {
     public var localeTime: TimeInterval?
     // Monitoring playing call back
     fileprivate var playbackTimeObserver: Any?
-
-    // MARK: - Air play support
-//    var allowsExternalPlayback = true
-//    var isExternalPlaybackActive: Bool {
-//      guard let player = self.player else {
-//        return false
-//    }
-//    return player.isExternalPlaybackActive
-//  }
     
     // MARK: - Public Util Function
     public func formatTimer(_ time: CGFloat) -> String {
@@ -188,9 +292,13 @@ open class JHKVideoPlayer: UIView {
     }
 
     // Check if network is in lag
-    public func checkLag() {
-        let current: TimeInterval = CMTimeGetSeconds((player?.currentTime())!)
-        // TODO: 比较条件逻辑未完全完成
+    @objc public func checkLag() {
+        
+        var current : TimeInterval = 0
+        if let cTim = (player?.currentTime()) {
+            current = CMTimeGetSeconds(cTim)
+        }
+
         if current == localeTime {
             playerDelay(true)
         } else {
@@ -204,13 +312,13 @@ open class JHKVideoPlayer: UIView {
     fileprivate func playerAvailableDuration() -> TimeInterval {
         let loadedTimeRange = player?.currentItem?.loadedTimeRanges
         let timeRange = (loadedTimeRange?.first)?.timeRangeValue
-        let startSeconds = CMTimeGetSeconds((timeRange?.start)!)
-        let durationSeconds = CMTimeGetSeconds((timeRange?.duration)!)
+        let startSeconds = CMTimeGetSeconds((timeRange?.start) ?? CMTimeMake(0, 0))
+        let durationSeconds = CMTimeGetSeconds((timeRange?.duration) ?? CMTimeMake(0, 0))
         let result = startSeconds + durationSeconds
         return result
     }
 
-    // judge if have local file loaded
+    // Judge if there is any local file loaded
     fileprivate func checkLocalFileExistsAtPath(_ url: URL) {
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: url.absoluteString) == true {
@@ -243,6 +351,7 @@ open class JHKVideoPlayer: UIView {
             link?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
             link = nil
         }
+
         playerItem?.removeObserver(self, forKeyPath: "status", context: nil)
         playerItem?.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
@@ -278,11 +387,10 @@ open class JHKVideoPlayer: UIView {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .black
-        originFrame = frame
 
         // Set audio display category
-        // 本设置将使播放器不随系统静音而静音
-        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        // TODO: 本设置将使播放器不随系统静音而静音
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
     }
 
     // Init with media url
@@ -300,7 +408,7 @@ open class JHKVideoPlayer: UIView {
     // Destory observers while inallocation
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("Successfully destory video player")
+        print("***Successfully destory video player***")
     }
 
     override open func layoutSubviews() {
@@ -320,6 +428,8 @@ open class JHKVideoPlayer: UIView {
         }
         if controlView == nil {
             controlView = JHKPlayerView()
+            controlView?.customizeActionHandler = actionDelegate
+            controlView?.internalDelegate = self
             self.addSubview(controlView!)
         }
         JHKControlClosure()
@@ -348,7 +458,8 @@ open class JHKVideoPlayer: UIView {
     }
 
     /// Add observes for player status and state value
-    public func addObservers() {
+    func addObservers() {
+
         playerItem?.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         playerItem?.addObserver(self, forKeyPath: "loadedTimeRanges", options: .new, context: nil)
 
@@ -361,6 +472,7 @@ open class JHKVideoPlayer: UIView {
     /// KVO responses. React immediately after playerItem status change and loading cache change.
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         let playerItem = object as? AVPlayerItem
+
         if keyPath == "status" {
             if playerItem?.status == .readyToPlay {
                 // Player successfully load the video, status readyToPlay
@@ -374,6 +486,8 @@ open class JHKVideoPlayer: UIView {
                 playerFailToLoad()
             }
         } else if keyPath == "loadedTimeRanges" {
+            guard playerItem?.duration != nil else { return }
+            guard player?.currentItem?.loadedTimeRanges.count != nil, player?.currentItem?.loadedTimeRanges.count != 0 else { return }
             let timeInterval = playerAvailableDuration()
             let duration = CMTimeGetSeconds((playerItem?.duration)!)
             loadedTime = CGFloat(timeInterval / duration)
@@ -385,16 +499,24 @@ open class JHKVideoPlayer: UIView {
         controlView?.loadingIndicator.stopAnimating()
         playState = .playing
         if playbackTimeObserver == nil {
-            playbackTimeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil, using: { [weak self](time) in
+            playbackTimeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil, using: {
+                [weak self] time in
                 guard let sself = self else { return }
-                let currentSecond = CGFloat((sself.playerItem?.currentTime().value)!) / CGFloat((sself.playerItem?.currentTime().timescale)!)
-                sself.currentTime = currentSecond
-                // TODO: 暂时使用的是传入断点的方式，若逻辑趋于复杂，可使用传出监听方式
-                if sself.breakPoint != nil && currentSecond >= sself.breakPoint! {
-                    sself.lockPlayer(with: "锁屏提示语", action: "超链接", handler: nil)
+                
+                // Bug: SSOFEDU-3390
+                var currentSecond : CGFloat = 0
+                if let timeItem = sself.playerItem?.currentTime() {
+                    currentSecond = CGFloat(timeItem.value) / CGFloat(timeItem.timescale)
                 }
-                //self?.actionDelegate?.breakPointListener(time: currentSecond)
+//                let currentSecond = CGFloat((sself.playerItem?.currentTime().value)!) / CGFloat((sself.playerItem?.currentTime().timescale)!)
+
+                sself.currentTime = currentSecond
+                self?.actionDelegate?.breakPointListener(time: currentSecond)
             })
+            if startPoint != nil {
+                player?.seek(to: CMTime(seconds: Double(startPoint!), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
+                startPoint = nil
+            }
         }
         if link == nil {
             link = CADisplayLink(target: self, selector: #selector(checkLag))
@@ -429,6 +551,7 @@ open class JHKVideoPlayer: UIView {
     /// Call when player fail to load resource, anounced that resource is not valid.
     private func playerFailToLoad() {
         playState = .stop
+        self.actionDelegate?.failLoadListener()
         controlView?.loadingIndicator.stopAnimating()
     }
 
@@ -440,19 +563,22 @@ open class JHKVideoPlayer: UIView {
         }
     }
 
-    public func lockPlayer(with warning: String?, action: String?, handler: (() -> (Void))?) {
-        playerStopPlaying()
-        controlView?.setUpLockMask(message: warning!, button: action)
-        controlView?.insertSubview((controlView?.lockMaskView)!, at: 0)
-
-        controlView?.autoHiddenMenu = false
+    public func lockPlayer(with warning: String, isStopPlaying: Bool, actions: [LockAction] = []) {
+        if isStopPlaying {
+            playerStopPlaying()
+        }else {
+            playerPausePlaying()
+        }
+        controlView?.setUpLockMask(message: warning, actions: actions)
+        autoHiddenMenu = false
         controlView?.bottomBar.isUserInteractionEnabled = false
+        // add by wjw
+        self.controlView?.loadingIndicator.stopAnimating()
     }
 
     public func unlocakPlayer() {
         controlView?.lockMaskView.removeFromSuperview()
-
-        controlView?.autoHiddenMenu = true
+        autoHiddenMenu = true
         controlView?.bottomBar.isUserInteractionEnabled = true
     }
 
@@ -480,28 +606,10 @@ open class JHKVideoPlayer: UIView {
     // MARK: - Blocks, Implement closures for player controls
     open func JHKControlClosure() {
 
-        // Processor changing closure
-        JHKPlayerClosure.sliderValueChangeClosure = { [weak self] (time) in
-            guard let sself = self else { return }
-            sself.player?.seek(to: CMTime.init(seconds: Double(time), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
-            sself.currentTime = CGFloat(time)
-            sself.playState = .pause
-        }
-
         // Processor change end closure
         JHKPlayerClosure.sliderDragedClosure = { [weak self] in
             guard let sself = self else { return }
             sself.playerStartPlaying()
-        }
-
-        // Change mode of full screen or shrink screen
-        JHKPlayerClosure.fullOrShrinkClosure = { [weak self] in
-            guard let sself = self else { return }
-            if sself.isFull == .normal {
-                UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-            } else {
-                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-            }
         }
 
         // Change playing states closure
@@ -510,6 +618,7 @@ open class JHKVideoPlayer: UIView {
             switch sself.playState {
             case .playing:
                 sself.playState = .pause
+                sself.actionDelegate?.playPauseAction()
             case .pause:
                 sself.playerStartPlaying()
             case .stop:
@@ -518,29 +627,18 @@ open class JHKVideoPlayer: UIView {
             }
         }
 
-        // Turn back button closure
-        JHKPlayerClosure.turnBackClosure = { [weak self] in
+        // Change playing states closure
+        JHKPlayerClosure.lockPlayScreenClosure = { [weak self] in
             guard let sself = self else { return }
-            sself.playerStopPlaying()
-            sself.actionDelegate?.playerQuitAction()
-        }
+            switch sself.playLockState {
+            case .notLocked:
+                sself.playLockState = .locked
+                sself.controlView?.isPlayerLocked = true
 
-        // Play next button closure
-        JHKPlayerClosure.playNextClosure = { [weak self] in
-            guard let sself = self else { return }
-            sself.actionDelegate?.playNextAction()
-        }
-
-        /// Play previous button closure
-        JHKPlayerClosure.playPreviousClosure = { [weak self] in
-            guard let sself = self else { return }
-            sself.actionDelegate?.playPreviousAction()
-        }
-
-        /// Push screen button closure
-        JHKPlayerClosure.pushScreenClosure = { [weak self] in
-            guard let sself = self else { return }
-            sself.actionDelegate?.pushScreenAction()
+            case .locked:
+                sself.playLockState = .notLocked
+                sself.controlView?.isPlayerLocked = false
+            }
         }
 
         /// More info button closure
@@ -548,6 +646,21 @@ open class JHKVideoPlayer: UIView {
             guard let sself = self else { return }
             if sself.actionDelegate != nil {
                 sself.setMenuContent(view: (sself.actionDelegate!.moreMenuAction()))
+            }
+        }
+
+        /// Share info button closure
+        JHKPlayerClosure.shareInfoClosure = { [weak self] in
+            guard let sself = self else { return }
+            if sself.actionDelegate != nil {
+                sself.actionDelegate?.shareAction()
+                
+                if self?.isFull == .full {
+                    // 点击分享按钮时，如果是全屏状态，则退出全屏
+                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+                }
+
+//                dPrint("弹窗分享窗口")
             }
         }
 
@@ -567,19 +680,42 @@ open class JHKVideoPlayer: UIView {
     }
 }
 
-extension UIImage {
-    /// Extension for determined specific Image resources in the bundle of CocoaPods Component
-    ///
-    /// - Parameter name: (String) - image name in bundle
-    /// - Parameter bundle: (String) - bundle name in specific
-    /// - Returns: image: UIImage
-    /// - Warning: for internal use only
-    /// - SeeAlso: `imageInBundle()`
-    internal class func imageInBundle(named name: String, from bundle: String? = nil) -> UIImage? {
-        let searchUrl = Bundle(for: JHKVideoPlayer.self).url(forResource: bundle ?? "JHKVideoPlayer", withExtension: "bundle")
-        let bundleUrl = Bundle(url: searchUrl!)?.url(forResource: "JHKPlayerBundle", withExtension: "bundle")
-        let bundle = Bundle(url: bundleUrl!)
-        let image = UIImage(named: name, in: bundle, compatibleWith: nil)
-        return image
+// Protocol JHKInternalTransport
+extension JHKVideoPlayer {
+    func sliderValueChange(value: Float) {
+        // Processor changing closure
+        self.player?.seek(to: CMTime.init(seconds: Double(value), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
+        self.currentTime = CGFloat(value)
+        self.playState = .pause
+    }
+
+    // Change mode of full screen or shrink screen
+    func fullOrShrinkAction() {
+        if self.isFull == .normal {
+            
+//            dPrint("转换为全屏")
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+        } else {
+//            dPrint("退出全屏")
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+        }
+    }
+
+    // Turn back button closure
+    func returnButtonAction() {
+        if self.isFull == .normal {
+            self.playerStopPlaying()
+        }
+        self.actionDelegate?.playerQuitAction()
+    }
+    
+    func openVIPButtonAction() {
+        if self.playLockState != .locked {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "openVIPMemberBtnClickedNoti"), object: nil)
+        }
+    }
+    
+    func isFullScreen() -> JHKPlayerFullScreenMode {
+        return isFull
     }
 }

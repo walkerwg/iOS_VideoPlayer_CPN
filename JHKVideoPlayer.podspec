@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JHKVideoPlayer'
-  s.version          = '0.1.0'
+  s.version          = '2.7.2'
   s.summary          = 'JHKVideoPlayer - A video player for JHK company.'
 
 # This description is used to generate tags and improve search results.
@@ -21,14 +21,14 @@ Pod::Spec.new do |s|
 This is a video player control written by Swift, which achieved a highly complete function and determined fully interface for user to make self-design.
                        DESC
 
-  s.homepage         = 'http://10.18.207.188/#/admin/projects/iOSModules/iOS_VideoPlayer_CPN'
+  s.homepage         = 'https://gitee.com/steven2017/JHKVideoPlayer'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'luis_gin' => 'hanqing93@gmail.com' }
-  s.source           = { :git => 'http://192.168.1.188:8088/iOS/iOS_VideoPlayer_CPN.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://gitee.com/steven2017/JHKVideoPlayer.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'JHKVideoPlayer/Classes/**/*'
   
@@ -36,7 +36,4 @@ This is a video player control written by Swift, which achieved a highly complet
     'JHKVideoPlayer' => ['JHKVideoPlayer/Assets/**/*']
 }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
