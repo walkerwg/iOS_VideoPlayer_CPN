@@ -1,4 +1,6 @@
 use_frameworks!
+platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
 
 target 'JHKVideoPlayer_Example' do
   pod 'JHKVideoPlayer', :path => ‘../JHKVideoPlayer.podspec’

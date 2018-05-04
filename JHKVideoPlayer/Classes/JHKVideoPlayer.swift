@@ -80,7 +80,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         didSet {
             switch playLockState {
             case .notLocked:
-                print("锁屏状态：没有锁�")
+                print("锁屏状态：没有锁")
                 controlView?.topBar.isHidden = false
                 controlView?.bottomBar.isHidden = false
                 controlView?.playOrPauseButton.isHidden = false
@@ -582,6 +582,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         controlView?.bottomBar.isUserInteractionEnabled = true
     }
 
+    public func removeLocakPlayer() {
+        controlView?.lockMaskView.removeFromSuperview()
+        controlView?.bottomBar.isUserInteractionEnabled = true
+    }
     /// Orient change response
     private func deviceOrient(_ orient: UIDeviceOrientation) {
         if autoLandscape {
@@ -711,7 +715,7 @@ extension JHKVideoPlayer {
     
     func openVIPButtonAction() {
         if self.playLockState != .locked {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "openVIPMemberBtnClickedNoti"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "openVIPMemberBtnClickedNoti"), object: controlView?.openVIPBtn.titleLabel?.text)
         }
     }
     

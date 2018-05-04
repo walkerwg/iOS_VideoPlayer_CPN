@@ -11,8 +11,12 @@
 import UIKit
 import MediaPlayer
 
-let SCREEN_WIDTH = UIScreen.main.bounds.size.width
-let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
+let kScreenWidth = UIScreen.main.bounds.size.width
+let kScreenHeight = UIScreen.main.bounds.size.height
+// 适配iPhoneX
+let isIPhoneX = (kScreenWidth == 375.0 && kScreenHeight == 812.0 ? true : false)
+let X_fullScreen : CGFloat = (isIPhoneX ? 34.0 : 0.0)
+
 /// The view components of JHKVideoPlayer, and can be expanded in further
 ///
 /// - Author: Luis Gin
@@ -51,7 +55,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     public var topControlsArray = NSMutableArray()
     public var bottomControlsArray = NSMutableArray()
 
-    internal var menuContentColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.7) {
+    internal var menuContentColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5) {
         didSet {
             for subView in subviews {
                 subView.backgroundColor = menuContentColor
@@ -417,8 +421,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         }
         
         if isFullOrHalfScreen() == .normal { // 竖屏
-            print("--屏幕状态----- 半屏")
-            
+
             let fontSizeSmall : CGFloat = 14
             
             // 显示半屏所特有的
@@ -460,11 +463,11 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             shareButtonHalf.frame = CGRect(x: topBar.width - 36, y: 0, width: 24, height: 24)
             pushButtonHalf.frame = CGRect(x: topBar.width - 36 - 36, y: 0, width: 24, height: 24)
 
-            var curWidth = SCREEN_WIDTH
-            if SCREEN_WIDTH < SCREEN_HEIGHT {
-                curWidth = SCREEN_WIDTH
+            var curWidth = kScreenWidth
+            if kScreenWidth < kScreenHeight {
+                curWidth = kScreenWidth
             }else {
-                curWidth = SCREEN_HEIGHT
+                curWidth = kScreenHeight
             }
 
             titleLabel.frame = CGRect(x: returnButton.origin.x + returnButton.frame.size.width + 5, y: 0, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 5) - (curWidth - (topBar.width - 36 - 36)) - 5, height: topBar.frame.height)
@@ -507,9 +510,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            self.addSubview(returnButtonHalfOnScreen)
             // 暂时不加了
             returnButtonHalfOnScreen.removeFromSuperview()
-            
-            playOrPauseButton.removeFromSuperview()
-            bottomBar.addSubview(playOrPauseButton)
+
             topBar.addSubview(moreButton)
             // 添加锁屏按钮
             self.addSubview(lockPlayScreenButton)
@@ -517,7 +518,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 68)
             // TODO:  增添三元条件分支匹配最小值
-            returnButton.frame = CGRect(x: 16, y: 16, width: 30, height: 30)
+            returnButton.frame = CGRect(x: 16 + X_fullScreen, y: 16, width: 30, height: 30)
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
@@ -528,7 +529,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
             titleLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
             // 导航栏右侧
-            moreButton.frame = CGRect(x: topBar.frame.width - 32 - 50, y: 0, width: 50, height: topBar.frame.height)
+            moreButton.frame = CGRect(x: topBar.frame.width - 32 - 50 - X_fullScreen, y: 0, width: 50, height: topBar.frame.height)
             moreButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
             separaterLineView1.frame = CGRect(x: moreButton.origin.x - 6, y: 0, width: 1, height: 8)
             shareButton.frame = CGRect(x: separaterLineView1.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)
@@ -543,14 +544,14 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             separaterLineView1.center.y = topBar.center.y
             separaterLineView2.center.y = topBar.center.y
 
-            var curWidth = SCREEN_WIDTH
-            var curHeight = SCREEN_HEIGHT
-            if SCREEN_WIDTH < SCREEN_HEIGHT {
-                curWidth = SCREEN_WIDTH
-                curHeight = SCREEN_HEIGHT
+            var curWidth = kScreenWidth
+            var curHeight = kScreenHeight
+            if kScreenWidth < kScreenHeight {
+                curWidth = kScreenWidth
+                curHeight = kScreenHeight
             }else {
-                curWidth = SCREEN_HEIGHT
-                curHeight = SCREEN_WIDTH
+                curWidth = kScreenHeight
+                curHeight = kScreenWidth
             }
 
             titleLabel.frame = CGRect(x: returnButton.origin.x + returnButton.frame.size.width + 8, y: 0, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 15) - (curWidth - (separaterLineView2.origin.x - 50)) - 5, height: topBar.frame.height)
@@ -558,11 +559,11 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 底部导航栏
             bottomBar.frame = CGRect(x: 0, y: self.frame.height * 5 / 6 - 16, width: self.frame.width, height: self.frame.height / 6 + 16)
             // 进度条
-            playSlider.frame = CGRect(x: 75, y: bottomBar.height * 2.0 / 3, width: bottomBar.frame.width - 160 - 80, height: 10)
+            playSlider.frame = CGRect(x: 75 + X_fullScreen, y: bottomBar.height * 2.0 / 3, width: bottomBar.frame.width - 160 - 80 - 2*X_fullScreen, height: 10)
             let insetH: CGFloat = playSlider.frame.height
-            loadProgressView.frame = CGRect(x: 75, y: bottomBar.height * 2.0 / 3 + insetH / 2, width: bottomBar.frame.width - 160 - 80, height: insetH)
+            loadProgressView.frame = CGRect(x: 75 + X_fullScreen, y: bottomBar.height * 2.0 / 3 + insetH / 2, width: bottomBar.frame.width - 160 - 80 - 2*X_fullScreen, height: insetH)
             // 时间指示器
-            currentTimeLabel.frame = CGRect(x: 16, y: insetH - 2, width: 55, height: 14)
+            currentTimeLabel.frame = CGRect(x: 16 + X_fullScreen, y: insetH - 2, width: 55, height: 14)
             totalTimeLabel.isHidden = false
             totalTimeLabel.frame = CGRect(x: loadProgressView.origin.x + loadProgressView.size.width + 12, y: insetH - 2, width: 55, height: 14)
             currentTimeLabel.center.y = loadProgressView.center.y // bottomBar.size.height * 2.0 / 3
@@ -581,14 +582,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             totalTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull*2/3)
             definitionButton.titleLabel!.font = UIFont.systemFont(ofSize: fontSizeFull*3/2)
             
-            playOrPauseButton.frame = CGRect(x: 3, y: currentTimeLabel.origin.y - 60, width: 50, height: 50)
+            playOrPauseButton.removeFromSuperview()
+            bottomBar.addSubview(playOrPauseButton)
+            playOrPauseButton.frame = CGRect(x: 5 + X_fullScreen, y: currentTimeLabel.origin.y - 60, width: 50, height: 50)
             // 全屏/半屏 切换
-            fullOrSmallButton.frame = CGRect(x: bottomBar.size.width - 16 - 30, y: -15, width: 30, height: 30)
+            fullOrSmallButton.frame = CGRect(x: bottomBar.size.width - 16 - 30 - X_fullScreen, y: -15, width: 30, height: 30)
             fullOrSmallButton.center.y = loadProgressView.center.y
             // 锁屏按钮
-            lockPlayScreenButton.frame = CGRect(x: 16, y: self.frame.height/2-10, width: 30, height: 30)
+            lockPlayScreenButton.frame = CGRect(x: 16 + X_fullScreen, y: self.frame.height/2-10, width: 30, height: 30)
             
             openVIPBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            playOrPauseButton.isHidden = false
         }
 
         for view in bottomControlsArray {
@@ -605,7 +609,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         lockMaskView.frame = CGRect(x: 0, y: TextY, width: self.frame.width - 30, height: 70)
         lockMessageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 40)
 
-        openVIPBtn.frame = CGRect(x: 20, y: 40, width: 100, height: 30)
+        if lockMessageView.attributedText.string == "抱歉，您的账号超过教育VIP权益绑定数量" {
+            openVIPBtn.setTitle("详询400-085-6006", for: .normal)
+            openVIPBtn.setTitleColor(UIColor.white, for: .normal)
+            openVIPBtn.setTitleColor(UIColor.white, for: .selected)
+        }else {
+            openVIPBtn.setTitle("开通会员", for: .normal)
+            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .normal)
+            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .selected)
+        }
+        
+        openVIPBtn.frame = CGRect(x: 20, y: 40, width: 150, height: 30)
         openVIPBtn.center.x = lockMaskView.center.x
         lockMaskView.addSubview(openVIPBtn)
 
@@ -663,6 +677,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Play or Pause video
     @objc public func playOrPauseAction() {
         JHKPlayerClosure.playOrPauseClosure?()
+        // 点击了播放暂停按钮：发送通知检查用户设备超限
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "overDeviceCountCallH5PopNotify"), object: nil)
     }
     
     @objc public func lockPlayScreenAction() {
@@ -976,3 +992,36 @@ extension JHKPlayerView {
         }
     }
 }
+
+//extension UIColor{
+//    
+//    convenience init(_ hexColor: String) {
+//        
+//        // 存储转换后的数值
+//        var red:UInt32 = 0, green:UInt32 = 0, blue:UInt32 = 0
+//        
+//        // 分别转换进行转换
+//        Scanner(string: hexColor[0..<2]).scanHexInt32(&red)
+//        
+//        Scanner(string: hexColor[2..<4]).scanHexInt32(&green)
+//        
+//        Scanner(string: hexColor[4..<6]).scanHexInt32(&blue)
+//        
+//        self.init(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: 1.0)
+//    }
+//}
+//
+//extension String {
+//    
+//    /// String使用下标截取字符串
+//    /// 例: "示例字符串"[0..<2] 结果是 "示例"
+//    public subscript (r: Range<Int>) -> String {
+//        get {
+//            let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+//            let endIndex = self.index(self.startIndex, offsetBy: r.upperBound)
+//            
+//            return self[startIndex..<endIndex]
+//        }
+//    }
+//}
+
