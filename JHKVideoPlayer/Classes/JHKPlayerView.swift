@@ -610,7 +610,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         lockMessageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 40)
 
         if lockMessageView.attributedText.string == "抱歉，您的账号超过教育VIP权益绑定数量" {
-            openVIPBtn.setTitle("详询400-085-6006", for: .normal)
+            openVIPBtn.setTitle(getJHKPhoneNumInfo(), for: .normal) // "详询400-085-6006"
             openVIPBtn.setTitleColor(UIColor.white, for: .normal)
             openVIPBtn.setTitleColor(UIColor.white, for: .selected)
         }else {
@@ -652,6 +652,18 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         //        bottomBar.addSubview(previewsButton)
         //        bottomBar.addSubview(nextButton)
         //        bottomBar.addSubview(pushButton)
+    }
+    // 获取客服电话信息
+    func getJHKPhoneNumInfo() -> String {
+        var jhkPhoneNumPrefix = "详询"
+        var jhkPhoneNum = "详询【400-085-6006】"
+        let dicValue = UserDefaults.standard.value(forKey: "H5SavedDataKey")
+        if let dictLocal = dicValue as? NSMutableDictionary {
+            if let phoneNumInfo = dictLocal.object(forKey: "KEY_ACCOUNT_BIND_PHONE") {
+                jhkPhoneNum = "详询\(phoneNumInfo)"
+            }
+        }
+        return jhkPhoneNum
     }
 
     /// Add all gestures to control view
