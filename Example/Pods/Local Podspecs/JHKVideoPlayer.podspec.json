@@ -1,6 +1,6 @@
 {
   "name": "JHKVideoPlayer",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "summary": "JHKVideoPlayer - A video player for JHK company.",
   "description": "This is a video player control written by Swift, which achieved a highly complete function and determined fully interface for user to make self-design.",
   "homepage": "https://gitee.com/steven2017/JHKVideoPlayer",
@@ -12,8 +12,8 @@
     "luis_gin": "hanqing93@gmail.com"
   },
   "source": {
-    "git": "https://gitee.com/steven2017/JHKVideoPlayer.git",
-    "tag": "2.8.0"
+    "git": "http://10.18.207.188/iOSModules/iOS_VideoPlayer_CPN",
+    "tag": "2.8.1"
   },
   "platforms": {
     "ios": "9.0"

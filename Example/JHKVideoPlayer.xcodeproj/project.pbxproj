@@ -51,7 +51,7 @@
 		932828431E556DF500430899 /* JHKVideoPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JHKVideoPlayer.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/JHKVideoPlayer-gbauzvtouiofdhdvejnmsuvdnwpg/Build/Products/Debug-iphonesimulator/JHKVideoPlayer/JHKVideoPlayer.framework"; sourceTree = "<group>"; };
 		937465091E77D46B00808FCC /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		9FC37A60D1F464D638B9992E /* Pods-JHKVideoPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JHKVideoPlayer_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JHKVideoPlayer_Tests/Pods-JHKVideoPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		D3B4925320D7385A10B86270 /* JHKVideoPlayer.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JHKVideoPlayer.podspec; path = ../JHKVideoPlayer.podspec; sourceTree = "<group>"; };
+		D3B4925320D7385A10B86270 /* JHKVideoPlayer.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JHKVideoPlayer.podspec; path = ../JHKVideoPlayer.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D9F08375278F5DEE68B910A2 /* Pods_JHKVideoPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHKVideoPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
