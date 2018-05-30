@@ -444,9 +444,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
             moreButton.removeFromSuperview()
             // 顶部导航栏
-            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 8)
-            returnButton.frame = CGRect(x: 12, y: 2, width: 23, height: 23)
-            returnButtonHalfOnScreen.frame = CGRect(x: 12, y: 2, width: 23, height: 23)
+            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 8+3)
+            returnButton.frame = CGRect(x: 12, y: 2, width: 26, height: 26)
+            returnButtonHalfOnScreen.frame = CGRect(x: 12, y: 2, width: 26, height: 26)
 
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
@@ -460,8 +460,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             topBar.addSubview(titleLabel)
             topBar.addSubview(returnButton)
 
-            shareButtonHalf.frame = CGRect(x: topBar.width - 36, y: 0, width: 24, height: 24)
-            pushButtonHalf.frame = CGRect(x: topBar.width - 36 - 36, y: 0, width: 24, height: 24)
+            shareButtonHalf.frame = CGRect(x: topBar.width - 36, y: 1, width: 26, height: 26)
+            pushButtonHalf.frame = CGRect(x: topBar.width - 36 - 36, y: 1, width: 26, height: 26)
 
             var curWidth = kScreenWidth
             if kScreenWidth < kScreenHeight {
@@ -473,7 +473,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             titleLabel.frame = CGRect(x: returnButton.origin.x + returnButton.frame.size.width + 5, y: 0, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 5) - (curWidth - (topBar.width - 36 - 36)) - 5, height: topBar.frame.height)
 
             // 底部导航栏
-            bottomBar.frame = CGRect(x: 0, y: self.frame.height * 5 / 6 - 16, width: self.frame.width, height: self.frame.height / 6 + 16)
+            bottomBar.frame = CGRect(x: 0, y: self.frame.height * 5 / 6 - 10, width: self.frame.width, height: self.frame.height / 6 + 10)
             playSlider.frame = CGRect(x: 0, y: bottomBar.frame.height - 4, width: bottomBar.frame.width, height: 10)
             let insetH: CGFloat = playSlider.frame.height
             loadProgressView.frame = CGRect(x: 0, y: bottomBar.frame.height, width: bottomBar.frame.width , height: insetH)
@@ -488,6 +488,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - 12 - 28, y: 10, width: 28, height: 28)
 
             openVIPBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+            let strTitle = openVIPBtn.titleLabel?.text ?? ""
+            let widthTemp = strTitle.ga_widthForComment(fontSize: 13, height: 28)
+            openVIPBtn.frame = CGRect(x: 20, y: 55, width: widthTemp, height: 33)
 //            // 清晰度切换
 //            definitionButton.frame = CGRect(x: 0, y: 0, width: playOrPauseButton.frame.height * 2 / 3, height: playOrPauseButton.frame.height * 2 / 5)
 //            definitionButton.center = CGPoint(x: playOrPauseButton.center.x - playOrPauseButton.frame.width * 4.5, y: playOrPauseButton.center.y)
@@ -592,6 +595,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             lockPlayScreenButton.frame = CGRect(x: 16 + X_fullScreen, y: self.frame.height/2-10, width: 30, height: 30)
             
             openVIPBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            let strTitle = openVIPBtn.titleLabel?.text ?? ""
+            let widthTemp = strTitle.ga_widthForComment(fontSize: 15, height: 30)
+            openVIPBtn.frame = CGRect(x: 20, y: 45, width: widthTemp, height: 35)
             playOrPauseButton.isHidden = false
         }
 
@@ -604,23 +610,15 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         dragLabel.frame = CGRect(x: 0, y: dragHud.frame.height, width: dragHud.frame.width, height: dragHud.frame.height * 2 / 5)
         dragLabel.font = UIFont.systemFont(ofSize: dragLabel.frame.height)
         volumeControl.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
-        
+        // 锁定播放器界面时，显示控件
         let TextY : CGFloat = self.frame.size.height/2 - 30
         lockMaskView.frame = CGRect(x: 0, y: TextY, width: self.frame.width - 30, height: 70)
         lockMessageView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 40)
 
-        if lockMessageView.attributedText.string == "抱歉，您的账号超过教育VIP权益绑定数量" {
-            openVIPBtn.setTitle(getJHKPhoneNumInfo(), for: .normal) // "详询400-085-6006"
-            openVIPBtn.setTitleColor(UIColor.white, for: .normal)
-            openVIPBtn.setTitleColor(UIColor.white, for: .selected)
-        }else {
-            openVIPBtn.setTitle("开通会员", for: .normal)
-            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .normal)
-            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .selected)
-        }
+        openVIPBtn.titleLabel?.sizeToFit()
+        openVIPBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        openVIPBtn.frame = CGRect(x: 20, y: 40, width: 150, height: 30)
-        openVIPBtn.center.x = lockMaskView.center.x
+        openVIPBtn.center.x = lockMessageView.center.x
         lockMaskView.addSubview(openVIPBtn)
 
         lockMaskView.addSubview(lockMessageView)
@@ -656,11 +654,16 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     // 获取客服电话信息
     func getJHKPhoneNumInfo() -> String {
         var jhkPhoneNumPrefix = "详询"
-        var jhkPhoneNum = "详询【400-085-6006】"
+        var jhkPhoneNum = "详询400-085-6006"
         let dicValue = UserDefaults.standard.value(forKey: "H5SavedDataKey")
         if let dictLocal = dicValue as? NSMutableDictionary {
-            if let phoneNumInfo = dictLocal.object(forKey: "KEY_ACCOUNT_BIND_PHONE") {
-                jhkPhoneNum = "详询\(phoneNumInfo)"
+            if let phoneNumInfo = dictLocal.object(forKey: "KEY_ACCOUNT_BIND_PHONE") as? String {
+
+                var tempStr = phoneNumInfo.replacingOccurrences(of:"[", with: "")
+                tempStr = tempStr.replacingOccurrences(of:"]", with: "")
+                tempStr = tempStr.replacingOccurrences(of:"【", with: "")
+                tempStr = tempStr.replacingOccurrences(of:"】", with: "")
+                jhkPhoneNum = "详询\(tempStr)"
             }
         }
         return jhkPhoneNum
@@ -688,9 +691,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 // MARK: - First response action
     /// Play or Pause video
     @objc public func playOrPauseAction() {
-        JHKPlayerClosure.playOrPauseClosure?()
         // 点击了播放暂停按钮：发送通知检查用户设备超限
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "overDeviceCountCallH5PopNotify"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playOrPauseBTNNotify"), object: nil)
+        if isPlayerLocked {
+            print("用户点击了播放器上的播放或者暂停按钮 playOrPauseAction")
+            
+            
+            return
+        }
+        
+        JHKPlayerClosure.playOrPauseClosure?()
+
     }
     
     @objc public func lockPlayScreenAction() {
@@ -847,7 +858,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// - Parameters:
     ///   - message: message display on ground
     ///   - actions: extra action followed message
-    public func setUpLockMask(message: String, actions: [LockAction] = []) {
+    public func setUpLockMask(message: String, BTNName: String, actions: [LockAction] = []) {
         let normalAttrs = [NSAttributedStringKey.font : UIFont.systemFont(ofSize: 10.0),  NSAttributedStringKey.foregroundColor : UIColor.white]
         let attributedString = NSMutableAttributedString(string: message, attributes: normalAttrs)
         var index = 0
@@ -865,8 +876,21 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         paragraphAttre.alignment = .center
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphAttre, range: NSMakeRange(0, attributedString.length))
         lockMessageView.attributedText = attributedString
-//        print("收费提示: \(attributedString)")
 //        lockMessageView.isUserInteractionEnabled = true
+        openVIPBtn.setTitle(BTNName, for: .normal)
+        if lockMessageView.attributedText.string == "抱歉，您的账号超过教育VIP权益绑定数量" {
+//            openVIPBtn.setTitle(getJHKPhoneNumInfo(), for: .normal) // "详询400-085-6006"
+            openVIPBtn.setTitleColor(UIColor.white, for: .normal)
+            openVIPBtn.setTitleColor(UIColor.white, for: .selected)
+        }else if lockMessageView.attributedText.string == "在非wifi环境下，继续观看会耗费流量" {
+//            openVIPBtn.setTitle("继续观看", for: .normal)
+            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .normal)
+            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .selected)
+        }else {
+//            openVIPBtn.setTitle("开通会员", for: .normal)
+            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .normal)
+            openVIPBtn.setTitleColor(UIColor.init("18bc84"), for: .selected)
+        }
         lockMessageView.contentSizeToFit()
         if lockMaskView.superview != self {
             self.insertSubview(lockMaskView, at: 0)
@@ -1002,6 +1026,16 @@ extension JHKPlayerView {
             dragHud.removeFromSuperview()
         default: break
         }
+    }
+}
+
+//  UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightMedium)
+// 计算文字高度或者宽度与weight参数无关
+extension String {
+    func ga_widthForComment(fontSize: CGFloat, height: CGFloat = 15) -> CGFloat {
+        let font = UIFont.systemFont(ofSize: fontSize)
+        let rect = NSString(string: self).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: height), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: font], context: nil)
+        return ceil(rect.width)
     }
 }
 

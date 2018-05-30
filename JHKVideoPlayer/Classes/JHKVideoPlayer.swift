@@ -434,6 +434,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         }
         JHKControlClosure()
 
+        if mediaURL == nil {
+            mediaURL = URL.init(string: "https://xxxxx.mp4")
+            print("Error: mediaURL为nil")
+        }
         // Determined use local file or outside link
         checkLocalFileExistsAtPath(mediaURL!)
         playerAsset = AVURLAsset(url: mediaURL!, options: nil)
@@ -539,6 +543,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 
     // Stop video player and deallocate
     public func playerStopPlaying() {
+        controlView?.loadingIndicator.stopAnimating()
         UIApplication.shared.isIdleTimerDisabled = false
         RemoveObservers()
         playState = .stop
@@ -563,13 +568,13 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         }
     }
 
-    public func lockPlayer(with warning: String, isStopPlaying: Bool, actions: [LockAction] = []) {
+    public func lockPlayer(with warning: String, buttonName: String = "", isStopPlaying: Bool, actions: [LockAction] = []) {
         if isStopPlaying {
             playerStopPlaying()
         }else {
             playerPausePlaying()
         }
-        controlView?.setUpLockMask(message: warning, actions: actions)
+        controlView?.setUpLockMask(message: warning, BTNName: buttonName, actions: actions)
         autoHiddenMenu = false
         controlView?.bottomBar.isUserInteractionEnabled = false
         // add by wjw
