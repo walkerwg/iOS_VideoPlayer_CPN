@@ -55,7 +55,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     public var topControlsArray = NSMutableArray()
     public var bottomControlsArray = NSMutableArray()
 
-    internal var menuContentColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.5) {
+    internal var menuContentColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.3) {
         didSet {
             for subView in subviews {
                 subView.backgroundColor = menuContentColor

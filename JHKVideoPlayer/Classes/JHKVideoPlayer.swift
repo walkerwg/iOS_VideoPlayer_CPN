@@ -98,6 +98,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 controlView?.topBar.isHidden = true
                 controlView?.bottomBar.isHidden = true
                 controlView?.playOrPauseButton.isHidden = true
+                controlView?.isSideMenuShow = false
                 
                 let imageNormal = UIImage.imageInBundle(named: "锁定")
                 controlView?.lockPlayScreenButton.setBackgroundImage(imageNormal, for: .normal)
@@ -210,7 +211,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     // 清晰度按钮名字设置
     public var definitBTNTitle: String? {
         didSet {
-            controlView?.definitionButton.titleLabel?.text  = definitBTNTitle ?? "标清123"
+            controlView?.definitionButton.setTitle(definitBTNTitle ?? "标清", for: .normal)
         }
     }
     
@@ -495,6 +496,15 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             let timeInterval = playerAvailableDuration()
             let duration = CMTimeGetSeconds((playerItem?.duration)!)
             loadedTime = CGFloat(timeInterval / duration)
+//            print("override open func observeValue(forKeyPath keyPath: String?, of")
+//            print("\(timeInterval) -- \(duration) -- \(loadedTime) -- \(self.currentTime) -- \(self.totalTime) --- \(self.playerItem)")
+//            if self.currentTime==nil {
+//                self.currentTime = 0
+//            }
+//            if Int(self.currentTime!) >= 60  { //self.totalTime
+//                playerFinishedPlay()
+////                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "PlayNextVideoJumpADNotify"), object: nil)
+//            }
         }
     }
 
@@ -631,9 +641,24 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             case .pause:
                 sself.playerStartPlaying()
             case .stop:
+                if isScreenLocked() {
+                    return
+                }
+
                 sself.initPlayer()
-                print("Vidoe is on the loading")
+//                print("Vidoe is on the loading")
             }
+        }
+        func isScreenLocked() -> Bool {
+            var playerLockedType = "0"
+            if let lockType = UserDefaults.standard.object(forKey: "keyLockPlayerType") as? String {
+                playerLockedType = lockType
+            }
+            if  playerLockedType == "overDeviceCount" || playerLockedType == "forOpenVIP" || playerLockedType == "forLastVideo" {
+                print("屏幕锁定: \(playerLockedType), 点击播放器按钮不做反应")
+                return true
+            }
+            return false
         }
 
         // Change playing states closure
