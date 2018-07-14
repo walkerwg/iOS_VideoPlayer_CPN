@@ -11,11 +11,12 @@
 import UIKit
 import MediaPlayer
 
-let kScreenWidth = UIScreen.main.bounds.size.width
-let kScreenHeight = UIScreen.main.bounds.size.height
+let kScreenWidth = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height ? UIScreen.main.bounds.size.width : UIScreen.main.bounds.size.height
+let kScreenHeight = UIScreen.main.bounds.size.height > UIScreen.main.bounds.size.width ? UIScreen.main.bounds.size.height : UIScreen.main.bounds.size.width
 // 适配iPhoneX
 let isIPhoneX = (kScreenWidth == 375.0 && kScreenHeight == 812.0 ? true : false)
 let X_fullScreen : CGFloat = (isIPhoneX ? 34.0 : 0.0)
+let kStatusBarHeight : CGFloat = (isIPhoneX ? 44.0 : 20.0)
 
 /// The view components of JHKVideoPlayer, and can be expanded in further
 ///
@@ -25,11 +26,13 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
     // MARK: - Signal
     /// Signal of whether hide all the menu
-    fileprivate var isMenuHidden: Bool = false {
+    public var isMenuHidden: Bool = false {
         didSet{
             for subView in subviews {
                 if subView != loadingIndicator && subView != lockMaskView {
-                    subView.isHidden = isMenuHidden
+                    if subView.tag != 880221 {
+                      subView.isHidden = isMenuHidden
+                    }
                 }
             }
             isSideMenuShow = false
@@ -112,6 +115,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let imagePressDown = UIImage.imageInBundle(named: "返回 按下")
         button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
+        button.tag = 880221
         return button
     }()
     
@@ -299,7 +303,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Full screen button
     open lazy var fullOrSmallButton: UIButton = {
         let button = UIButton()
-        let image = UIImage.imageInBundle(named: "全屏")
+        var image = UIImage.imageInBundle(named: "全屏")
+        if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight { // 竖屏
+            image = UIImage.imageInBundle(named: "缩小")
+        }
         button.setBackgroundImage(image, for: .normal)
         button.addTarget(self, action: #selector(fullOrShrinkAction), for: .touchUpInside)
         return button
@@ -387,7 +394,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }()
 
     public var isPlayerLocked : Bool = false  // 屏幕是否已经锁定 默认没有, false:没有锁定, true:已经锁定
-    
+    public var isPlayerScreenLocked : Bool = false  // 屏幕是否是锁定界面，播放时左侧的锁. false:没有，true：锁定
+    open let TopBarHeightLandScape : CGFloat = 68  // 横屏时顶部菜单栏的高度
 
     // 锁屏响应链式表
     fileprivate var lockHandlerMap: Dictionary<String, (() -> Void)> = [:]
@@ -415,7 +423,12 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     override open func layoutSubviews() {
         super.layoutSubviews()
 
-        if isPlayerLocked {
+        if self.isHidden {
+            print("播放器已经隐藏，不做任何处理 layoutSubviews")
+            return
+        }
+
+        if isPlayerLocked && isPlayerScreenLocked  {
             print("屏幕已经锁定，不做任何处理 layoutSubviews")
             return
         }
@@ -485,7 +498,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 播放按钮，停止 播放  上一集/下一集
             playOrPauseButton.center = CGPoint(x: self.frame.width / 2, y: (self.frame.height) / 2)
             // 上一集 下一集按钮 聚好学3.3版本暂时不使用了，先保留着
-            fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - 12 - 28, y: 10, width: 28, height: 28)
+            fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - 12 - 28, y: 10, width: 30, height: 30)
 
             openVIPBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
             let strTitle = openVIPBtn.titleLabel?.text ?? ""
@@ -512,16 +525,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            returnButtonHalfOnScreen.isHidden = true
 //            self.addSubview(returnButtonHalfOnScreen)
             // 暂时不加了
-            returnButtonHalfOnScreen.removeFromSuperview()
+//            returnButtonHalfOnScreen.removeFromSuperview()
 
             topBar.addSubview(moreButton)
             // 添加锁屏按钮
             self.addSubview(lockPlayScreenButton)
 
             // 顶部导航栏
-            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 68)
+            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: TopBarHeightLandScape)
             // TODO:  增添三元条件分支匹配最小值
             returnButton.frame = CGRect(x: 16 + X_fullScreen, y: 16, width: 30, height: 30)
+            returnButtonHalfOnScreen.frame = CGRect(x: 16 + X_fullScreen, y: 18, width: 30, height: 30)
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
@@ -593,12 +607,18 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             fullOrSmallButton.center.y = loadProgressView.center.y
             // 锁屏按钮
             lockPlayScreenButton.frame = CGRect(x: 16 + X_fullScreen, y: self.frame.height/2-10, width: 30, height: 30)
-            
+
             openVIPBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             let strTitle = openVIPBtn.titleLabel?.text ?? ""
             let widthTemp = strTitle.ga_widthForComment(fontSize: 15, height: 30)
             openVIPBtn.frame = CGRect(x: 20, y: 45, width: widthTemp, height: 35)
             playOrPauseButton.isHidden = false
+        }
+
+        if isPlayerLocked && !isPlayerScreenLocked  {
+            lockPlayScreenButton.isHidden = true
+            playOrPauseButton.isHidden = true
+            print("屏幕已经锁定，隐藏锁屏按钮")
         }
 
         for view in bottomControlsArray {
@@ -644,7 +664,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         bottomBar.addSubview(totalTimeLabel)
         dragHud.addSubview(dragLabel)
         self.addSubview(loadingIndicator)
-//        self.addSubview(returnButtonHalfOnScreen)
+        self.addSubview(returnButtonHalfOnScreen)
         loadingIndicator.startAnimating()
         // 上一集 下一集按钮 聚好学3.3版本暂时不使用了，先保留着
         //        bottomBar.addSubview(previewsButton)
@@ -694,7 +714,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         // 点击了播放暂停按钮：发送通知检查用户设备超限
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playOrPauseBTNNotify"), object: nil)
         if isPlayerLocked {
-            print("用户点击了播放器上的播放或者暂停按钮 playOrPauseAction")
+            print("playOrPauseAction Clicked")
             
             
             return
@@ -826,18 +846,18 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             self.addSubview(sideMenu)
             setNeedsLayout()
         }
-        sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
+        sideMenu.frame = CGRect(x: kScreenHeight, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
         UIView.animate(withDuration: 0.25, animations: {
             let q: CGFloat
             if self.sideMenuForDefinition! { q = 4 } else { q = 3 }
-            self.sideMenu.frame = CGRect(x: self.frame.width * q / 5, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
+            self.sideMenu.frame = CGRect(x: kScreenHeight * q / 5, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
         })
     }
 
     /// Function to hide side menu from screen
     private func hideSideMenu() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
+            self.sideMenu.frame = CGRect(x: kScreenHeight, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
         })
     }
 
@@ -934,7 +954,12 @@ extension JHKPlayerView {
 
     func tapGestureHandler(_ tap: UITapGestureRecognizer) {
         print("tapGestureHandler")
-        if isPlayerLocked {
+
+        if isPlayerLocked && !isPlayerScreenLocked {
+            print("屏幕已经锁定，左侧锁屏 tapGestureHandler")
+            return
+        }
+        if isPlayerLocked && isPlayerScreenLocked {
             print("屏幕已经锁定，不做任何处理 tapGestureHandler")
             lockPlayScreenButton.isHidden = !lockPlayScreenButton.isHidden
             return
@@ -964,7 +989,7 @@ extension JHKPlayerView {
         let velocityPoint: CGPoint = pan.velocity(in: self)
         
         if isPlayerLocked {
-            print("屏幕已经锁定，不做任何处理 panGestureHandler")
+            print("屏幕已经锁定，不做任何手势处理 panGestureHandler")
             return
         }
 
@@ -972,6 +997,10 @@ extension JHKPlayerView {
         switch pan.state {
         // Input gesture signal when touch began
         case .began:
+            // 开始拖动时隐藏播放暂停按钮
+            if isFullOrHalfScreen() == .normal {
+                playOrPauseButton.isHidden = true
+            }
             JHKPlayerView.self.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideMenu), object: nil)
             let x: CGFloat = fabs(velocityPoint.x)
             let y: CGFloat = fabs(velocityPoint.y)
@@ -982,6 +1011,9 @@ extension JHKPlayerView {
             self.gestureLeftSignal = startPoint.x < self.bounds.size.width / 2
             self.addSubview(dragHud)
         case .changed:
+            if isFullOrHalfScreen() == .normal {
+                playOrPauseButton.isHidden = true
+            }
             let valueX: CGFloat = velocityPoint.x
             let valueY: CGFloat = velocityPoint.y
             if horizontalSignal {
@@ -1016,6 +1048,11 @@ extension JHKPlayerView {
                 dragLabel.text = String(format: "%.0f%%", ((volumeViewSlider?.value)! * 100))
             }
         case .ended:
+            if self.topBar.isHidden == false {
+                self.playOrPauseButton.isHidden = false
+            }else {
+                self.playOrPauseButton.isHidden = true
+            }
             if internalDelegate?.autoHiddenMenu == true {
                 self.perform(#selector(hideMenu), with: nil, afterDelay: 5)
             }
