@@ -642,6 +642,23 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         lockMaskView.addSubview(openVIPBtn)
 
         lockMaskView.addSubview(lockMessageView)
+        // 与第三方视频源进行适配
+        if let appType = UserDefaults.standard.object(forKey: "curWebViewAppType") as? String {
+            if appType != "0" { // 如果不是教育，隐藏播放器上很多按钮
+                lockPlayScreenButton.isHidden = true
+                pushButtonHalf.isHidden = true
+                shareButton.isHidden = true
+                shareButtonHalf.isHidden = true
+                moreButton.isHidden = true
+                pushButton.isHidden = true
+                separaterLineView1.isHidden = true
+                separaterLineView2.isHidden = true
+                lockMaskView.isHidden = true
+                lockPlayScreenButton.isHidden = true
+                definitionButton.isHidden = true
+                lockPlayScreenButton.isHidden = true
+            }
+        }
     }
 
     open func addAllViews() {
