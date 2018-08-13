@@ -18,6 +18,7 @@ struct JHKPlayerClosure {
     static var moreInfoClosure: (() -> ())?
     static var shareInfoClosure: (() -> ())?
     static var scheduledPlayerClosure: ((_ value: Float) -> ())?
+    static var downloadClosure: (() -> ())?
 }
 
 protocol JHKInternalTransport: class {
@@ -78,6 +79,9 @@ public protocol JHKPlayerActionsDelegate: class {
 
     /// Intereaction of click share button.
     func shareAction()
+    
+    /// Intereaction of click download button.
+    func downloadAction()
 }
 
 // Default intereaction of Events in protocol
@@ -107,5 +111,9 @@ extension JHKPlayerActionsDelegate {
     public func determinedDefinition() -> UIView {
         let view = UIView()
         return view
+    }
+    public func downloadAction() {
+        print("###player download###")
+
     }
 }

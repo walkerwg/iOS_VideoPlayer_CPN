@@ -11,12 +11,11 @@
 import UIKit
 import MediaPlayer
 
-let kScreenWidth = UIScreen.main.bounds.size.width < UIScreen.main.bounds.size.height ? UIScreen.main.bounds.size.width : UIScreen.main.bounds.size.height
-let kScreenHeight = UIScreen.main.bounds.size.height > UIScreen.main.bounds.size.width ? UIScreen.main.bounds.size.height : UIScreen.main.bounds.size.width
+let kScreenWidth = UIScreen.main.bounds.size.width
+let kScreenHeight = UIScreen.main.bounds.size.height
 // 适配iPhoneX
 let isIPhoneX = (kScreenWidth == 375.0 && kScreenHeight == 812.0 ? true : false)
 let X_fullScreen : CGFloat = (isIPhoneX ? 34.0 : 0.0)
-let kStatusBarHeight : CGFloat = (isIPhoneX ? 44.0 : 20.0)
 
 /// The view components of JHKVideoPlayer, and can be expanded in further
 ///
@@ -26,13 +25,11 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
     // MARK: - Signal
     /// Signal of whether hide all the menu
-    public var isMenuHidden: Bool = false {
+    fileprivate var isMenuHidden: Bool = false {
         didSet{
             for subView in subviews {
                 if subView != loadingIndicator && subView != lockMaskView {
-                    if subView.tag != 880221 {
-                      subView.isHidden = isMenuHidden
-                    }
+                    subView.isHidden = isMenuHidden
                 }
             }
             isSideMenuShow = false
@@ -57,7 +54,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     // Collect views into arrays to fit auto layout
     public var topControlsArray = NSMutableArray()
     public var bottomControlsArray = NSMutableArray()
-
+    
     internal var menuContentColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.3) {
         didSet {
             for subView in subviews {
@@ -65,6 +62,14 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             }
         }
     }
+    internal var clearColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0)
+    
+    internal static var sliderMinColor = UIColor(red: 25/255.0, green: 207/255.0, blue: 141/255.0, alpha: 0.0)
+    
+    internal static var sliderMaxColor = UIColor.white
+    
+    internal var dragHudColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.7)
+
     /// Top menu of player
     public lazy var topBar: UIView = {
         let view = UIView()
@@ -98,9 +103,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     open lazy var returnButton: UIButton = {
         let button = UIButton()
         // TODO: 暂时设置半屏
-        let imageNormal = UIImage.imageInBundle(named: "返回")
+        let imageNormal = UIImage.imageInBundle(named: "Player_返回")
         button.setBackgroundImage(imageNormal, for: .normal)
-        let imagePressDown = UIImage.imageInBundle(named: "返回 按下")
+        let imagePressDown = UIImage.imageInBundle(named: "Player_返回按下")
         button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
         return button
@@ -110,25 +115,39 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     open lazy var returnButtonHalfOnScreen: UIButton = {
         let button = UIButton()
         // TODO: 暂时设置半屏
-        let imageNormal = UIImage.imageInBundle(named: "返回")
+        let imageNormal = UIImage.imageInBundle(named: "Player_返回")
         button.setBackgroundImage(imageNormal, for: .normal)
-        let imagePressDown = UIImage.imageInBundle(named: "返回 按下")
+        let imagePressDown = UIImage.imageInBundle(named: "Player_返回按下")
         button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
-        button.tag = 880221
+        return button
+    }()
+    
+    /// Download button on top menu right side
+    open lazy var downloadButton: UIButton = {
+        let button = UIButton()
+        let imageNormal = UIImage.imageInBundle(named: "Player_下载")
+        button.setBackgroundImage(imageNormal, for: .normal)
+        let imagePressDown = UIImage.imageInBundle(named: "Player_下载按下")
+        button.setBackgroundImage(imagePressDown, for: .highlighted)
+        button.addTarget(self, action: #selector(downloadAction), for: .touchUpInside)
         return button
     }()
     
     /// Push button on top menu right side
     open lazy var pushButton: UIButton = {
         let button = UIButton()
-        button.setTitle("投屏", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.init("18bc84"), for: .selected)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+//        button.setTitle("投屏", for: .normal)
+//        button.setTitleColor(UIColor.white, for: .normal)
+//        button.setTitleColor(UIColor.init("18bc84"), for: .selected)
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+//        button.titleLabel?.adjustsFontSizeToFitWidth = true
         //        button.layer.borderColor = UIColor.white.cgColor
         //        button.layer.borderWidth = 1
+        let imageNormal = UIImage.imageInBundle(named: "Player_投屏")
+        button.setBackgroundImage(imageNormal, for: .normal)
+        let imagePressDown = UIImage.imageInBundle(named: "Player_投屏按下")
+        button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(pushButtonAction), for: .touchUpInside)
         return button
     }()
@@ -136,8 +155,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Push button on top menu right side
     open lazy var pushButtonHalf: UIButton = {
         let button = UIButton()
-        let image = UIImage.imageInBundle(named: "pushScreen") // btn_pane  投屏
-        button.setBackgroundImage(image, for: .normal)
+        let imageNormal = UIImage.imageInBundle(named: "Player_投屏")
+        button.setBackgroundImage(imageNormal, for: .normal)
+        let imagePressDown = UIImage.imageInBundle(named: "Player_投屏按下")
+        button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(pushButtonAction), for: .touchUpInside)
         return button
     }()
@@ -155,7 +176,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// More button on top menu right side
     open lazy var moreButton: UIButton = {
         let button = UIButton()
-        button.setTitle("选课", for: .normal)
+        button.setTitle("目录", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor.init("18bc84"), for: .selected)
         button.setTitleColor(UIColor.init("18bc84"), for: .highlighted)
@@ -170,14 +191,18 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// More button on top menu right side
     open lazy var shareButton: UIButton = {
         let button = UIButton()
-        button.setTitle("分享", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitleColor(UIColor.init("18bc84"), for: .selected)
-        button.setTitleColor(UIColor.init("18bc84"), for: .highlighted)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
+//        button.setTitle("分享", for: .normal)
+//        button.setTitleColor(UIColor.white, for: .normal)
+//        button.setTitleColor(UIColor.init("18bc84"), for: .selected)
+//        button.setTitleColor(UIColor.init("18bc84"), for: .highlighted)
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
+//        button.titleLabel?.adjustsFontSizeToFitWidth = true
         //        button.layer.borderColor = UIColor.white.cgColor
         //        button.layer.borderWidth = 1
+        let imageNormal = UIImage.imageInBundle(named: "Player_分享")
+        button.setBackgroundImage(imageNormal, for: .normal)
+        let imagePressDown = UIImage.imageInBundle(named: "Player_分享按下")
+        button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(shareButtonAction), for: .touchUpInside)
         return button
     }()
@@ -185,9 +210,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Share button on top menu right side -- 小屏幕时的分享
     open lazy var shareButtonHalf: UIButton = {
         let button = UIButton()
-        let imageNormal = UIImage.imageInBundle(named: "分享") // btn_pane  投屏
+        let imageNormal = UIImage.imageInBundle(named: "Player_分享") // btn_pane  投屏
         button.setBackgroundImage(imageNormal, for: .normal)
-        let imagePressDown = UIImage.imageInBundle(named: "分享 按下") // btn_pane  投屏
+        let imagePressDown = UIImage.imageInBundle(named: "Player_分享按下") // btn_pane  投屏
         button.setBackgroundImage(imagePressDown, for: .highlighted)
  //       button.addTarget(self, action: #selector(pushButtonAction), for: .touchUpInside)
         button.addTarget(self, action: #selector(shareButtonAction), for: .touchUpInside)
@@ -214,12 +239,11 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         return separaLine
     }()
     
-
     /// Time label for playing progress
     open lazy var currentTimeLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 11.0)
+        label.font = UIFont.systemFont(ofSize: 10.0)
         label.textAlignment = .left
         return label
     }()
@@ -236,7 +260,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Load progressor
     open lazy var loadProgressView: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.progressTintColor = .cyan
+        progressView.progressTintColor = UIColor.clear
+        progressView.trackTintColor = UIColor.lightGray
         return progressView
     }()
 
@@ -244,14 +269,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     open lazy var playSlider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 0.0
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), false, 0.0)
-        let transparentImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-
-        let image = UIImage.imageInBundle(named: "player_slider")
-        slider.setThumbImage(image, for: .normal)
-        slider.setMaximumTrackImage(transparentImage, for: .normal)
-        slider.setMinimumTrackImage(transparentImage, for: .normal)
+//        UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), false, 0.0)
+//        let transparentImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//
+//        let image = UIImage.imageInBundle(named: "player_slider")
+//        slider.setThumbImage(image, for: .normal)
+//        slider.setMaximumTrackImage(transparentImage, for: .normal)
+//        slider.setMinimumTrackImage(transparentImage, for: .normal)
+        slider.thumbTintColor = UIColor.white
+        slider.maximumTrackTintColor = JHKPlayerView.sliderMinColor
+        slider.maximumTrackTintColor = JHKPlayerView.sliderMaxColor
 
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchUpInside)
@@ -263,8 +291,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Play or pause button
     open lazy var playOrPauseButton: UIButton = {
         let button = UIButton()
-        let image = UIImage.imageInBundle(named: "播放")
-        button.setBackgroundImage(image, for: .normal)
+        let imageNormal = UIImage.imageInBundle(named: "Player_播放") // btn_pane  投屏
+        button.setBackgroundImage(imageNormal, for: .normal)
         button.addTarget(self, action: #selector(playOrPauseAction), for: .touchUpInside)
         return button
     }()
@@ -272,8 +300,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Lock Play button 锁住播放屏幕
     open lazy var lockPlayScreenButton: UIButton = {
         let button = UIButton()
-        let image = UIImage.imageInBundle(named: "解锁")
-        button.setBackgroundImage(image, for: .normal)
+        let imageNormal = UIImage.imageInBundle(named: "Player_解锁") // btn_pane  投屏
+        button.setBackgroundImage(imageNormal, for: .normal)
         button.addTarget(self, action: #selector(lockPlayScreenAction), for: .touchUpInside)
         return button
     }()
@@ -294,8 +322,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     // 上一集 下一集按钮 聚好学3.3版本暂时不使用了，先保留着
     open lazy var nextButton: UIButton = {
         let button = UIButton()
-        let image = UIImage.imageInBundle(named: "btn_next")
-        button.setBackgroundImage(image, for: .normal)
+        let imageNormal = UIImage.imageInBundle(named: "Player_下一集") // btn_pane  投屏
+        button.setBackgroundImage(imageNormal, for: .normal)
+
         button.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
         return button
     }()
@@ -303,11 +332,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Full screen button
     open lazy var fullOrSmallButton: UIButton = {
         let button = UIButton()
-        var image = UIImage.imageInBundle(named: "全屏")
-        if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight { // 竖屏
-            image = UIImage.imageInBundle(named: "缩小")
-        }
-        button.setBackgroundImage(image, for: .normal)
+        let imageNormal = UIImage.imageInBundle(named: "Player_全屏") // btn_pane  投屏
+        button.setBackgroundImage(imageNormal, for: .normal)
+        let imagePressDown = UIImage.imageInBundle(named: "Player_全屏按下") // btn_pane  投屏
+        button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(fullOrShrinkAction), for: .touchUpInside)
         return button
     }()
@@ -323,16 +351,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Drag hub
     open lazy var dragHud: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = self.menuContentColor
-        imageView.layer.cornerRadius = 5
+        imageView.backgroundColor = self.dragHudColor
+        imageView.layer.cornerRadius = 6
         return imageView
     }()
     
     /// Drag label
     open lazy var dragLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = self.menuContentColor
+        label.backgroundColor = self.dragHudColor
         label.textColor = UIColor.white
+        label.layer.cornerRadius = 6
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
@@ -394,8 +423,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }()
 
     public var isPlayerLocked : Bool = false  // 屏幕是否已经锁定 默认没有, false:没有锁定, true:已经锁定
-    public var isPlayerScreenLocked : Bool = false  // 屏幕是否是锁定界面，播放时左侧的锁. false:没有，true：锁定
-    open let TopBarHeightLandScape : CGFloat = 68  // 横屏时顶部菜单栏的高度
+    
 
     // 锁屏响应链式表
     fileprivate var lockHandlerMap: Dictionary<String, (() -> Void)> = [:]
@@ -423,20 +451,26 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     override open func layoutSubviews() {
         super.layoutSubviews()
 
-        if self.isHidden {
-            print("播放器已经隐藏，不做任何处理 layoutSubviews")
-            return
-        }
-
-        if isPlayerLocked && isPlayerScreenLocked  {
+        if isPlayerLocked {
             print("屏幕已经锁定，不做任何处理 layoutSubviews")
             return
         }
+        let fontSizeSmall : CGFloat = 14
+        let imgWidth: CGFloat = 20.0
+        var imgHorizontalSpace: CGFloat = 24 * kScreenWidth/375.0
+        var space: CGFloat = 12.0
+        let returnButtonTop: CGFloat = 28.0;
+        let titleLableHeight : CGFloat = 18.0;
+        let returnButtonHeight : CGFloat = 15.0;
+        let returnButtonWidth : CGFloat = 9.0;
         
+        let bottomBarHeightScale: CGFloat = 0.187
+        let bottomBarHeight: CGFloat = self.frame.height * bottomBarHeightScale
+        let playOrPauseButtonTop: CGFloat = 16.0
+        let playOrPauseButtonWidth: CGFloat = 16.0
+        let currentTimeLabelWidth: CGFloat = 90.0
         if isFullOrHalfScreen() == .normal { // 竖屏
 
-            let fontSizeSmall : CGFloat = 14
-            
             // 显示半屏所特有的
             pushButtonHalf.isHidden = false
             shareButtonHalf.isHidden = false
@@ -446,59 +480,65 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             separaterLineView2.isHidden = true
             definitionButton.isHidden = true
             totalTimeLabel.isHidden = true
+            moreButton.isHidden = true
+            fullOrSmallButton.isHidden = false
+
 //            returnButtonHalfOnScreen.isHidden = false
             // 暂时不加了
 //            self.addSubview(returnButtonHalfOnScreen)
             lockPlayScreenButton.isHidden = true
             lockPlayScreenButton.removeFromSuperview()
+//
+//            playOrPauseButton.removeFromSuperview()
+//            self.addSubview(playOrPauseButton)
 
-            playOrPauseButton.removeFromSuperview()
-            self.addSubview(playOrPauseButton)
-
-            moreButton.removeFromSuperview()
+//            moreButton.removeFromSuperview()
             // 顶部导航栏
-            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 8+3)
-            returnButton.frame = CGRect(x: 12, y: 2, width: 26, height: 26)
-            returnButtonHalfOnScreen.frame = CGRect(x: 12, y: 2, width: 26, height: 26)
+            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 4)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth, height: returnButtonHeight)
+//            returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: imgWidth, height: imgWidth)
 
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
                     topBar.addSubview(view)
-                    view.frame = CGRect(x: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count - i) - topBar.frame.height, y: topBar.frame.height * 0.1, width: topBar.frame.height * 0.8, height: topBar.frame.height * 0.8)
+                    view.frame = CGRect(x: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count - i) - topBar.frame.height, y: topBar.frame.height * 0.5, width: topBar.frame.height * 0.8, height: topBar.frame.height * 0.8)
                 }
             }
 
-            titleLabel.font = UIFont.systemFont(ofSize: fontSizeSmall)
-            topBar.addSubview(titleLabel)
+//            titleLabel.font = UIFont.systemFont(ofSize: fontSizeSmall)
+//          topBar.addSubview(titleLabel) 竖屏标题需求去掉
             topBar.addSubview(returnButton)
 
-            shareButtonHalf.frame = CGRect(x: topBar.width - 36, y: 1, width: 26, height: 26)
-            pushButtonHalf.frame = CGRect(x: topBar.width - 36 - 36, y: 1, width: 26, height: 26)
-
-            var curWidth = kScreenWidth
-            if kScreenWidth < kScreenHeight {
-                curWidth = kScreenWidth
-            }else {
-                curWidth = kScreenHeight
-            }
-
-            titleLabel.frame = CGRect(x: returnButton.origin.x + returnButton.frame.size.width + 5, y: 0, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 5) - (curWidth - (topBar.width - 36 - 36)) - 5, height: topBar.frame.height)
+            shareButtonHalf.frame = CGRect(x: topBar.width - imgWidth - space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - space - imgHorizontalSpace, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            //竖屏标题需求去掉
+//            var curWidth = kScreenWidth
+//            if kScreenWidth < kScreenHeight {
+//                curWidth = kScreenWidth
+//            }else {
+//                curWidth = kScreenHeight
+//            }
+//            titleLabel.frame = CGRect(x: returnButton.frame.maxX + space, y: returnButton.frame.minY - 2, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 5) - (curWidth - (topBar.width - imgWidth - imgWidth)) - 5, height: titleLableHeight)
 
             // 底部导航栏
-            bottomBar.frame = CGRect(x: 0, y: self.frame.height * 5 / 6 - 10, width: self.frame.width, height: self.frame.height / 6 + 10)
-            playSlider.frame = CGRect(x: 0, y: bottomBar.frame.height - 4, width: bottomBar.frame.width, height: 10)
-            let insetH: CGFloat = playSlider.frame.height
-            loadProgressView.frame = CGRect(x: 0, y: bottomBar.frame.height, width: bottomBar.frame.width , height: insetH)
+            bottomBar.frame = CGRect(x: 0, y: self.frame.height - bottomBarHeight, width: self.frame.width, height: bottomBarHeight)
+            playOrPauseButton.frame = CGRect(x: space, y: playOrPauseButtonTop, width: playOrPauseButtonWidth, height: playOrPauseButtonWidth)
+            fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - space - playOrPauseButtonWidth, y: playOrPauseButton.frame.minY, width: playOrPauseButtonWidth, height: playOrPauseButtonWidth)
 
-            currentTimeLabel.frame = CGRect(x: 8, y: bottomBar.frame.height - 18, width: 200, height: 14)
+            currentTimeLabel.frame = CGRect(x: bottomBar.frame.width - 2 * space - playOrPauseButtonWidth - currentTimeLabelWidth, y: playOrPauseButton.frame.minY, width: currentTimeLabelWidth, height: playOrPauseButtonWidth)
             currentTimeLabel.textColor = UIColor.init("e7e8ed")
-            currentTimeLabel.textAlignment = .left
-            playOrPauseButton.frame = CGRect(x: self.frame.width / 2, y: (self.frame.height) / 2, width: 48, height: 48)
-            // 播放按钮，停止 播放  上一集/下一集
-            playOrPauseButton.center = CGPoint(x: self.frame.width / 2, y: (self.frame.height) / 2)
+            currentTimeLabel.textAlignment = .right
+
+            playSlider.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 2)
+            let insetH: CGFloat = playSlider.frame.height
+            loadProgressView.frame = playSlider.frame
+
+    
+//            // 播放按钮，停止 播放  上一集/下一集
+//            playOrPauseButton.center = CGPoint(x: self.frame.width / 2, y: (self.frame.height) / 2)
             // 上一集 下一集按钮 聚好学3.3版本暂时不使用了，先保留着
-            fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - 12 - 28, y: 10, width: 30, height: 30)
 
             openVIPBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
             let strTitle = openVIPBtn.titleLabel?.text ?? ""
@@ -512,30 +552,36 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             print("--屏幕状态----- 全屏")
 
             let fontSizeFull : CGFloat = 16
-
+            space = 16
+            imgHorizontalSpace = 24.0
+            let m_space: CGFloat = 24
+            let b_space: CGFloat = 36
+            let img_w: CGFloat = 22
             // 隐藏半屏所特有的
-            pushButtonHalf.isHidden = true
-            shareButtonHalf.isHidden = true
-            pushButton.isHidden = false
-            shareButton.isHidden = false
-            separaterLineView1.isHidden = false
-            separaterLineView2.isHidden = false
+//            pushButtonHalf.isHidden = true
+//            shareButtonHalf.isHidden = true
+//            pushButton.isHidden = false
+//            shareButton.isHidden = false
+//            separaterLineView1.isHidden = false
+//            separaterLineView2.isHidden = false
             definitionButton.isHidden = false
             lockPlayScreenButton.isHidden = false
+            fullOrSmallButton.isHidden = true
+            moreButton.isHidden = false
 //            returnButtonHalfOnScreen.isHidden = true
 //            self.addSubview(returnButtonHalfOnScreen)
             // 暂时不加了
-//            returnButtonHalfOnScreen.removeFromSuperview()
+            returnButtonHalfOnScreen.removeFromSuperview()
+            
 
-            topBar.addSubview(moreButton)
+//            topBar.addSubview(moreButton)
             // 添加锁屏按钮
             self.addSubview(lockPlayScreenButton)
 
             // 顶部导航栏
-            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: TopBarHeightLandScape)
+            topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 80)
             // TODO:  增添三元条件分支匹配最小值
-            returnButton.frame = CGRect(x: 16 + X_fullScreen, y: 16, width: 30, height: 30)
-            returnButtonHalfOnScreen.frame = CGRect(x: 16 + X_fullScreen, y: 18, width: 30, height: 30)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth, height: returnButtonHeight)
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
@@ -544,22 +590,22 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                 }
             }
 
-            titleLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
-            // 导航栏右侧
-            moreButton.frame = CGRect(x: topBar.frame.width - 32 - 50 - X_fullScreen, y: 0, width: 50, height: topBar.frame.height)
-            moreButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
-            separaterLineView1.frame = CGRect(x: moreButton.origin.x - 6, y: 0, width: 1, height: 8)
-            shareButton.frame = CGRect(x: separaterLineView1.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)
-            shareButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
-            separaterLineView2.frame = CGRect(x: shareButton.origin.x - 6, y: 0, width: 1, height: 8)
-            pushButton.frame = CGRect(x: separaterLineView2.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)
-            pushButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
+            shareButtonHalf.frame = CGRect(x: topBar.width - imgWidth - m_space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - m_space - imgHorizontalSpace, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+
+//            separaterLineView1.frame = CGRect(x: moreButton.origin.x - 6, y: 0, width: 1, height: 8)
+//            shareButton.frame = CGRect(x: separaterLineView1.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)
+//            shareButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
+//            separaterLineView2.frame = CGRect(x: shareButton.origin.x - 6, y: 0, width: 1, height: 8)
+//            pushButton.frame = CGRect(x: separaterLineView2.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)
+//            pushButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
             
-            returnButton.center.y = topBar.center.y
-            moreButton.center.y = topBar.center.y
-            shareButton.center.y = topBar.center.y
-            separaterLineView1.center.y = topBar.center.y
-            separaterLineView2.center.y = topBar.center.y
+//            returnButton.center.y = topBar.center.y
+//            moreButton.center.y = topBar.center.y
+//            shareButton.center.y = topBar.center.y
+//            separaterLineView1.center.y = topBar.center.y
+//            separaterLineView2.center.y = topBar.center.y
 
             var curWidth = kScreenWidth
             var curHeight = kScreenHeight
@@ -571,64 +617,72 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                 curHeight = kScreenWidth
             }
 
-            titleLabel.frame = CGRect(x: returnButton.origin.x + returnButton.frame.size.width + 8, y: 0, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 15) - (curWidth - (separaterLineView2.origin.x - 50)) - 5, height: topBar.frame.height)
+            titleLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
+            titleLabel.frame = CGRect(x: returnButton.frame.maxX + space, y: returnButton.frame.minY - 2, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 5) - (curWidth - (topBar.width - imgWidth - imgWidth)) - 5, height: titleLableHeight)
             
+            let bottom_height:CGFloat = 84.0/375 * self.frame.height
             // 底部导航栏
-            bottomBar.frame = CGRect(x: 0, y: self.frame.height * 5 / 6 - 16, width: self.frame.width, height: self.frame.height / 6 + 16)
+            bottomBar.frame = CGRect(x: 0, y: self.frame.height - bottom_height, width: self.frame.width, height: bottom_height)
             // 进度条
-            playSlider.frame = CGRect(x: 75 + X_fullScreen, y: bottomBar.height * 2.0 / 3, width: bottomBar.frame.width - 160 - 80 - 2*X_fullScreen, height: 10)
-            let insetH: CGFloat = playSlider.frame.height
-            loadProgressView.frame = CGRect(x: 75 + X_fullScreen, y: bottomBar.height * 2.0 / 3 + insetH / 2, width: bottomBar.frame.width - 160 - 80 - 2*X_fullScreen, height: insetH)
+            playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 2)
+//            let insetH: CGFloat = playSlider.frame.height
+            loadProgressView.frame = playSlider.frame
             // 时间指示器
-            currentTimeLabel.frame = CGRect(x: 16 + X_fullScreen, y: insetH - 2, width: 55, height: 14)
-            totalTimeLabel.isHidden = false
-            totalTimeLabel.frame = CGRect(x: loadProgressView.origin.x + loadProgressView.size.width + 12, y: insetH - 2, width: 55, height: 14)
-            currentTimeLabel.center.y = loadProgressView.center.y // bottomBar.size.height * 2.0 / 3
-            totalTimeLabel.center.y = loadProgressView.center.y //bottomBar.size.height * 2.0 / 3
-            currentTimeLabel.textColor = UIColor.init("e7e8ed")
-            currentTimeLabel.textAlignment = .center
-            totalTimeLabel.textColor = UIColor.init("e7e8ed")
-            totalTimeLabel.textAlignment = .center
+//            currentTimeLabel.frame = CGRect(x: 16 + X_fullScreen, y: insetH - 2, width: 55, height: 14)
+//            totalTimeLabel.isHidden = false
+//            currentTimeLabel.center.y = loadProgressView.center.y // bottomBar.size.height * 2.0 / 3
+//            totalTimeLabel.center.y = loadProgressView.center.y //bottomBar.size.height * 2.0 / 3
+//            currentTimeLabel.textColor = UIColor.init("e7e8ed")
+//            currentTimeLabel.textAlignment = .center
+//            totalTimeLabel.textColor = UIColor.init("e7e8ed")
+//            totalTimeLabel.textAlignment = .center
             
-            // 清晰度切换
-            definitionButton.frame = CGRect(x: totalTimeLabel.origin.x + totalTimeLabel.size.width + 5, y: 0, width: 36, height: 20)
-            definitionButton.center.y = totalTimeLabel.center.y - 5
-
+            playOrPauseButton.isHidden = false
+            playOrPauseButton.frame = CGRect(x: space, y: playSlider.frame.maxY + 18/84.0 * bottomBar.height, width: img_w, height: img_w)
+            
+            nextButton.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY, width: img_w, height: img_w)
+            
             // 设置全屏时字体大小
-            currentTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull*2/3)
-            totalTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull*2/3)
-            definitionButton.titleLabel!.font = UIFont.systemFont(ofSize: fontSizeFull*3/2)
-            
-            playOrPauseButton.removeFromSuperview()
-            bottomBar.addSubview(playOrPauseButton)
-            playOrPauseButton.frame = CGRect(x: 5 + X_fullScreen, y: currentTimeLabel.origin.y - 60, width: 50, height: 50)
-            // 全屏/半屏 切换
-            fullOrSmallButton.frame = CGRect(x: bottomBar.size.width - 16 - 30 - X_fullScreen, y: -15, width: 30, height: 30)
-            fullOrSmallButton.center.y = loadProgressView.center.y
-            // 锁屏按钮
-            lockPlayScreenButton.frame = CGRect(x: 16 + X_fullScreen, y: self.frame.height/2-10, width: 30, height: 30)
+            currentTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
+            currentTimeLabel.frame = CGRect(x: nextButton.frame.maxX + space , y:  playOrPauseButton.frame.minY, width: 200, height: img_w)
+            currentTimeLabel.textAlignment = .left
 
+            moreButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
+            moreButton.frame = CGRect(x: bottomBar.frame.width - 35 - m_space  , y:  playOrPauseButton.frame.minY, width: 35, height: nextButton.frame.height)
+            // 清晰度切换
+            definitionButton.titleLabel!.font = UIFont.systemFont(ofSize: fontSizeFull)
+            definitionButton.frame = CGRect(x: bottomBar.frame.width - 30 - m_space - b_space - 30 , y: playOrPauseButton.frame.minY, width: moreButton.frame.width, height: nextButton.frame.height)
+            
+//            totalTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
+            // 导航栏右侧
+     
+//
+//            playOrPauseButton.removeFromSuperview()
+//            bottomBar.addSubview(playOrPauseButton)
+
+
+//            // 全屏/半屏 切换
+//            fullOrSmallButton.frame = CGRect(x: bottomBar.size.width - 16 - 30 - X_fullScreen, y: -15, width: 30, height: 30)
+//            fullOrSmallButton.center.y = loadProgressView.center.y
+            // 锁屏按钮
+            lockPlayScreenButton.frame = CGRect(x: bottomBar.frame.width - m_space - 40, y: self.frame.height/2 - 20, width: 40, height: 40)
+            
             openVIPBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             let strTitle = openVIPBtn.titleLabel?.text ?? ""
             let widthTemp = strTitle.ga_widthForComment(fontSize: 15, height: 30)
             openVIPBtn.frame = CGRect(x: 20, y: 45, width: widthTemp, height: 35)
-            playOrPauseButton.isHidden = false
-        }
-
-        if isPlayerLocked && !isPlayerScreenLocked  {
-            lockPlayScreenButton.isHidden = true
-            playOrPauseButton.isHidden = true
-            print("屏幕已经锁定，隐藏锁屏按钮")
         }
 
         for view in bottomControlsArray {
             bottomBar.addSubview(view as! UIView)
         }
         loadingIndicator.center = CGPoint(x: self.center.x, y: self.center.y)
-        dragHud.frame = CGRect(x: 0, y: 0, width: self.frame.height / 5, height: self.frame.height / 5)
+                //wg:因新版去掉进度指示img
+        dragHud.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
         dragHud.center = self.center
-        dragLabel.frame = CGRect(x: 0, y: dragHud.frame.height, width: dragHud.frame.width, height: dragHud.frame.height * 2 / 5)
-        dragLabel.font = UIFont.systemFont(ofSize: dragLabel.frame.height)
+        dragLabel.frame = CGRect(x: -75, y: -20, width: 150, height: 40)
+
+        dragLabel.font = UIFont.systemFont(ofSize: 15)
         volumeControl.frame = CGRect(x: 0, y: 0, width: 1, height: 1)
         // 锁定播放器界面时，显示控件
         let TextY : CGFloat = self.frame.size.height/2 - 30
@@ -642,50 +696,34 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         lockMaskView.addSubview(openVIPBtn)
 
         lockMaskView.addSubview(lockMessageView)
-        // 与第三方视频源进行适配
-        if let appType = UserDefaults.standard.object(forKey: "curWebViewAppType") as? String {
-            if appType != "0" { // 如果不是教育，隐藏播放器上很多按钮
-                lockPlayScreenButton.isHidden = true
-                pushButtonHalf.isHidden = true
-                shareButton.isHidden = true
-                shareButtonHalf.isHidden = true
-                moreButton.isHidden = true
-                pushButton.isHidden = true
-                separaterLineView1.isHidden = true
-                separaterLineView2.isHidden = true
-                lockMaskView.isHidden = true
-                lockPlayScreenButton.isHidden = true
-                definitionButton.isHidden = true
-                lockPlayScreenButton.isHidden = true
-            }
-        }
     }
 
     open func addAllViews() {
         self.addSubview(topBar)
         topBar.addSubview(titleLabel)
         topBar.addSubview(returnButton)
+        topBar.addSubview(downloadButton)
         topBar.addSubview(shareButton)
         topBar.addSubview(shareButtonHalf)
         topBar.addSubview(pushButton)
-        topBar.addSubview(moreButton)
         topBar.addSubview(pushButtonHalf)
-        topBar.addSubview(separaterLineView1)
-        topBar.addSubview(separaterLineView2)
+//        topBar.addSubview(separaterLineView1)
+//        topBar.addSubview(separaterLineView2)
         self.addSubview(bottomBar)
         bottomBar.addSubview(loadProgressView)
         bottomBar.addSubview(playSlider)
-//        self.addSubview(playOrPauseButton)
+        bottomBar.addSubview(playOrPauseButton)
         bottomBar.addSubview(fullOrSmallButton)
         bottomBar.addSubview(currentTimeLabel)
         bottomBar.addSubview(totalTimeLabel)
+        bottomBar.addSubview(moreButton)
         dragHud.addSubview(dragLabel)
         self.addSubview(loadingIndicator)
-        self.addSubview(returnButtonHalfOnScreen)
+//        self.addSubview(returnButtonHalfOnScreen)
         loadingIndicator.startAnimating()
         // 上一集 下一集按钮 聚好学3.3版本暂时不使用了，先保留着
         //        bottomBar.addSubview(previewsButton)
-        //        bottomBar.addSubview(nextButton)
+                bottomBar.addSubview(nextButton)
         //        bottomBar.addSubview(pushButton)
     }
     // 获取客服电话信息
@@ -726,12 +764,16 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }
 
 // MARK: - First response action
+    
+    @objc public func downloadAction() {
+        JHKPlayerClosure.downloadClosure?()
+    }
     /// Play or Pause video
     @objc public func playOrPauseAction() {
         // 点击了播放暂停按钮：发送通知检查用户设备超限
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playOrPauseBTNNotify"), object: nil)
         if isPlayerLocked {
-            print("playOrPauseAction Clicked")
+            print("用户点击了播放器上的播放或者暂停按钮 playOrPauseAction")
             
             
             return
@@ -799,7 +841,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Next action
     @objc public func nextAction() {
         isSideMenuShow = false
-        customizeActionHandler?.playPreviousAction()
+        customizeActionHandler?.playNextAction()
     }
 
     /// Change definition
@@ -841,6 +883,25 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }
 
 // MARK: - Dependant functions
+    
+    ///add gradient layer
+    private func addGradientLayer(in view: UIView) {
+        //定义渐变的颜色
+        let color1 = menuContentColor.cgColor
+        let color2 = clearColor.cgColor
+        let gradientColors = [color1, color2]
+        //定义每种颜色所在的位置
+        let gradientLocations:[NSNumber] = [0.0, 1.0]
+        //创建CAGradientLayer对象并设置参数
+        let layer = CAGradientLayer()
+        layer.colors = gradientColors
+        layer.locations = gradientLocations
+        //设置渲染的起始结束位置（横向渐变）
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 1, y: 0)
+        view.layer.addSublayer(layer)
+    }
+    
     /// Function to hide all subviews
     @objc public func hideMenu() {
         self.isMenuHidden = true
@@ -863,18 +924,18 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             self.addSubview(sideMenu)
             setNeedsLayout()
         }
-        sideMenu.frame = CGRect(x: kScreenHeight, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
+        sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
         UIView.animate(withDuration: 0.25, animations: {
             let q: CGFloat
             if self.sideMenuForDefinition! { q = 4 } else { q = 3 }
-            self.sideMenu.frame = CGRect(x: kScreenHeight * q / 5, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
+            self.sideMenu.frame = CGRect(x: self.frame.width * q / 5, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
         })
     }
 
     /// Function to hide side menu from screen
     private func hideSideMenu() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.sideMenu.frame = CGRect(x: kScreenHeight, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
+            self.sideMenu.frame = CGRect(x: self.frame.width, y: self.topBar.frame.height, width: self.frame.width * 2 / 5, height: self.frame.height - self.topBar.frame.height - self.bottomBar.frame.height)
         })
     }
 
@@ -971,12 +1032,7 @@ extension JHKPlayerView {
 
     func tapGestureHandler(_ tap: UITapGestureRecognizer) {
         print("tapGestureHandler")
-
-        if isPlayerLocked && !isPlayerScreenLocked {
-            print("屏幕已经锁定，左侧锁屏 tapGestureHandler")
-            return
-        }
-        if isPlayerLocked && isPlayerScreenLocked {
+        if isPlayerLocked {
             print("屏幕已经锁定，不做任何处理 tapGestureHandler")
             lockPlayScreenButton.isHidden = !lockPlayScreenButton.isHidden
             return
@@ -1006,7 +1062,7 @@ extension JHKPlayerView {
         let velocityPoint: CGPoint = pan.velocity(in: self)
         
         if isPlayerLocked {
-            print("屏幕已经锁定，不做任何手势处理 panGestureHandler")
+            print("屏幕已经锁定，不做任何处理 panGestureHandler")
             return
         }
 
@@ -1014,10 +1070,6 @@ extension JHKPlayerView {
         switch pan.state {
         // Input gesture signal when touch began
         case .began:
-            // 开始拖动时隐藏播放暂停按钮
-            if isFullOrHalfScreen() == .normal {
-                playOrPauseButton.isHidden = true
-            }
             JHKPlayerView.self.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideMenu), object: nil)
             let x: CGFloat = fabs(velocityPoint.x)
             let y: CGFloat = fabs(velocityPoint.y)
@@ -1028,9 +1080,6 @@ extension JHKPlayerView {
             self.gestureLeftSignal = startPoint.x < self.bounds.size.width / 2
             self.addSubview(dragHud)
         case .changed:
-            if isFullOrHalfScreen() == .normal {
-                playOrPauseButton.isHidden = true
-            }
             let valueX: CGFloat = velocityPoint.x
             let valueY: CGFloat = velocityPoint.y
             if horizontalSignal {
@@ -1042,14 +1091,21 @@ extension JHKPlayerView {
                     newValue = 0
                 }
                 // do horizontal action
-                if valueX > 0 {
-                    let image = UIImage.imageInBundle(named: "btn_forward")
-                    dragHud.image = image
-                } else {
-                    let image = UIImage.imageInBundle(named: "btn_backward")
-                    dragHud.image = image
-                }
-                dragLabel.text = currentTimeLabel.text
+//                if valueX > 0 {
+//                    let image = UIImage.imageInBundle(named: "btn_forward")
+//                    dragHud.image = image
+//                } else {
+//                    let image = UIImage.imageInBundle(named: "btn_backward")
+//                    dragHud.image = image
+//                }
+                let string = currentTimeLabel.text
+                let attrstring:NSMutableAttributedString = NSMutableAttributedString(string:string!)
+                let str = NSString(string: string!)
+                let theRange = str.range(of: "/")
+                let range = NSRange.init(location: 0, length: theRange.location)
+                attrstring.addAttribute(.foregroundColor, value: UIColor.init("19cf8d"), range: range)
+                attrstring.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: theRange)
+                dragLabel.attributedText = attrstring
                 playSlider.value = newValue
                 internalDelegate?.sliderValueChange(value: newValue)
             } else if gestureLeftSignal {
@@ -1065,11 +1121,6 @@ extension JHKPlayerView {
                 dragLabel.text = String(format: "%.0f%%", ((volumeViewSlider?.value)! * 100))
             }
         case .ended:
-            if self.topBar.isHidden == false {
-                self.playOrPauseButton.isHidden = false
-            }else {
-                self.playOrPauseButton.isHidden = true
-            }
             if internalDelegate?.autoHiddenMenu == true {
                 self.perform(#selector(hideMenu), with: nil, afterDelay: 5)
             }
