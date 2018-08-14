@@ -36,7 +36,7 @@ class MenuController: UIViewController, JHKPlayerActionsDelegate {
         playerView.actionDelegate = self
         playerView.startPoint = CGFloat.init(15)
         self.view.addSubview(playerView)
-        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+//        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
     }
     
     override func didReceiveMemoryWarning() {

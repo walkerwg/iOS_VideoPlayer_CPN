@@ -150,6 +150,8 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                     self.frame = originFrame!
                 }
                 controlView?.setNeedsLayout()
+                // 控制屏幕是否自动旋转 --- 不让旋转
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerAutorotateStateNotification"), object: "0")
             }
             else {// 全屏时
                 // 缩小至小屏幕按钮
@@ -173,6 +175,8 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                     self.frame = UIScreen.main.bounds
                 }
                 controlView?.setNeedsLayout()
+                // 控制屏幕是否自动旋转 --- 不让旋转
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerAutorotateStateNotification"), object: "0")
             }
         }
     }
@@ -489,8 +493,8 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 
         playerItem?.addObserver(self, forKeyPath: "status", options: .new, context: nil)
         playerItem?.addObserver(self, forKeyPath: "loadedTimeRanges", options: .new, context: nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(orientChange(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        
+        //        NotificationCenter.default.addObserver(self, selector: #selector(orientChange(_:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playerFinishPlay(_:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(JHKVideoPlayer.appDidEnterBackground), name: Notification.Name.UIApplicationWillResignActive, object: playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterForeground), name: Notification.Name.UIApplicationDidBecomeActive, object: playerItem)
@@ -747,14 +751,22 @@ extension JHKVideoPlayer {
 
     // Change mode of full screen or shrink screen
     func fullOrShrinkAction() {
-        var realWidth =  UIScreen.main.bounds.width < UIScreen.main.bounds.height ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
-        var realHeight = UIScreen.main.bounds.width < UIScreen.main.bounds.height ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
         if self.isFull == .normal {
-            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
-            let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: realHeight, height: realWidth))
-        } else {
+            // 防止方向未发生变化不执行 shouldAutorotate 代理
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-            let rect = CGRect(origin: CGPoint(x: 0, y: kStatusBarHeight), size: CGSize(width: realWidth, height: realHeight))
+            // 控制屏幕是否自动旋转 --- 让旋转
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerAutorotateStateNotification"), object: "1")
+            // 大窗口
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+            isFull = .full
+        } else {
+            // 防止方向未发生变化不执行 shouldAutorotate 代理
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+            // 控制屏幕是否自动旋转 --- 让旋转
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerAutorotateStateNotification"), object: "1")
+            // 小窗口
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            isFull = .normal
         }
     }
 
