@@ -1,19 +1,16 @@
 PODS:
-  - Alamofire (4.7.2)
-  - JHKVideoPlayer (2.8.5):
-    - Alamofire (= 4.7.2)
+  - JHKVideoPlayer (3.6.0)
 
 DEPENDENCIES:
   - JHKVideoPlayer (from `../JHKVideoPlayer.podspec`)
 
 EXTERNAL SOURCES:
   JHKVideoPlayer:
-    :path: ../JHKVideoPlayer.podspec
+    :path: "../JHKVideoPlayer.podspec"
 
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  JHKVideoPlayer: 42e5526a6f6fec7139efc2215f77dbbc3e0a7d92
+  JHKVideoPlayer: 3964ea849157879db8ea33640ad81f6653574a15
 
 PODFILE CHECKSUM: 83b53bc85a2e67d0430f3c6812c1978bd27cc1fd
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.0

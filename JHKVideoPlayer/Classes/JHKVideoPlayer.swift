@@ -85,6 +85,9 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 controlView?.bottomBar.isHidden = false
                 controlView?.playOrPauseButton.isHidden = false
                 
+                controlView?.isPlayerLocked = false
+                controlView?.isPlayerScreenLocked = false
+                controlView?.bottomBar.isUserInteractionEnabled = true
                 let imageNormal = UIImage.imageInBundle(named: "Player_解锁")
                 controlView?.lockPlayScreenButton.setBackgroundImage(imageNormal, for: .normal)
                 // 允许点击开通会员按钮
@@ -98,6 +101,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 controlView?.topBar.isHidden = true
                 controlView?.bottomBar.isHidden = true
                 controlView?.playOrPauseButton.isHidden = true
+                controlView?.isSideMenuShow = false
+                controlView?.isPlayerLocked = true
+                controlView?.isPlayerScreenLocked = true
+                controlView?.bottomBar.isUserInteractionEnabled = false
                 
                 let imageNormal = UIImage.imageInBundle(named: "Player_锁屏")
                 controlView?.lockPlayScreenButton.setBackgroundImage(imageNormal, for: .normal)
@@ -194,7 +201,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     private var imageOutPut: AVPlayerItemOutput?
 
     // Control Menu
-    fileprivate var controlView: JHKPlayerView?
+    open var controlView: JHKPlayerView?
 
     // MARK: - Data
     // Origin frame
@@ -210,7 +217,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     // 清晰度按钮名字设置
     public var definitBTNTitle: String? {
         didSet {
-            controlView?.definitionButton.titleLabel?.text  = definitBTNTitle ?? "标清123"
+            controlView?.definitionButton.setTitle(definitBTNTitle ?? "标清", for: .normal)
         }
     }
     
@@ -286,6 +293,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             initPlayer()
             // add by wjw
             self.controlView?.loadingIndicator.startAnimating()
+            setPlayOrPauseBtnStatus(IsShowAnimate: true)
         }
     }
     // Interaction with system flush interval
@@ -516,6 +524,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     /// Call when video successfully loaded, anounced that player is ready to play.
     public func playerStartPlaying() {
         controlView?.loadingIndicator.stopAnimating()
+        setPlayOrPauseBtnStatus(IsShowAnimate: false)
         playState = .playing
         if playbackTimeObserver == nil {
             playbackTimeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil, using: {
@@ -559,6 +568,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     // Stop video player and deallocate
     public func playerStopPlaying() {
         controlView?.loadingIndicator.stopAnimating()
+        setPlayOrPauseBtnStatus(IsShowAnimate: false)
         UIApplication.shared.isIdleTimerDisabled = false
         RemoveObservers()
         playState = .stop
@@ -573,6 +583,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         playState = .stop
         self.actionDelegate?.failLoadListener()
         controlView?.loadingIndicator.stopAnimating()
+        setPlayOrPauseBtnStatus(IsShowAnimate: false)
     }
 
     /// Call when player finished playing current video, anounced for further setting.
@@ -594,6 +605,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         controlView?.bottomBar.isUserInteractionEnabled = false
         // add by wjw
         self.controlView?.loadingIndicator.stopAnimating()
+        setPlayOrPauseBtnStatus(IsShowAnimate: false)
     }
 
     public func unlocakPlayer() {
@@ -621,9 +633,11 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     private func playerDelay(_ flag: Bool) {
         if flag == true && playState == .stop {
             self.controlView?.loadingIndicator.startAnimating()
+            setPlayOrPauseBtnStatus(IsShowAnimate: true)
             playerPausePlaying()
         } else {
             self.controlView?.loadingIndicator.stopAnimating()
+            setPlayOrPauseBtnStatus(IsShowAnimate: false)
         }
     }
 
@@ -646,9 +660,27 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             case .pause:
                 sself.playerStartPlaying()
             case .stop:
+                if isScreenLocked() {
+                    return
+                }
+//                if sself.playLockState != .locked {
                 sself.initPlayer()
                 print("Vidoe is on the loading")
+//                }else {
+//                    sself.mediaURL = URL.init(string: "https://xxxxx.mp4")
+//                }
             }
+        }
+        func isScreenLocked() -> Bool {
+            var playerLockedType = "0"
+            if let lockType = UserDefaults.standard.object(forKey: "keyLockPlayerType") as? String {
+                playerLockedType = lockType
+            }
+            if  playerLockedType == "overDeviceCount" || playerLockedType == "forOpenVIP" || playerLockedType == "forLastVideo" {
+                print("屏幕锁定: \(playerLockedType), 点击播放器按钮不做反应")
+                return true
+            }
+            return false
         }
 
         // Change playing states closure
@@ -715,13 +747,14 @@ extension JHKVideoPlayer {
 
     // Change mode of full screen or shrink screen
     func fullOrShrinkAction() {
+        var realWidth =  UIScreen.main.bounds.width < UIScreen.main.bounds.height ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
+        var realHeight = UIScreen.main.bounds.width < UIScreen.main.bounds.height ? UIScreen.main.bounds.height : UIScreen.main.bounds.width
         if self.isFull == .normal {
-            
-//            dPrint("转换为全屏")
             UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+            let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: realHeight, height: realWidth))
         } else {
-//            dPrint("退出全屏")
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            let rect = CGRect(origin: CGPoint(x: 0, y: kStatusBarHeight), size: CGSize(width: realWidth, height: realHeight))
         }
     }
 
@@ -741,5 +774,16 @@ extension JHKVideoPlayer {
     
     func isFullScreen() -> JHKPlayerFullScreenMode {
         return isFull
+    }
+    func setPlayOrPauseBtnStatus(IsShowAnimate: Bool) {
+        if IsShowAnimate { // 转圈动画显示的时候，播放按钮不显示
+            if controlView?.topBar.isHidden == false {
+                controlView?.playOrPauseButton.isHidden = true
+            }
+        }else {
+            if controlView?.topBar.isHidden == false {
+                controlView?.playOrPauseButton.isHidden = false
+            }
+        }
     }
 }
