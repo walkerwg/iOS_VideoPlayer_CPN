@@ -67,7 +67,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }
     internal var clearColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0)
     
-    internal static var sliderMinColor = UIColor(red: 25/255.0, green: 207/255.0, blue: 141/255.0, alpha: 0.0)
+    internal static var sliderMinColor = UIColor(red: 25/255.0, green: 107/255.0, blue: 141/255.0, alpha: 0.0)
     
     internal static var sliderMaxColor = UIColor.white
     
@@ -264,7 +264,12 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Load progressor
     open lazy var loadProgressView: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.progressTintColor = UIColor.clear
+        progressView.backgroundColor = UIColor.clear
+        progressView.progressTintColor = JHKPlayerView.sliderMaxColor
+        progressView.trackTintColor = UIColor.lightGray
+        progressView.progressViewStyle = .bar
+        progressView.contentMode = .center
+        progressView.progress = 0.0
         progressView.trackTintColor = UIColor.lightGray
         return progressView
     }()
@@ -273,18 +278,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     open lazy var playSlider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 0.0
-//        UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), false, 0.0)
-//        let transparentImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//
-//        let image = UIImage.imageInBundle(named: "player_slider")
-//        slider.setThumbImage(image, for: .normal)
-//        slider.setMaximumTrackImage(transparentImage, for: .normal)
-//        slider.setMinimumTrackImage(transparentImage, for: .normal)
+        //wg:
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 2.0)
+        UIGraphicsBeginImageContext(rect.size)
+        let context:CGContext = UIGraphicsGetCurrentContext()!
+        context.setFillColor(UIColor.green.cgColor);
+        context.fill(rect);
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         slider.thumbTintColor = UIColor.white
-        slider.maximumTrackTintColor = JHKPlayerView.sliderMinColor
-        slider.maximumTrackTintColor = JHKPlayerView.sliderMaxColor
-
+        slider.setMinimumTrackImage(image, for: .normal)
+        slider.maximumTrackTintColor = UIColor.clear
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(playSliderSeeked(_:)), for: .touchDown)
@@ -478,7 +482,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let bottomBarHeight: CGFloat = self.frame.height * bottomBarHeightScale
         let playOrPauseButtonTop: CGFloat = 16.0
         let playOrPauseButtonWidth: CGFloat = 16.0
-        let currentTimeLabelWidth: CGFloat = 90.0
+        let currentTimeLabelWidth: CGFloat = 80.0
         if isFullOrHalfScreen() == .normal { // 竖屏
 
             // 显示半屏所特有的
@@ -493,9 +497,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             moreButton.isHidden = true
             fullOrSmallButton.isHidden = false
 
-//            returnButtonHalfOnScreen.isHidden = false
+            returnButtonHalfOnScreen.isHidden = false
             // 暂时不加了
-//            self.addSubview(returnButtonHalfOnScreen)
+            self.addSubview(returnButtonHalfOnScreen)
             lockPlayScreenButton.isHidden = true
             lockPlayScreenButton.removeFromSuperview()
 //
@@ -505,8 +509,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            moreButton.removeFromSuperview()
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 4)
-            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth, height: returnButtonHeight)
-//            returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: imgWidth, height: imgWidth)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth * 1.3, height: returnButtonHeight * 1.3)
+            returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: returnButton.frame.size.width, height: returnButton.frame.size.height)
 
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
@@ -578,8 +582,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             lockPlayScreenButton.isHidden = false
             fullOrSmallButton.isHidden = true
             moreButton.isHidden = false
-//            returnButtonHalfOnScreen.isHidden = true
-//            self.addSubview(returnButtonHalfOnScreen)
+            returnButtonHalfOnScreen.isHidden = true
+            self.addSubview(returnButtonHalfOnScreen)
             // 暂时不加了
             returnButtonHalfOnScreen.removeFromSuperview()
             
@@ -800,6 +804,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 // MARK: - First response action
     
     @objc public func downloadAction() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "downLoadVideoFromCurrentPlayerNotify"), object: nil)
         JHKPlayerClosure.downloadClosure?()
     }
     /// Play or Pause video
@@ -1144,7 +1149,10 @@ extension JHKPlayerView {
 //                    let image = UIImage.imageInBundle(named: "btn_backward")
 //                    dragHud.image = image
 //                }
+                
+                //wg:修复
                 let string = currentTimeLabel.text
+                if (string == nil) {return}
                 let attrstring:NSMutableAttributedString = NSMutableAttributedString(string:string!)
                 let str = NSString(string: string!)
                 let theRange = str.range(of: "/")
