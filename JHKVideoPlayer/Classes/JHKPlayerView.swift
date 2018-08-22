@@ -852,6 +852,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             sideMenuForDefinition = false
             isSideMenuShow = true
         }
+        topBar.isHidden = true
+        bottomBar.isHidden = true
         JHKPlayerClosure.moreInfoClosure?()
     }
     
@@ -963,18 +965,18 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             self.addSubview(sideMenu)
             setNeedsLayout()
         }
-        sideMenu.frame = CGRect(x: kScreenHeight, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
+        sideMenu.frame = CGRect(x: kScreenHeight, y: 0, width: kScreenHeight * 2 / 5, height: kScreenWidth)
         UIView.animate(withDuration: 0.25, animations: {
             let q: CGFloat
             if self.sideMenuForDefinition! { q = 4 } else { q = 3 }
-            self.sideMenu.frame = CGRect(x: kScreenHeight * q / 5, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
+            self.sideMenu.frame = CGRect(x: kScreenHeight * q / 5, y: 0, width: kScreenHeight * 2 / 5, height: kScreenWidth)
         })
     }
 
     /// Function to hide side menu from screen
     private func hideSideMenu() {
         UIView.animate(withDuration: 0.25, animations: {
-            self.sideMenu.frame = CGRect(x: kScreenHeight, y: self.topBar.frame.height, width: kScreenHeight * 2 / 5, height: kScreenWidth - self.topBar.frame.height - self.bottomBar.frame.height)
+            self.sideMenu.frame = CGRect(x: kScreenHeight, y: 0, width: kScreenHeight * 2 / 5, height: kScreenWidth)
         })
     }
 
