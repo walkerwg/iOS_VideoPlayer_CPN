@@ -893,6 +893,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             sideMenuForDefinition = true
             isSideMenuShow = true
         }
+        topBar.isHidden = true
+        bottomBar.isHidden = true
+        lockPlayScreenButton.isHidden = true
         JHKPlayerClosure.changeDefinitionClosure?()
     }
 
