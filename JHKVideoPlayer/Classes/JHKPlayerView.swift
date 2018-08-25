@@ -499,7 +499,6 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
             returnButtonHalfOnScreen.isHidden = false
             // 暂时不加了
-            self.addSubview(returnButtonHalfOnScreen)
             lockPlayScreenButton.isHidden = true
             lockPlayScreenButton.removeFromSuperview()
 //
@@ -582,11 +581,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             lockPlayScreenButton.isHidden = false
             fullOrSmallButton.isHidden = true
             moreButton.isHidden = false
-            returnButtonHalfOnScreen.isHidden = true
-            self.addSubview(returnButtonHalfOnScreen)
-            // 暂时不加了
-            returnButtonHalfOnScreen.removeFromSuperview()
-            
+            returnButtonHalfOnScreen.isHidden = true    
 
 //            topBar.addSubview(moreButton)
             // 添加锁屏按钮
@@ -757,7 +752,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         bottomBar.addSubview(moreButton)
         dragHud.addSubview(dragLabel)
         self.addSubview(loadingIndicator)
-//        self.addSubview(returnButtonHalfOnScreen)
+        self.addSubview(returnButtonHalfOnScreen)
         loadingIndicator.startAnimating()
         // 上一集 下一集按钮 聚好学3.3版本暂时不使用了，先保留着
         //        bottomBar.addSubview(previewsButton)
@@ -927,7 +922,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }
 
 // MARK: - Dependant functions
-    
+
     ///add gradient layer
     private func addGradientLayer(in view: UIView) {
         //定义渐变的颜色
