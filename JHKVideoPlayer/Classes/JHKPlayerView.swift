@@ -286,11 +286,11 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         context.fill(rect);
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        slider.thumbTintColor = UIColor.white
+        slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
         slider.setMinimumTrackImage(image, for: .normal)
         slider.maximumTrackTintColor = UIColor.clear
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
-        slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchUpInside)
+        slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchDown)
         slider.addTarget(self, action: #selector(playSliderSeeked(_:)), for: .touchDown)
         return slider
     }()
@@ -590,7 +590,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 80)
             // TODO:  增添三元条件分支匹配最小值
-            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth, height: returnButtonHeight)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*1.2, height: returnButtonHeight*1.2)
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView

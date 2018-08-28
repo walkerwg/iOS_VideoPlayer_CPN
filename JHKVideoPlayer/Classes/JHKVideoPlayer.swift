@@ -295,7 +295,6 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     public var mediaURL: URL? {
         didSet {
             initPlayer()
-            // add by wjw
             self.controlView?.loadingIndicator.startAnimating()
             setPlayOrPauseBtnStatus(IsShowAnimate: true)
         }
