@@ -23,6 +23,9 @@ let kStatusBarHeight : CGFloat = (isIPhoneX ? 44.0 : 20.0)
 /// - Author: Luis Gin
 /// - Version: v0.1.1
 open class JHKPlayerView: UIView, UITextViewDelegate {
+    
+    // 播放器视图type
+    public var playerViewType: JHKPlayerViewType?
 
     // MARK: - Signal
     /// Signal of whether hide all the menu
@@ -91,6 +94,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     public lazy var sideMenu: UIView = {
         let view = UIView()
         view.backgroundColor = self.menuContentColor
+//        view.backgroundColor = UIColor.clear
         view.clipsToBounds = true
         return view
     }()
@@ -279,15 +283,26 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let slider = UISlider()
         slider.minimumValue = 0.0
         //wg:
-        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 2.0)
-        UIGraphicsBeginImageContext(rect.size)
-        let context:CGContext = UIGraphicsGetCurrentContext()!
-        context.setFillColor(UIColor.green.cgColor);
-        context.fill(rect);
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
-        slider.setMinimumTrackImage(image, for: .normal)
+        //        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 2.0)
+        //        UIGraphicsBeginImageContext(rect.size)
+        //        let context:CGContext = UIGraphicsGetCurrentContext()!
+        //        context.setFillColor(UIColor.green.cgColor);
+        //        context.fill(rect);
+        //        let image = UIGraphicsGetImageFromCurrentImageContext()
+        //        UIGraphicsEndImageContext()
+        //        slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
+        //        slider.setMinimumTrackImage(image, for: .normal)
+        //        if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+        //            slider.minimumTrackTintColor = UIColor.init("EC1D39")
+        //        } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+        //            slider.minimumTrackTintColor = UIColor.red
+        //        }
+        
+        if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+            slider.minimumTrackTintColor = UIColor.init("19cf8d")
+        } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+            slider.minimumTrackTintColor = UIColor.init("EC1D39")
+        }
         slider.maximumTrackTintColor = UIColor.clear
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchDown)
@@ -442,8 +457,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     weak var customizeGestureHandler: JHKPlayerGestureHandler?
 
 // MARK: - Init methods
-    override public init(frame: CGRect) {
+    public init(frame: CGRect, playerViewType: JHKPlayerViewType = JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE) {
         super.init(frame: frame)
+        self.playerViewType = playerViewType
         self.addAllViews()
         self.addGuestures()
     }
@@ -1157,7 +1173,11 @@ extension JHKPlayerView {
                 let str = NSString(string: string!)
                 let theRange = str.range(of: "/")
                 let range = NSRange.init(location: 0, length: theRange.location)
-                attrstring.addAttribute(.foregroundColor, value: UIColor.init("19cf8d"), range: range)
+                if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+                    attrstring.addAttribute(.foregroundColor, value: UIColor.init("19cf8d"), range: range)
+                } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+                    attrstring.addAttribute(.foregroundColor, value: UIColor.init("EC1D39"), range: range)
+                }
                 attrstring.addAttribute(.font, value: UIFont.systemFont(ofSize: 14), range: theRange)
                 dragLabel.attributedText = attrstring
                 playSlider.value = newValue

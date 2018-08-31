@@ -20,6 +20,7 @@ class MenuController: UIViewController, JHKPlayerActionsDelegate {
         let player = JHKVideoPlayer(frame:CGRect(x:10, y:40, width:300, height:180))
         player.actionDelegate = self
         player.backgroundColor = .black
+        player.playerType = .JHK_PLAYERVIEW_JHKTYPE
         return player
     }()
 

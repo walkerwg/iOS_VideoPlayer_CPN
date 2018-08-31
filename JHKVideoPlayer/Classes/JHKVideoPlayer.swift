@@ -38,6 +38,18 @@ public enum JHKPlayerContentFillMode: Int {
     case scaleFill
 }
 
+/// Enum player type
+public enum JHKPlayerViewType: Int {
+    /** 聚好学播放器 */
+    case JHK_PLAYERVIEW_EDUTYPE = 0
+    
+    /** 聚好看播放器 */
+    case JHK_PLAYERVIEW_JHKTYPE = 1
+    
+    /** other */
+    case JHK_PLAYERVIEW_OTHERTYPE = 2
+}
+
 /// An implement of video player which provide multiple predefined action, and can be expanded in further
 ///
 /// - Author: Luis Gin
@@ -206,6 +218,9 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 
     // Control Menu
     open var controlView: JHKPlayerView?
+    
+    // 播放器类型
+    public var playerType: JHKPlayerViewType = JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE
 
     // MARK: - Data
     // Origin frame
@@ -453,7 +468,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             RemoveObservers()
         }
         if controlView == nil {
-            controlView = JHKPlayerView()
+            controlView = JHKPlayerView.init(frame: .zero, playerViewType: JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE)
             controlView?.customizeActionHandler = actionDelegate
             controlView?.internalDelegate = self
             self.addSubview(controlView!)
