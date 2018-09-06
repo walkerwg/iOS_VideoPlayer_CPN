@@ -50,6 +50,15 @@ public enum JHKPlayerViewType: Int {
     case JHK_PLAYERVIEW_OTHERTYPE = 2
 }
 
+/// Enum collectState type
+public enum JHKPlayerCollectState: Int {
+    /** 未收藏 */
+    case JHK_PLAYERVIEW_CANCELCOLLERCTSTATE = 0
+    
+    /** 收藏 */
+    case JHK_PLAYERVIEW_COLLECTSTATE = 1
+}
+
 /// An implement of video player which provide multiple predefined action, and can be expanded in further
 ///
 /// - Author: Luis Gin
@@ -221,6 +230,9 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     
     // 播放器类型
     public var playerType: JHKPlayerViewType = JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE
+    
+    // 是否收藏
+    public var playerCollectState: JHKPlayerCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE
 
     // MARK: - Data
     // Origin frame
@@ -468,7 +480,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             RemoveObservers()
         }
         if controlView == nil {
-            controlView = JHKPlayerView.init(frame: .zero, playerViewType: JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE)
+            controlView = JHKPlayerView.init(frame: .zero, playerViewType: playerType, collectState: playerCollectState)
             controlView?.customizeActionHandler = actionDelegate
             controlView?.internalDelegate = self
             self.addSubview(controlView!)
@@ -497,6 +509,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             (playerLayer as! AVPlayerLayer).player = player
         } else {
             self.playerLayer = AVPlayerLayer(player: player)
+//            self.playerLayer?.videoGravity = .resizeAspectFill
             self.layer.insertSublayer(playerLayer!, at: 0)
         }
         addObservers()
@@ -737,6 +750,17 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 //                dPrint("弹窗分享窗口")
             }
         }
+        
+        /// Collect button closure
+        JHKPlayerClosure.collectClosure = { [weak self] (state) in
+            guard let sself = self else { return }
+            
+            if state == JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE {
+                sself.actionDelegate?.collectAction(collectState: JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE)
+            } else {
+                sself.actionDelegate?.collectAction(collectState: JHKPlayerCollectState.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE)
+            }
+        }
 
         /// Change definition closure
         JHKPlayerClosure.changeDefinitionClosure = { [weak self] in
@@ -801,6 +825,15 @@ extension JHKVideoPlayer {
     func isFullScreen() -> JHKPlayerFullScreenMode {
         return isFull
     }
+    
+    func collagenScreen() {
+        playerLayer?.videoGravity = .resizeAspect
+    }
+    
+    func fullScreen() {
+        playerLayer?.videoGravity = .resizeAspectFill
+    }
+
     func setPlayOrPauseBtnStatus(IsShowAnimate: Bool) {
         if IsShowAnimate { // 转圈动画显示的时候，播放按钮不显示
             if controlView?.topBar.isHidden == false {

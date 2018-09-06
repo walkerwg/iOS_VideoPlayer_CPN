@@ -24,6 +24,9 @@ let kStatusBarHeight : CGFloat = (isIPhoneX ? 44.0 : 20.0)
 /// - Version: v0.1.1
 open class JHKPlayerView: UIView, UITextViewDelegate {
     
+    // 收藏状态
+    public var playerViewCollectState: JHKPlayerCollectState?
+    
     // 播放器视图type
     public var playerViewType: JHKPlayerViewType?
 
@@ -105,6 +108,32 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         label.textColor = UIColor.white
         return label
     }()
+    
+    /// 100% button on top menu
+    public lazy var collagenBtn: UIButton = {
+        let button = UIButton()
+        button.setTitle("100%", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        let imageNormal = UIImage.imageInBundle(named: "左 选中")
+        button.setBackgroundImage(imageNormal, for: .normal)
+        let imagePressDown = UIImage.imageInBundle(named: "左 未选中")
+        button.setBackgroundImage(imagePressDown, for: .highlighted)
+        button.addTarget(self, action: #selector(collagenBtnAction), for: .touchUpInside)
+        return button
+    }()
+    
+    /// fullScreen button on top menu
+    public lazy var fullScreenBtn: UIButton = {
+        let button = UIButton()
+        button.setTitle("全屏", for: .normal)
+        button.setTitleColor(UIColor.init("FFFFFF"), for: .normal)
+        let imageNormal = UIImage.imageInBundle(named: "右 未选中")
+        button.setBackgroundImage(imageNormal, for: .normal)
+        let imagePressDown = UIImage.imageInBundle(named: "右 选中")
+        button.setBackgroundImage(imagePressDown, for: .highlighted)
+        button.addTarget(self, action: #selector(fullScreenBtnAction), for: .touchUpInside)
+        return button
+    }()
 
     /// Return button on top menu left side
     open lazy var returnButton: UIButton = {
@@ -139,6 +168,24 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let imagePressDown = UIImage.imageInBundle(named: "Player_下载按下")
         button.setBackgroundImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(downloadAction), for: .touchUpInside)
+        return button
+    }()
+    
+    /// Collect button on top menu right side
+    open lazy var collectButton: UIButton = {
+        let button = UIButton()
+        if self.playerViewCollectState == JHKPlayerCollectState.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE {
+            let imageNormal = UIImage.imageInBundle(named: "横屏 收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 收藏")
+            button.setBackgroundImage(imageNormal, for: .normal)
+            button.setBackgroundImage(imagePressCollect, for: .highlighted)
+        } else if self.playerViewCollectState == JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE {
+            let imageNormal = UIImage.imageInBundle(named: "横屏 已收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 已收藏")
+            button.setBackgroundImage(imageNormal, for: .normal)
+            button.setBackgroundImage(imagePressCollect, for: .highlighted)
+        }
+        button.addTarget(self, action: #selector(collectAction), for: .touchUpInside)
         return button
     }()
     
@@ -457,9 +504,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     weak var customizeGestureHandler: JHKPlayerGestureHandler?
 
 // MARK: - Init methods
-    public init(frame: CGRect, playerViewType: JHKPlayerViewType = JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE) {
+    public init(frame: CGRect, playerViewType: JHKPlayerViewType = JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE, collectState: JHKPlayerCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE) {
         super.init(frame: frame)
         self.playerViewType = playerViewType
+        self.playerViewCollectState = collectState
         self.addAllViews()
         self.addGuestures()
     }
@@ -493,6 +541,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let titleLableHeight : CGFloat = 18.0;
         let returnButtonHeight : CGFloat = 15.0;
         let returnButtonWidth : CGFloat = 9.0;
+        let fullScreenButtonWidth : CGFloat = 90.0;
+        let fullScreenButtonHeight : CGFloat = 36.0
         
         let bottomBarHeightScale: CGFloat = 0.187
         let bottomBarHeight: CGFloat = self.frame.height * bottomBarHeightScale
@@ -538,10 +588,14 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            titleLabel.font = UIFont.systemFont(ofSize: fontSizeSmall)
 //          topBar.addSubview(titleLabel) 竖屏标题需求去掉
             topBar.addSubview(returnButton)
-
+            
             shareButtonHalf.frame = CGRect(x: topBar.width - imgWidth - space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - space - imgHorizontalSpace, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
-            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+                downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+                collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            }
             //竖屏标题需求去掉
 //            var curWidth = kScreenWidth
 //            if kScreenWidth < kScreenHeight {
@@ -614,10 +668,19 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                     view.frame = CGRect(x: self.frame.width - topBar.frame.height * CGFloat(topControlsArray.count - i) - topBar.frame.height, y: topBar.frame.height * 0.1, width: topBar.frame.height * 0.8, height: topBar.frame.height * 0.8)
                 }
             }
+            
+            if isIPhoneX {
+                collagenBtn.frame = CGRect(x: topBar.width / 2 -  fullScreenButtonWidth, y: 24, width: fullScreenButtonWidth, height: fullScreenButtonHeight)
+                fullScreenBtn.frame = CGRect(x: topBar.width / 2, y: 24, width: fullScreenButtonWidth, height: fullScreenButtonHeight)
+            }
 
             shareButtonHalf.frame = CGRect(x: topBar.width - imgWidth - m_space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - m_space - imgHorizontalSpace, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
-            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+                downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+                collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            }
 
 //            separaterLineView1.frame = CGRect(x: moreButton.origin.x - 6, y: 0, width: 1, height: 8)
 //            shareButton.frame = CGRect(x: separaterLineView1.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)
@@ -751,7 +814,15 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         self.addSubview(topBar)
         topBar.addSubview(titleLabel)
         topBar.addSubview(returnButton)
-        topBar.addSubview(downloadButton)
+        if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+            topBar.addSubview(downloadButton)
+        } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+            topBar.addSubview(collectButton)
+        }
+        if isIPhoneX {
+            topBar.addSubview(collagenBtn)
+            topBar.addSubview(fullScreenBtn)
+        }
         topBar.addSubview(shareButton)
         topBar.addSubview(shareButtonHalf)
         topBar.addSubview(pushButton)
@@ -814,6 +885,24 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
 // MARK: - First response action
     
+    @objc public func collectAction() {
+        if self.playerViewCollectState == JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE { // 取消收藏
+            let imageNormal = UIImage.imageInBundle(named: "横屏 收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 收藏")
+            collectButton.setBackgroundImage(imageNormal, for: .normal)
+            collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+            playerViewCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE
+            JHKPlayerClosure.collectClosure?(.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE)
+        } else { // 收藏
+            let imageNormal = UIImage.imageInBundle(named: "横屏 已收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 已收藏")
+            collectButton.setBackgroundImage(imageNormal, for: .normal)
+            collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+            playerViewCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE
+            JHKPlayerClosure.collectClosure?(.JHK_PLAYERVIEW_COLLECTSTATE)
+        }
+    }
+    
     @objc public func downloadAction() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "downLoadVideoFromCurrentPlayerNotify"), object: nil)
         JHKPlayerClosure.downloadClosure?()
@@ -840,6 +929,34 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     @objc func fullOrShrinkAction() {
         internalDelegate?.fullOrShrinkAction()
         isSideMenuShow = false
+    }
+    
+    @objc func collagenBtnAction() {
+        let collImageNormal = UIImage.imageInBundle(named: "左 选中")
+        let collImagePressDown = UIImage.imageInBundle(named: "左 未选中")
+        collagenBtn.setBackgroundImage(collImageNormal, for: .normal)
+        collagenBtn.setBackgroundImage(collImagePressDown, for: .highlighted)
+
+        let fullImageNormal = UIImage.imageInBundle(named: "右 未选中")
+        let fullImagePressDown = UIImage.imageInBundle(named: "右 选中")
+        fullScreenBtn.setBackgroundImage(fullImageNormal, for: .normal)
+        fullScreenBtn.setBackgroundImage(fullImagePressDown, for: .highlighted)
+
+        internalDelegate?.collagenScreen()
+    }
+    
+    @objc func fullScreenBtnAction() {
+        let collImageNormal = UIImage.imageInBundle(named: "左 未选中")
+        let collImagePressDown = UIImage.imageInBundle(named: "左 选中")
+        collagenBtn.setBackgroundImage(collImageNormal, for: .normal)
+        collagenBtn.setBackgroundImage(collImagePressDown, for: .highlighted)
+        
+        let fullImageNormal = UIImage.imageInBundle(named: "右 选中")
+        let fullImagePressDown = UIImage.imageInBundle(named: "右 未选中")
+        fullScreenBtn.setBackgroundImage(fullImageNormal, for: .normal)
+        fullScreenBtn.setBackgroundImage(fullImagePressDown, for: .highlighted)
+
+        internalDelegate?.fullScreen()
     }
 
     @objc func returnButtonAction() {

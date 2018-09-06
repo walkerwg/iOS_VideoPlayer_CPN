@@ -19,6 +19,7 @@ struct JHKPlayerClosure {
     static var shareInfoClosure: (() -> ())?
     static var scheduledPlayerClosure: ((_ value: Float) -> ())?
     static var downloadClosure: (() -> ())?
+    static var collectClosure: ((_ collectState: JHKPlayerCollectState) -> ())?
 }
 
 protocol JHKInternalTransport: class {
@@ -28,6 +29,8 @@ protocol JHKInternalTransport: class {
     func returnButtonAction()
     func openVIPButtonAction()
     func isFullScreen() -> JHKPlayerFullScreenMode
+    func collagenScreen()
+    func fullScreen()
 }
 
 /// Handler on screen guesture. if you plan on customize own intereaction, simply modify playerView.customizeGestureHandler which default as 'self'.
@@ -82,6 +85,9 @@ public protocol JHKPlayerActionsDelegate: class {
     
     /// Intereaction of click download button.
     func downloadAction()
+    
+    /// Intereaction of click collect button
+    func collectAction(collectState: JHKPlayerCollectState)
 }
 
 // Default intereaction of Events in protocol

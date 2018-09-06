@@ -10,6 +10,14 @@ import UIKit
 import JHKVideoPlayer
 
 class MenuController: UIViewController, JHKPlayerActionsDelegate {
+    func collectAction(collectState: JHKPlayerCollectState) {
+        if collectState == .JHK_PLAYERVIEW_CANCELCOLLERCTSTATE {
+            print("取消收藏")
+        } else {
+            print("点击收藏")
+        }
+    }
+    
     func shareAction() {
         print("点击了 shareAction")
     }
