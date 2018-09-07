@@ -224,7 +224,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     private var playerAsset: AVURLAsset?
     private var snapshotGenerator: AVAssetImageGenerator?
     private var imageOutPut: AVPlayerItemOutput?
-
+    var observer: Any?
     // Control Menu
     open var controlView: JHKPlayerView?
     
@@ -300,8 +300,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             guard let endPoint = endPoint else { return }
             let cmTime = CMTime(seconds: Double(endPoint), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
             let timeValue = NSValue.init(time: cmTime)
-            player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
+           observer = player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
                 print("### 跳过片尾 ###")
+            self.player?.removeTimeObserver(self.observer)
+            self.playState = .stop
                 if self.autoNext {
                     self.actionDelegate?.playNextAction()
                 }
