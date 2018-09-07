@@ -67,7 +67,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }
     internal var clearColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0)
     
-    internal static var sliderMinColor = UIColor(red: 25/255.0, green: 107/255.0, blue: 141/255.0, alpha: 0.0)
+    internal static var sliderMinColor = UIColor(red: 25/255.0, green: 207/255.0, blue: 141/255.0, alpha: 1)
     
     internal static var sliderMaxColor = UIColor.white
     
@@ -282,7 +282,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 2.0)
         UIGraphicsBeginImageContext(rect.size)
         let context:CGContext = UIGraphicsGetCurrentContext()!
-        context.setFillColor(UIColor.green.cgColor);
+        context.setFillColor(JHKPlayerView.sliderMinColor.cgColor)
         context.fill(rect);
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -496,6 +496,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             totalTimeLabel.isHidden = true
             moreButton.isHidden = true
             fullOrSmallButton.isHidden = false
+            titleLabel.isHidden = true
 
             returnButtonHalfOnScreen.isHidden = false
             // 暂时不加了
@@ -508,7 +509,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            moreButton.removeFromSuperview()
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 4)
-            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth * 1.3, height: returnButtonHeight * 1.3)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 1.3, height: returnButtonHeight * 1.3)
             returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: returnButton.frame.size.width, height: returnButton.frame.size.height)
 
             if topControlsArray.count > 0 {
@@ -541,12 +542,15 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - space - playOrPauseButtonWidth, y: playOrPauseButton.frame.minY, width: playOrPauseButtonWidth, height: playOrPauseButtonWidth)
 
             currentTimeLabel.frame = CGRect(x: bottomBar.frame.width - 2 * space - playOrPauseButtonWidth - currentTimeLabelWidth, y: playOrPauseButton.frame.minY, width: currentTimeLabelWidth, height: playOrPauseButtonWidth)
+            currentTimeLabel.font = UIFont.systemFont(ofSize: 10)
             currentTimeLabel.textColor = UIColor.init("e7e8ed")
             currentTimeLabel.textAlignment = .right
 
             playSlider.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 2)
             let insetH: CGFloat = playSlider.frame.height
-            loadProgressView.frame = playSlider.frame
+            loadProgressView.frame = CGRect(x: playOrPauseButton.frame.maxX + space + 2, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 0.8)
+            loadProgressView.layer.cornerRadius = 1;
+            loadProgressView.layer.masksToBounds = true
 
     
 //            // 播放按钮，停止 播放  上一集/下一集
@@ -590,7 +594,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 80)
             // TODO:  增添三元条件分支匹配最小值
-            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*1.2, height: returnButtonHeight*1.2)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*1.3, height: returnButtonHeight*1.3)
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
@@ -600,8 +604,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             }
 
             shareButtonHalf.frame = CGRect(x: topBar.width - imgWidth - m_space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
-            pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - m_space - imgHorizontalSpace, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
-            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - m_space - b_space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
 
 //            separaterLineView1.frame = CGRect(x: moreButton.origin.x - 6, y: 0, width: 1, height: 8)
 //            shareButton.frame = CGRect(x: separaterLineView1.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)
@@ -635,7 +639,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 进度条
             playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 2)
 //            let insetH: CGFloat = playSlider.frame.height
-            loadProgressView.frame = playSlider.frame
+            loadProgressView.frame = CGRect(x: space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 0.8)
+            loadProgressView.layer.cornerRadius = 1;
+            loadProgressView.layer.masksToBounds = true
+
             // 时间指示器
 //            currentTimeLabel.frame = CGRect(x: 16 + X_fullScreen, y: insetH - 2, width: 55, height: 14)
 //            totalTimeLabel.isHidden = false
@@ -916,9 +923,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     @objc func playSliderSeeked(_ sender: AnyObject) {
         JHKPlayerView.self.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideMenu), object: nil)
         for gesture in self.gestureRecognizers! {
-            gesture.isEnabled = false
+            gesture.isEnabled = true
         }
-        sliderGesture?.isEnabled = false
+        sliderGesture?.isEnabled = true
     }
 
 // MARK: - Dependant functions
