@@ -224,7 +224,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     private var playerAsset: AVURLAsset?
     private var snapshotGenerator: AVAssetImageGenerator?
     private var imageOutPut: AVPlayerItemOutput?
-
+    var observer: Any?
     // Control Menu
     open var controlView: JHKPlayerView?
     
@@ -300,8 +300,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             guard let endPoint = endPoint else { return }
             let cmTime = CMTime(seconds: Double(endPoint), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
             let timeValue = NSValue.init(time: cmTime)
-            player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
+           observer = player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
                 print("### 跳过片尾 ###")
+            self.player?.removeTimeObserver(self.observer)
+            self.playState = .stop
                 if self.autoNext {
                     self.actionDelegate?.playNextAction()
                 }
@@ -451,6 +453,29 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         self.init(frame: .zero)
         let urlFromString = URL(string: url)
         self.mediaURL = urlFromString
+    }
+    
+    // Set playerTyep collectState
+    public func setPlayer(playerType: JHKPlayerViewType, collectState: JHKPlayerCollectState) {
+        self.playerType = playerType
+        self.playerCollectState = collectState
+    }
+    
+    // Cut collectState
+    public func cutCollectState(collectState: JHKPlayerCollectState) {
+        self.playerCollectState = collectState
+        self.controlView?.playerViewCollectState = collectState
+        if collectState == .JHK_PLAYERVIEW_CANCELCOLLERCTSTATE {
+            let imageNormal = UIImage.imageInBundle(named: "横屏 收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 收藏")
+            self.controlView?.collectButton.setBackgroundImage(imageNormal, for: .normal)
+            self.controlView?.collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+        } else {
+            let imageNormal = UIImage.imageInBundle(named: "横屏 已收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 已收藏")
+            self.controlView?.collectButton.setBackgroundImage(imageNormal, for: .normal)
+            self.controlView?.collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+        }
     }
 
     // Constructor for initWithNSCode, which required since swift2.1 when init() is override

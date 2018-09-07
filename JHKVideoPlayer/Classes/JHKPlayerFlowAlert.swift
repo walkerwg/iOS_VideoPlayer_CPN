@@ -87,7 +87,7 @@ class JHKPlayerFlowAlert: UIView {
         playBtn = UIButton.init(frame: CGRect(x: (self.bounds.size.width - kAlertViewWidth) / 2 + 147.5, y: (self.bounds.size.height - kAlertViewHeight) / 2 + 37.0, width: 90.0, height: 24.0))
         playBtn?.alpha = 0.9
         playBtn?.layer.cornerRadius = 10.0
-        playBtn?.setTitle("播放", for: .normal)
+        playBtn?.setTitle(titleText!, for: .normal)
         playBtn?.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
         playBtn?.backgroundColor = self.HexColor(rgbValue: 0x18BC84)
         playBtn?.setTitleColor(HexColor(rgbValue: 0xFFFFFF), for: .normal)
