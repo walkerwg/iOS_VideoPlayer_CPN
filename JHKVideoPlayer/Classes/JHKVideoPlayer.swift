@@ -452,6 +452,29 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         let urlFromString = URL(string: url)
         self.mediaURL = urlFromString
     }
+    
+    // Set playerTyep collectState
+    public func setPlayer(playerType: JHKPlayerViewType, collectState: JHKPlayerCollectState) {
+        self.playerType = playerType
+        self.playerCollectState = collectState
+    }
+    
+    // Cut collectState
+    public func cutCollectState(collectState: JHKPlayerCollectState) {
+        self.playerCollectState = collectState
+        self.controlView?.playerViewCollectState = collectState
+        if collectState == .JHK_PLAYERVIEW_CANCELCOLLERCTSTATE {
+            let imageNormal = UIImage.imageInBundle(named: "横屏 收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 收藏")
+            self.controlView?.collectButton.setBackgroundImage(imageNormal, for: .normal)
+            self.controlView?.collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+        } else {
+            let imageNormal = UIImage.imageInBundle(named: "横屏 已收藏")
+            let imagePressCollect = UIImage.imageInBundle(named: "横屏 已收藏")
+            self.controlView?.collectButton.setBackgroundImage(imageNormal, for: .normal)
+            self.controlView?.collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+        }
+    }
 
     // Constructor for initWithNSCode, which required since swift2.1 when init() is override
     required public init?(coder: NSCoder) {

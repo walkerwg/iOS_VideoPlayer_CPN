@@ -7,156 +7,150 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02DCA8B35794D2D3AE9B2EC1176D6D56 /* menu_quit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA1ECFE83297C8615A215B0C7F5BA1F /* menu_quit@3x.png */; };
-		069CFF7F69B7694A7ABB042C8E46A72B /* 分享@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC7C0CCA9D24A2058490BC9D33E98A /* 分享@2x.png */; };
-		075F3AE6F46DF7D5E8D96BC7F35DF929 /* 全屏.png in Resources */ = {isa = PBXBuildFile; fileRef = 92ADF614F6DFFF444EAE8DC60CD32EA2 /* 全屏.png */; };
-		07F2B7F7EA1DFF0ABE8CF030D9EC61DB /* 返回Full@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B440058B41207116A7CB6666AE7BD4D4 /* 返回Full@3x.png */; };
+		024E9F5F64BF1A7CE9BAEC89B5BDFDEF /* 投屏 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A50066E9A34BB9C1D6F887B3C69A856 /* 投屏 按下@2x.png */; };
+		06ECFECB08B435D76CEEC2F5891CCCF0 /* 全屏.png in Resources */ = {isa = PBXBuildFile; fileRef = 003A18C453F9BEF02F4690D6AC4E1A2E /* 全屏.png */; };
+		090C03B811D5FFC405A85A8D1D9BB4EA /* 返回Full 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF7B89DCB5F8A86FFDB92174ED33D85F /* 返回Full 按下@2x.png */; };
+		0A3AF0A7CD78DE60C3D55B356D1F5138 /* Player_投屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58EA8D8A1578916A5298D3E764E98A57 /* Player_投屏@2x.png */; };
+		0AD9DA155DFC499E4F44A6F0772858CC /* Player_全屏按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9157FD09D506708B776FC9668BD1580D /* Player_全屏按下@2x.png */; };
+		0B73A8D13E87C9C8B023EBFA14A06085 /* Player_锁屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6083F3F2F0846B9602BD36D85983B558 /* Player_锁屏@2x.png */; };
+		0E4F6BAD47BEB611FEFF2DDD7B669D0F /* menu_quit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF4126D04CE9D282BC7A151753C6691D /* menu_quit@3x.png */; };
+		0E6A39DC8AF5E9C1B78CAB3FC6C4C027 /* 锁定@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC4AB542A54A3B745F1AADB226A6F /* 锁定@3x.png */; };
 		10EB23E9ECC4B33E16933BB1EA560B6A /* Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87882A1F5A92C8138D54545E51D51E6F /* Timeline.swift */; };
-		12B2C277CBF114CF923B91A7FCB76E5E /* Player_返回按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BA47BAA6666ECEC16CDC338200BE22 /* Player_返回按下@2x.png */; };
 		1325929E1C50B43712AA548E668F516B /* JHKPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB86E2F7C283EE18356222F89FA3B6ED /* JHKPlayerView.swift */; };
-		15FE1C518894FB74841448903ED6425F /* 投屏 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE38E26B2D44BAE5C61A9F11255AE82 /* 投屏 按下@3x.png */; };
-		16D2D6E5B452C7255B5C353B8CFA3E1D /* 亮度icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 957CFA1584F58014C0DB2F1410052F43 /* 亮度icon@3x.png */; };
-		19583B466B7B935546C72A7B14E98AAB /* Player_全屏按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 69F7D178E11F3DED8EBB50CA2A742152 /* Player_全屏按下@2x.png */; };
-		1987114E2EFBD754807616E7CF043F9C /* btn_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9922BE1EF11D34CE36B414887C188010 /* btn_pause@2x.png */; };
-		1AE0A91B9CB12633E7DC9A35B693ADEF /* 分享 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E2D26934A01425C772AA448602FE6B1A /* 分享 按下@2x.png */; };
-		1B481706448A87C2CC5B839D4868DD5E /* pushScreen2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F5FDFC33FA30F48D95D3C8D72E4C76E5 /* pushScreen2@3x.png */; };
+		13746180D5CEEF7D3C32812DC5A3C016 /* icon_sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 6211342BB39D7D267C7039A5E6C031E2 /* icon_sound.png */; };
+		193A95B597CEBDDACE4D17FB054BDCBE /* 暂停@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F0D1B3BAFBB396290E05535F146F77A7 /* 暂停@3x.png */; };
 		1B9B6160EF934CE630AEC0AD87D777EE /* Pods-JHKVideoPlayer_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BABAF2AC7F5334C0BFCA18474931486 /* Pods-JHKVideoPlayer_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B9EDEDC964E6B08F78920B4F4B9DB84 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B44A27EFBB0DA84D738057B77F3413B1 /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D8DBAEB2140F305003DFA19 /* 横屏 收藏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAEA2140F303003DFA19 /* 横屏 收藏@2x.png */; };
-		1D8DBAED2140F319003DFA19 /* 横屏 已收藏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAEC2140F318003DFA19 /* 横屏 已收藏@2x.png */; };
-		1D8DBAEE2140FD53003DFA19 /* 横屏 收藏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAEA2140F303003DFA19 /* 横屏 收藏@2x.png */; };
-		1D8DBAEF2140FD53003DFA19 /* 横屏 已收藏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAEC2140F318003DFA19 /* 横屏 已收藏@2x.png */; };
-		1D8DBAF421411072003DFA19 /* 左 选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF021411070003DFA19 /* 左 选中@2x.png */; };
-		1D8DBAF521411072003DFA19 /* 右 未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF121411070003DFA19 /* 右 未选中@2x.png */; };
-		1D8DBAF621411072003DFA19 /* 左 未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF221411070003DFA19 /* 左 未选中@2x.png */; };
-		1D8DBAF721411072003DFA19 /* 右 选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF321411071003DFA19 /* 右 选中@2x.png */; };
-		1D8DBAF82141109D003DFA19 /* 右 未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF121411070003DFA19 /* 右 未选中@2x.png */; };
-		1D8DBAF92141109D003DFA19 /* 右 选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF321411071003DFA19 /* 右 选中@2x.png */; };
-		1D8DBAFA2141109D003DFA19 /* 左 未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF221411070003DFA19 /* 左 未选中@2x.png */; };
-		1D8DBAFB2141109D003DFA19 /* 左 选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D8DBAF021411070003DFA19 /* 左 选中@2x.png */; };
-		1E2F2C0F8C17B35210C7AAD4F7300276 /* 投屏.png in Resources */ = {isa = PBXBuildFile; fileRef = 32FE94B23CA3B00D78E8D0B957E39A8C /* 投屏.png */; };
-		20017D09C88BE22B418CBB4AA8CCD755 /* btn_previous.png in Resources */ = {isa = PBXBuildFile; fileRef = D3B210A6C3F88447A28335CE36123B40 /* btn_previous.png */; };
-		20346F43785B4B5DDF8BC34BC7356DB6 /* 暂停@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A63B3642772FBA1354C829D06681BD26 /* 暂停@3x.png */; };
-		2349E0DC0117FC31B18C303677573E08 /* 返回 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F1BFC99490829DC71D3A6D349A8B82D8 /* 返回 按下@3x.png */; };
-		23EEB5F512D978BE352FDB818E385FF6 /* 投屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A1BB08766957C9632884A2929F66AD /* 投屏@2x.png */; };
-		295189C785550B2067DD0E56D6A9586E /* iosFullScreen in Resources */ = {isa = PBXBuildFile; fileRef = 6B9B14233741E2F0098C8C5B214D1997 /* iosFullScreen */; };
-		2EAB94BAE8EF112D8D87CDB62D63B1D2 /* 播放@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C4D654DF2AE4F3F08AD3D6E72480E99 /* 播放@2x.png */; };
-		2EC39452EAD2FE90D3F2338AF80808B0 /* 暂停 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 589EE8D64FEEE35B38D19EFA7CEF9FF0 /* 暂停 按下.png */; };
-		2ED03BDA0C3A83E749CCFA01BD32A5B7 /* pushScreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 25387479F5E707E458949E470ABF2939 /* pushScreen2.png */; };
-		359E6F4B0939A1418E7858D6F3CEACFA /* 音量icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23C2B6BFCC9FBDE0D7590F29B0E6C84E /* 音量icon@2x.png */; };
+		1C74659E33566093B862A253BA40EA90 /* Player_解锁@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C32D290906E4D963033EC05A25A194B /* Player_解锁@2x.png */; };
+		1D77C4E21F0723DF37753EC85B2EC0D5 /* 音量icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66ED02904BDB6793C362E931A9D224D2 /* 音量icon@3x.png */; };
+		1E299BD6020F82D5910DDD8479586619 /* player_volume@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF994BC4D607ADCE5753B132E475EC67 /* player_volume@3x.png */; };
+		1FC7CF32EF4E4945051618E76D2731E9 /* 全屏 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E6DB2D91F7C809875A054F38957DCD7 /* 全屏 按下.png */; };
+		22CF79FE9A569ABDE6D11DC18CD2247E /* 缩小 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A3B87CE40B23DBE9155DAAD48A30630 /* 缩小 按下@2x.png */; };
+		2663CEE998B507FE0909527662A560FB /* 分享 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = B119BED2D46A046E762DA4CBED076684 /* 分享 按下.png */; };
+		2723D8B059087E500F9593C31220A869 /* 投屏 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 252DB23D938AAC42758255823DB5DE75 /* 投屏 按下@3x.png */; };
+		2A51915F8C00AA1FE4736C1C505BA598 /* 返回Full 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = C8C9C2C7FC0F78DCFADF46BEBFA75039 /* 返回Full 按下.png */; };
+		31C59AC15CD73F4F45071BAA3AC98F66 /* 全屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE7C4052C0B8094276055FBB217657E9 /* 全屏@2x.png */; };
+		328588D9376BA5D5B099ACD82C1B6A0F /* pushScreen2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1C0DE039F746B18B9E72CB1ED75C17 /* pushScreen2@2x.png */; };
+		353591B9152B270730676769B8387C5A /* player_slider@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20FFBC594577DA6E1C0648040B1EEC87 /* player_slider@3x.png */; };
 		3626B94094672CB1C9DEA32B9F9502E1 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01C037B4034EDA3D7955BC5E4E9D9D6 /* TaskDelegate.swift */; };
-		36D13C350FA2E5F984D8C4C192AAC459 /* 缩小 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E26349F982C9E9ED2BC2DBA47022BF9A /* 缩小 按下@2x.png */; };
-		39358AD0FF8D522CA8F094EAC8A40735 /* 暂停.png in Resources */ = {isa = PBXBuildFile; fileRef = C3F738C49FEBF566EF1E86DBE32FB5E7 /* 暂停.png */; };
-		396D646D1834088EFC6BF87C6296B30A /* 亮度icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A71C35205B5729A0314F7E4C64C3C5E /* 亮度icon@2x.png */; };
-		3B88E71880E25BFFAC705F86951B090D /* 缩小@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEFCDF58A6777043666A4A58D3462B47 /* 缩小@2x.png */; };
-		3CB502734CDD9A8CF9621B3B51862D7C /* 分享 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CAE1BB8A372FF98BFD1B0E8339C73ED /* 分享 按下@3x.png */; };
-		432D07A8741712A6BC367FA4160F2BEC /* 亮度icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DC825DBEBE55377CC144C75FD3074B5 /* 亮度icon.png */; };
+		36FFAFA4F9BFBD436F43CFF229EC1573 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 817B5F0B6DC2B48633502C412AC2F15D /* Info.plist */; };
+		380F67208007101FBEF3CC3CCE35359A /* 暂停.png in Resources */ = {isa = PBXBuildFile; fileRef = EDBCB940E86C75C20C2492BAFD7806A5 /* 暂停.png */; };
+		3B937B988CB556E463208339CE673D34 /* 左 选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D630FE3D50435F812F0F16A27707E04 /* 左 选中@2x.png */; };
+		3C02ADFF2D0141AC992DD65992F5EB79 /* Player_播放@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8863374649096029F325BE92F98E16D /* Player_播放@2x.png */; };
+		3DC6F2B0CED8BE54B3181E396348248D /* 亮度icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D96E1B005F1A1B85328D4BF912B33625 /* 亮度icon@3x.png */; };
+		3E1F7673583FC06090BCA9B84B7D054E /* 投屏.png in Resources */ = {isa = PBXBuildFile; fileRef = CC9FFFE36FC82107A9557F1331482D18 /* 投屏.png */; };
+		407EE412FA0DA1A8753CE98516878244 /* 返回 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 872777C064A765DEF7CB76061B103496 /* 返回 按下@2x.png */; };
+		418214F610273D310A3A6B565D4C857F /* btn_forward.png in Resources */ = {isa = PBXBuildFile; fileRef = EDEE299E991840F3ECEB60ACB23D62DF /* btn_forward.png */; };
 		445B49A5E498707DA0032E8E9835447B /* SupportComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = F414F40A40062C5EB6A158338FC5DC45 /* SupportComponents.swift */; };
-		47CB889C166ED5B4DA9C4222276FBBF7 /* 缩小 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = F23663F6574D92C629B47066D3E676E2 /* 缩小 按下.png */; };
-		484F5DAD64F423CB1AFF18501AFC5369 /* 投屏 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72147F32D1B7C974EBA66104248049B0 /* 投屏 按下@2x.png */; };
-		4B6783855E959F948C8105D35DD0F8A4 /* 暂停 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 376E833680BF72F25ECE24CE253E982B /* 暂停 按下@2x.png */; };
-		4BCCC989ECE5D09FC6E560C91CB27F2C /* 返回 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A5861ECBBA850DC301F22A814AD7FF1 /* 返回 按下@2x.png */; };
+		499415616961EFEC5B126C51A3F833C3 /* player_slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01562CFF1C463189CC59371070CCD517 /* player_slider@2x.png */; };
 		4DA15F46257DAACBC811358A3CF4B389 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */; };
 		4E041839C43109F369DEA0A111B6FA96 /* JHKVideoPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C795DE12B5D4AFC9362E559A4D2FA7A4 /* JHKVideoPlayer.bundle */; };
 		4E262EB5D32634DB9D4191167FAD3BD1 /* Pods-JHKVideoPlayer_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4346B390E86CA447EF0150817AC5DEA0 /* Pods-JHKVideoPlayer_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5001A0AC2AD64A0C9C6C48311B5E02C4 /* 投屏@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EC187CE52CC09B3799261682A2BD960F /* 投屏@3x.png */; };
+		51AB0FE989D7B516325E0D5822A69CE9 /* 暂停 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FB3F1AF7928C6B61AB5402937ABA189 /* 暂停 按下@2x.png */; };
 		52AC57F0A55B03A05D27D61A03CBF61F /* JHKVideoPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F69D1B784248267EE1477C613B425035 /* JHKVideoPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5387216E723A3C68E851CA15573CDD71 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E230A0448B394DE26E688DAC8E6201E /* Request.swift */; };
-		53D74B59D793EFB6DA29F7003F4CF509 /* Player_下载按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C7844C2B812506A400CEAE7013215FB /* Player_下载按下@2x.png */; };
-		56BCF2E2EC6595C44B64CBD27550D159 /* 音量icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9435019376E9FFCBC55EE2E60EDBD7C0 /* 音量icon.png */; };
-		575AFD5A133AF3195F106797C880B952 /* btn_backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 143B074B6F7D1706BBD1637B0CB19AC8 /* btn_backward.png */; };
-		57C339FF9401902E3DFEA4AF49B9DBBA /* Player_暂停@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0229735384785C3B67103D7C4A045F1 /* Player_暂停@2x.png */; };
-		5CBEA0FEE6B24E456058873F122711D7 /* 解锁.png in Resources */ = {isa = PBXBuildFile; fileRef = 56F5D557DA97F7EC77D5D7B7FC02F438 /* 解锁.png */; };
-		5F2DA97069A0376517A58AC48406EFF7 /* btn_forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 535AF17EB5B625EEE7F38B3282E183B6 /* btn_forward.png */; };
-		60E9A80D2A9ECE1D794D787F81E232FA /* player_pane.png in Resources */ = {isa = PBXBuildFile; fileRef = 1082FF1B86880C0B1BFF20A46C10AF2E /* player_pane.png */; };
+		5646B0B4A6CC1B7F929E062D8967D6A6 /* 播放@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9506F17DA1549E294B0E45DB3FD7E78 /* 播放@2x.png */; };
+		581F7BE03E8238345BD376643925D33C /* 返回Full 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 73F4DE3CCA8791ABD9B382ECB879FCFB /* 返回Full 按下@3x.png */; };
+		59C3F20BAFE10A8E182C6DAD7CD038A7 /* iosFullScreen in Resources */ = {isa = PBXBuildFile; fileRef = 634F3BDAE36A64FC02407BC615C4E3BE /* iosFullScreen */; };
+		5E7AAC0B43C19EF6E6C954D9A3BF150E /* 横屏 已收藏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 901E161721996BFF48A6040253FA4D33 /* 横屏 已收藏@2x.png */; };
 		61200D01A1855D7920CEF835C8BE00B0 /* DispatchQueue+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCBF1EED873F61C6D46CE37FA5C39D3 /* DispatchQueue+Alamofire.swift */; };
 		62F65AD8DC4F0F9610F4B8B4738EC094 /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B030D27CAC730C5EB0F22390645310 /* ServerTrustPolicy.swift */; };
 		632DAC8AB33D7C5108ED2DBF72CDCABD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0533E4EC2277AAAC8888328EC5A64B /* Foundation.framework */; };
-		690C62924863F1DB6DA1CFE33243E0D8 /* 返回.png in Resources */ = {isa = PBXBuildFile; fileRef = 722183574BC569E30B957E4857F2087A /* 返回.png */; };
+		6538E7C1959D42897D8574E93B1B673A /* 右 未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C02235759A54C09177D4213358E8AFDB /* 右 未选中@2x.png */; };
+		6751C0121C9895CA67820D491DAE0C77 /* btn_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE9985910D4790F7FC750B93D62CCE3C /* btn_pause@2x.png */; };
 		69388A079816BD5EB3513C2DCBAB5CB1 /* Pods-JHKVideoPlayer_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 00065358B37FC9A67AB4F10364234039 /* Pods-JHKVideoPlayer_Tests-dummy.m */; };
 		6A2ACD1D3FCEBDC466CDE5D9F8AFD6F5 /* JHKPlayerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2522AA9DC3AA9BEB786DD593C0813432 /* JHKPlayerTransport.swift */; };
-		6C496D8EAF10ABF9CD4BE5971E3EDCAA /* Player_投屏按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 58637272978A9F51F2E2286D98849BE2 /* Player_投屏按下@2x.png */; };
-		6FFBE8D08BEE8F8E748B116BE0396795 /* player_slider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA9308757E6DC936E3AD0291A09DC8C8 /* player_slider@2x.png */; };
-		701711191636828440062516AE3F2856 /* icon_brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B3A99715286AC6BDD76B6695B3A427 /* icon_brightness.png */; };
-		707ADA2263F4D1AB0AB76CB200342754 /* 返回@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A53FFE5711FAC3D429E4F5FC05158E2C /* 返回@2x.png */; };
-		711D2F5CD78BB12791A08588F632B34E /* 分享@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 411A7AF3D2B4ED0784BA7CFEDE51D031 /* 分享@3x.png */; };
+		6A45B20842797629FAC5EE270C919542 /* 暂停 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D55EDD48065307301836D29985C603FD /* 暂停 按下@3x.png */; };
+		6A7E0F4821EA856699DDF96FDBDDB00D /* 暂停@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E17B18BCBC938CA7238511D290D3BEE3 /* 暂停@2x.png */; };
+		6A8F4167CCE5772BF35DFEAF91523B9C /* Player_投屏按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 89532E8E6BFDB95B413954EBAEA253D7 /* Player_投屏按下@2x.png */; };
+		6A982754DFF1E1D25A56A3F0C6AD6CA9 /* 亮度icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 40074401E8BE033B7625F1410AA55BE0 /* 亮度icon.png */; };
+		6CC2D9930886233219FCC6CE46BDFC92 /* 投屏 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 159834C896ECB7872A12759403320F56 /* 投屏 按下.png */; };
+		6E8C3D2CE8C8B8EF5360B3FEC8888921 /* 分享 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5386C305EB9F1BACA1ECA395EF21206D /* 分享 按下@2x.png */; };
+		6FBE4BEDC83EF3F64A7150277B0C203B /* Player_下载@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F9DFE4918302BFCEEF9E567D72E8D8E /* Player_下载@2x.png */; };
+		712638A4A48169648A6E578612ECF307 /* Player_下一集@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269A137825A27D5B495F056CA37DCE61 /* Player_下一集@2x.png */; };
+		718DE76D9D94E2567CAAB83601D65326 /* 投屏@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C9CA0FD5DF7C43FC09472AE495FCC25 /* 投屏@3x.png */; };
+		72A6E751AF60B6B875D1D91A1C68EB65 /* 解锁@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FFEB535C5401E63C6DBEA7F54F325579 /* 解锁@2x.png */; };
 		73B9C996AED49ED7CF8EC2A6F1738059 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0533E4EC2277AAAC8888328EC5A64B /* Foundation.framework */; };
-		78F9F8091B789C00C756133744C53A9F /* Player_下一集@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BF6C1531A443A687D22CC92C978B4651 /* Player_下一集@2x.png */; };
+		7431D27DF6319D5A97355E817E43EF10 /* 分享 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201BE31F13CA82D05CC537A83AD92E9B /* 分享 按下@3x.png */; };
+		748E5788D6177660C25CA735F02F7119 /* icon_brightness.png in Resources */ = {isa = PBXBuildFile; fileRef = E49EF71F99B64D53EA950E64268D35BE /* icon_brightness.png */; };
 		791946E683CE7F6B9B443255B02C88E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0533E4EC2277AAAC8888328EC5A64B /* Foundation.framework */; };
+		7974E8535B806D4D23717635C5B7AD59 /* pushScreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC1C8BC235EE04C9BE29BA0EF165BD07 /* pushScreen@3x.png */; };
 		7B5FE28C7EA4122B0598738E54DBEBD8 /* SessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195D73DD9EF275A3C56569E2B1CA8026 /* SessionDelegate.swift */; };
+		7C4B8D50770129FB71A4199FA7FD0D66 /* 返回 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FEBCDA2BA2A54A988187DC94541F8930 /* 返回 按下@3x.png */; };
+		7D79EF3F61F5958A623AAFB432C616EC /* 全屏@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 001A1B93E66883C8E328A7E75B4A5868 /* 全屏@3x.png */; };
 		7D8CC01E8C9EFFF9F4D65406CDE0AB66 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D60BC9955B4F7FFA62D7440CB385C11 /* Result.swift */; };
-		7EDE867DEBA0891F050C9AA927B73712 /* 解锁@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C9C39F040ACC3025B47622B3C70D8016 /* 解锁@2x.png */; };
-		822918FED8A6EE27502F09342D6F53D9 /* 锁定@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4BE37D509302E78AFF649C02E6403DC5 /* 锁定@2x.png */; };
-		828F96FB59994BFB196EF1C1AE73914B /* 解锁@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BAE6645CF2EB04ADBAC65695431C7A3 /* 解锁@3x.png */; };
-		849EDFFB880EB1A53F6D1ED9D7445E48 /* Player_下载@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 755BD1AC49B52E6EA03C8C1CD6E2B4D0 /* Player_下载@2x.png */; };
-		852EF58962CBDFA72C399E42E053B411 /* Player_分享按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B07C309530CE9B7E12DB5A60D6C414 /* Player_分享按下@2x.png */; };
-		853A1207B321B1228E46A3338F429862 /* Player_投屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64825E4EECEB0A2D4D24F0AB6F741F53 /* Player_投屏@2x.png */; };
-		886B58C205E3E3A7389B0A298B0FAF48 /* 锁定.png in Resources */ = {isa = PBXBuildFile; fileRef = ACF71A70E2CEF30190422437B20CA444 /* 锁定.png */; };
-		8933B9190571C46B82D5757308186FAF /* 播放 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 813574435415C4A009833044EFF214DE /* 播放 按下@3x.png */; };
-		8A62AB812EA0CC57BC1419E3CFD6E87E /* player_volume@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F3BEED6BAF7D2039FF626222DEB34D85 /* player_volume@2x.png */; };
-		8D1B9D1CF9E4E544C48E1AF2BD4BA3A2 /* player_slider@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E59EC01F29DC7698DFC3C29BC3F84C74 /* player_slider@3x.png */; };
-		91DB7A57659DDC6FE364185B9AD408B3 /* 播放.png in Resources */ = {isa = PBXBuildFile; fileRef = B84FA27ACDEC06EB05B7D6EE28A4992C /* 播放.png */; };
-		934D6A6523868D6B92D2AFA116359245 /* Player_返回@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 499DA6DC0D434508C8E2E32FCAE43D00 /* Player_返回@2x.png */; };
-		99D4A8FA382777C3F2E07DB15AFF9A88 /* 分享.png in Resources */ = {isa = PBXBuildFile; fileRef = 2ADFF707F9A854A25C96BCACC883F230 /* 分享.png */; };
-		9A77733C3151E52FE256FE3BADD3A29F /* 全屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D3983E9389269A9B5069490E7342AB3F /* 全屏@2x.png */; };
-		9B80FBE5196752E207D2C184DD32F3D7 /* 返回Full 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C8D9132B33075988F00687EE8D9DE6C /* 返回Full 按下@3x.png */; };
-		9C69934C4DA6C8DCCCEC0CAD447E07D4 /* btn_next.png in Resources */ = {isa = PBXBuildFile; fileRef = 87EF60D514A2BFCC06AE54DAC644ECC5 /* btn_next.png */; };
-		9DB97B363EF5D5AA955868B877F28F9F /* pushScreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 789B99AEF02F8A56D1574A3478C9551D /* pushScreen@3x.png */; };
+		809EDB7847278A6D9F626E1B3DFA9B1C /* 音量icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E2F5E837FCD44189F2FCBE2A3C303A /* 音量icon.png */; };
+		80AD3E7425EDFF674D3159F6EB91D3CA /* btn_backward.png in Resources */ = {isa = PBXBuildFile; fileRef = ED87CB2263E8AEF74B6E9A6C86895F05 /* btn_backward.png */; };
+		833DA7E02B53958212F78B88100E254E /* Player_分享@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB88B74E9D8123CBA53C3E6ED8E221C /* Player_分享@2x.png */; };
+		838E5F997FB5623A240819DAAA1121F0 /* 缩小 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 36CC464685671A86F128207D1FF4B69C /* 缩小 按下.png */; };
+		84189ED69F26881F301CD3A26E8692EE /* btn_previous.png in Resources */ = {isa = PBXBuildFile; fileRef = 758BD61C0FD209928541E68CCA8CE715 /* btn_previous.png */; };
+		859413456D5E35D5C45558DE3134B004 /* 分享.png in Resources */ = {isa = PBXBuildFile; fileRef = 67F5577C3101522DBA3536B84AB785D8 /* 分享.png */; };
+		85B6566B3B837ADAD0AFEE7807BA811B /* 全屏 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3513891FDCA990E5FBFAA4151C3C27 /* 全屏 按下@3x.png */; };
+		85E1E27CF3815AEB6AC4EF5922BB7070 /* btn_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9472A54B9A2FEFA892CA227F7586DD0C /* btn_pause@3x.png */; };
+		897284E58CE7293BE57F16E55CC50D1C /* 暂停 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = B8EC1FDE7DA8E96613E31A4EF7E9A278 /* 暂停 按下.png */; };
+		89D0CD355965F57AB1A18B742F150789 /* pushScreen2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95920068F4FAF3E72D23A00CFBD3774A /* pushScreen2@3x.png */; };
+		8A3B774194A0FCFAC347055D7C7ED077 /* 播放 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D255E452629FE54D067815095102E7A7 /* 播放 按下@2x.png */; };
+		8C3D92312E50502DF7A011F72AC982D5 /* menu_quit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B8A754AAE7A404FC9BA095BCDF200CB /* menu_quit@2x.png */; };
+		8E340F6B220111A531ED96567C119531 /* 亮度icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 111AFBB5D408134575C08B558DC24F10 /* 亮度icon@2x.png */; };
+		8FCDA20F343AEFF772A36639390AD740 /* 返回Full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE348DE0D48F44D0C104C1227583255F /* 返回Full@2x.png */; };
+		92D98073B3452FEFB6C354A46DD98A92 /* Player_分享按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D5729A42266193A3698FA9A440D1D5 /* Player_分享按下@2x.png */; };
+		946FF66BB181E3CAB2A3249E6CD71C6C /* 返回Full.png in Resources */ = {isa = PBXBuildFile; fileRef = BDF32315902D3A47A96ED2F05577869B /* 返回Full.png */; };
+		99D684C6E8428C4C6569BB567487FDAC /* pushScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D54A5183DADB5E7F9E6A02AF19A55ED /* pushScreen.png */; };
 		9ED2BB2981896E0A39EFA365503F58CE /* AFError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF006B0AD5765D1BFA8253C2DCBB126 /* AFError.swift */; };
-		9F71F98F1A8CD4C7C3BB40BFDA6A0FF9 /* 返回Full 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91A0424FE66CF95F4A4F5C4BC9EB9488 /* 返回Full 按下@2x.png */; };
 		A06BA49B69B84AA1D60842382D41B4F7 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4801DB15CAA8BA279CCD71D2D2C59 /* Extension+String.swift */; };
-		A088346AAFBD9660CC1566F405309AB2 /* Player_分享@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80714D94C8BC17DB1CB9A412E7C642A7 /* Player_分享@2x.png */; };
+		A1149AE5CE33A6CB107B9F0926519BAA /* 全屏 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 761D194C213F3734A2D1B87C90E5A45B /* 全屏 按下@2x.png */; };
+		A1BB242AEE8A8A8579E56A87222211F5 /* 缩小 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C61D203C98184718BC1A5338FC6FEBFB /* 缩小 按下@3x.png */; };
+		A23DF2303D6320D8AD9A512D0C529B00 /* 缩小@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F9B0E06A7DBA565D259F832F0818B2 /* 缩小@2x.png */; };
 		A2A6F71B727312BD45CC7A4AAD7B0AB7 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A8AA5F9EDED0A0BDDE7E830BF4AEE0 /* NetworkReachabilityManager.swift */; };
-		A43536FEA0B762C9F5CD2D20EF67A84E /* 投屏 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C8699ED86904D9EB3512A1BB53E654A /* 投屏 按下.png */; };
-		A7BFDF56C35A12771A6644EDC68ADFAA /* 全屏 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 580DC7922FD26C3556D841CE285E0497 /* 全屏 按下@3x.png */; };
-		A9C2723E9E3D83A80C435D0E92C3F160 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D5AD70190D312DF5EADA7B6E9033738 /* Info.plist */; };
+		A31EC2C809F8DFC90ABC3C34BAADD752 /* 横屏 收藏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65C83226BFB31D9E32A8204562FFB060 /* 横屏 收藏@2x.png */; };
+		A5935F3600D9E2D5085AF2117482879A /* 左 未选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F145E548A7042E7994367C55043565CA /* 左 未选中@2x.png */; };
+		A70BAA932E861CE1EE98C0216CACCFD6 /* 锁定.png in Resources */ = {isa = PBXBuildFile; fileRef = ED7F29260D08CA5AE7B04502892D766C /* 锁定.png */; };
+		A93AC2EAB328324E14A8E9868D9F804A /* Player_全屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A7C83DE981CE5F17BB873AD1E7113E7 /* Player_全屏@2x.png */; };
 		A9EEEA7477981DEEBC72432DE9990A4B /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C1C119BCE81C53F76CAC2BE27C38E0 /* Alamofire-dummy.m */; };
-		AE017EA4E08A8706BC8D7793187FF093 /* Player_锁屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1F503A99CEA03A2BA76B431060FBC3D /* Player_锁屏@2x.png */; };
 		AE1EF48399533730D0066E04B22CA2D6 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CDAC6C1187C5467E576980E1062C8B /* SessionManager.swift */; };
-		AFB6252DF655023DD677F2CB2F939AFF /* 音量icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = ACAE92B99F88C31A59B9B29DD3521B0E /* 音量icon@3x.png */; };
-		B1FB373F0E43E97B1BF7259ED4F05697 /* 暂停 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3DE85E07F49D7BFDBCA9ABA294F36D6B /* 暂停 按下@3x.png */; };
-		B26D8DCC37A60DA1E10165ACDA16509A /* 全屏 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6A2828C17F4B320697C57D3774BA52A /* 全屏 按下@2x.png */; };
-		B2FEB3956C0AA3D8192DE911D00DC824 /* 全屏@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A7BB985FECD5D72CB085CAC216D5C4D9 /* 全屏@3x.png */; };
+		AFE5D8ADC8349E013692EC6B36A0BEB5 /* pushScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 65DA172C21EC111683D4129ABDA91C39 /* pushScreen@2x.png */; };
+		B1453F3517B355FF2BD535FC6FDA0DBB /* player_pane.png in Resources */ = {isa = PBXBuildFile; fileRef = 401364FA8D2CB525E45DC1E5F04638C1 /* player_pane.png */; };
 		B4F7A80ADE74640201B7C6DE8D6D0E69 /* Pods-JHKVideoPlayer_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F35A1F7742659E9D2C3FFED743C85 /* Pods-JHKVideoPlayer_Example-dummy.m */; };
-		B5689FDBE0D06F816E9BE755D619C592 /* 返回@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 151FAB47A73F07C884602F1E11FB6068 /* 返回@3x.png */; };
+		B5151B07547DCE052A438E45AE3A69EB /* 锁定@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA4624A791E899135FDFE67D9AD61D1 /* 锁定@2x.png */; };
 		B65FCF589DA398C3EFE0128064E510EC /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 155538D91ACEEEDF82069ACF6C1A02E7 /* MultipartFormData.swift */; };
+		B6B58A0B7B3CB8BA05DA1C09408B0679 /* Player_返回@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E73CF8BD7E5ECC3A37606134D01EA4B2 /* Player_返回@2x.png */; };
+		B9FE372220ABAF2043FEB91D83CD2093 /* 播放.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4B7B762D08BF7E539FB578CE4D11B3 /* 播放.png */; };
+		BA2FF92C8B058BF613B6F14B09A08069 /* 解锁.png in Resources */ = {isa = PBXBuildFile; fileRef = C4A6176D6023AE95AB048A1D822CE40B /* 解锁.png */; };
 		BBEFE2F9CEB73DC7BD97FFA66A0D9D4F /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */; };
 		BE5C67A07E289FE1F9BE27335B159997 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6639346628280A0D0FAD35196BF56108 /* ParameterEncoding.swift */; };
-		BE7EF8C24067D26A400751A8C06FEC87 /* 暂停@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8488D447CF882BD6E51FBD89762C8F7 /* 暂停@2x.png */; };
-		C0E2C1E583B22264E71A2DEEABFDF383 /* 播放@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D769006214A75C8FC486CDF4DAF5A2 /* 播放@3x.png */; };
-		C2DB11CAA6253E82CECB699116171BD7 /* 缩小@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8D9EFBDAC528910F118B66F66C97BF88 /* 缩小@3x.png */; };
+		C091E04BB52C96CE4C5C50E0C1D7BA9A /* 右 选中@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E88AA0CFA6DB1DBFEFDA631D29F9D211 /* 右 选中@2x.png */; };
 		C6C1C570F5B7CC658892AFE26A631840 /* JHKVideoPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2337BC1BC553631AEEF3B1D6F73DB157 /* JHKVideoPlayer-dummy.m */; };
-		C82C17E14724AE1DF6BA9A1119F3CBBB /* 返回Full 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BBB445DBFD757352F6A87BB30F40187 /* 返回Full 按下.png */; };
-		C8963A0DE3AB6424DB925BA1BEFD5A42 /* 播放 按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60090928D52B5AF200202136064E795F /* 播放 按下@2x.png */; };
+		CA46B8F0CA3FCB234B3E899D6776DB0B /* player_volume@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA4D4E23966595525B2BFC920207A3FB /* player_volume@2x.png */; };
+		CA5CF2629440857AEBC628561A81BCCA /* 缩小@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A78D6A8AE72ECB024E82DF9DD54EECFF /* 缩小@3x.png */; };
+		CACC9F351E540688AF921D046A4573C6 /* Player_暂停@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 037D18CDEB0B2FC5DCB719139B7990B3 /* Player_暂停@2x.png */; };
 		CB6D60925223897FFA2662667DF83E8A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F47F5C9CDB035C5AFADEBA5BF44F1C /* Response.swift */; };
-		CB8AE0C4A11291316EDDCCFEE4BA7182 /* menu_quit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D092FF61D854623F209F6418EAD763C9 /* menu_quit@2x.png */; };
+		CB8032945C0977C2D40B16EC7A79E8D3 /* 播放@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EB45CDAFDD7B0198E4FEF4CB2F97F2C /* 播放@3x.png */; };
+		CCA2CCE30D7BD936C8ADF2EC9F8DE1A1 /* 分享@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CA81EEA3307405B97AB59A211EB4AE /* 分享@3x.png */; };
 		CDAD6F0A2BE56CA9EC4B832B5970B434 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B64E22DDB95B5C89DB5ACCA5B64DC79 /* Extension+UIView.swift */; };
-		CED31FE521781B71798159C4005C2407 /* btn_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7DB75D25C984B8EDCC5C531E00CC0683 /* btn_pause@3x.png */; };
-		D12B2E3B98312842AB740E8A7F5BB6DC /* 全屏 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = D4C1B908A1B0545F63805137ACAF18C6 /* 全屏 按下.png */; };
+		D0C8727F15FC663AF3E48FC5BE8C7FCF /* 缩小.png in Resources */ = {isa = PBXBuildFile; fileRef = 92FAFDB8000D38FDE173A62CD52604FE /* 缩小.png */; };
 		D3330FF61B32BEFC18B88A43F86623D2 /* Extension+UIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CE53B657508A1EE2E0A34018F77CDE /* Extension+UIBarButtonItem.swift */; };
-		D6D371CD695572FACB53E2E1ACE3A991 /* 分享 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = AED2FF0315E7B8F2B5238092733C29E3 /* 分享 按下.png */; };
-		D9A39CE2F3697040DF481A8EFBEA12E9 /* 返回Full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0C6DC3D4EA3A9B759E14D51C4FC697 /* 返回Full@2x.png */; };
-		DDA116DDF9D7FEEA4D672462B6C6439E /* icon_sound.png in Resources */ = {isa = PBXBuildFile; fileRef = 58F91061C3F2665EBDEAAAB86CF54272 /* icon_sound.png */; };
-		DF0D47934A09D7B5F9998B211F37F9F2 /* player_volume@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 247F4649E6D1E956CD0AA1FBD77EC2A4 /* player_volume@3x.png */; };
-		DF4CFB40058E942063635B7C551A491C /* 播放 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = A8BD622A9A285F72B9E303DEA2BDA174 /* 播放 按下.png */; };
-		E2666D7532CE382794CA600369A6F078 /* pushScreen2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3481095BCEF5B14B798235A31D81DF28 /* pushScreen2@2x.png */; };
-		E5689B76BB11184D50DF49C821797E7D /* pushScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C6D1F6142E0999551837AF672D44F3 /* pushScreen@2x.png */; };
-		E67D21A1DF9B95AB85CCD90F2C723C5F /* 返回 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 730876DD2E32922EE82B79B3E8A0D3E2 /* 返回 按下.png */; };
-		E7112B2C59F14EFBC3E4252E4F63692D /* 返回Full.png in Resources */ = {isa = PBXBuildFile; fileRef = 218CE121E1646B3987E0EB6A159028FF /* 返回Full.png */; };
-		E97FC9236FC9996EE1FBA1546BD7AE8F /* 缩小 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE54DD5E2CD9DAE78BE64DC301415DB4 /* 缩小 按下@3x.png */; };
+		D545F6302800914785144E64BA920C4D /* 返回 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C74390C9CDE6BA53C9BF40D57E3868B /* 返回 按下.png */; };
+		D6DEBEE771B969D4C7D8621AD4CA9D16 /* 分享@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF173E94FFB5DEC6C51FDF5D5FCBC7F /* 分享@2x.png */; };
+		D751ACB6CCE52BB1BD0282718B525B96 /* 解锁@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47CA539BB96964EF4C3F563F650ABC6 /* 解锁@3x.png */; };
+		D875FA5637F7FD351103F98B43AF98E9 /* 返回Full@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE075FED3540818C7D0E656CFC8B5C0E /* 返回Full@3x.png */; };
+		DB6AC044DF77C427170472DA30079B04 /* 音量icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DBF7B68971709DBF75753CCC3BFA3F7 /* 音量icon@2x.png */; };
+		E022561A7C03169FB6CD240D197965A0 /* 返回@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F75F57C8C2D521DE0F70C3CF9DD71FD /* 返回@3x.png */; };
 		EA7235E9FC6202813968098F546229B1 /* JHKPlayerFlowAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D11A11F232E3C973D447E2B1602A3881 /* JHKPlayerFlowAlert.swift */; };
+		EB26AEE57D41B4D2D8FFDD322E01C59A /* Player_返回按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ED2F0256070569BFD6094BD137D6E640 /* Player_返回按下@2x.png */; };
 		EB28A621106EAB950E467392A0CEB23B /* FormatConverting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E39D82AEF5238F14A062AD60B4B2D6 /* FormatConverting.swift */; };
+		ECF391D3F6E4212652822ADD1D3E110D /* Player_下载按下@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E682CA63A0E1E65B3C9F2F727FAA37EF /* Player_下载按下@2x.png */; };
 		EE0E2788FE1FB4F14F4BA84231074075 /* JHKVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2FDED640B4325C8D9E7466F414436F /* JHKVideoPlayer.swift */; };
 		EFD264FC408EBF3BA2528E70B08DDD94 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66A46F517F0AF7E85A16D723F6406896 /* Notifications.swift */; };
-		F2035F45239289ABAA575ED31AE55780 /* 缩小.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E6AAED07875E74FD98DBB4BC39BFBB /* 缩小.png */; };
-		F34477B9CC5C803089411BAF636FD570 /* iosHalfScreen in Resources */ = {isa = PBXBuildFile; fileRef = FECD2220C63776B681844FAAD666080E /* iosHalfScreen */; };
+		F06A5D14786A0806B15BF2EAA81EA47B /* 播放 按下.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FFF79E8816F5F8F086692E5B88438E4 /* 播放 按下.png */; };
+		F37C5E034447344CFF1913B4A69FA916 /* pushScreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = E5929DC366D255E1F6B98FC11AE1B1E3 /* pushScreen2.png */; };
+		F3974732241CC867CFF4809370350B31 /* iosHalfScreen in Resources */ = {isa = PBXBuildFile; fileRef = 0AC98F5B993FD6FF127498D048E34234 /* iosHalfScreen */; };
+		F40575DA1D6C332F6B99D2FE210DE714 /* 返回@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6B1F9942860C1E285B9A4B4C6E62BB87 /* 返回@2x.png */; };
 		F6BECD98B97CBFEBE2C96F0E9E72A6C0 /* ResponseSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F9510473F6FFD7AA66524DB16C2263 /* ResponseSerialization.swift */; };
-		F6EB98E0AD29AB3A539D0BF6E4B0FDF0 /* Player_播放@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B986F83B2757FFABA939901538C9C44 /* Player_播放@2x.png */; };
+		F6D7211D39D42551C31672EA532619EE /* 返回.png in Resources */ = {isa = PBXBuildFile; fileRef = 337EE46C4E834C08D9A487FF9958BFD3 /* 返回.png */; };
 		F8B3D3092ED0417E8CDF32033F6122F5 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCB8C44DE758E906C0BCDA455937B85 /* Alamofire.swift */; };
-		F9968197799865FE8C358A81BE46BA00 /* pushScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B943AFD7C54C018C9BEA25D365DDDA4 /* pushScreen.png */; };
-		FC5BF7E5DABD7894209CB1A22B675D31 /* 锁定@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2C3829BDC30825385E96CA1E5A0BBA4 /* 锁定@3x.png */; };
-		FC60B9B85B32DA468C9163C59A94C659 /* Player_全屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BE98BBE412CE3185DA13A3CBED6C7C7 /* Player_全屏@2x.png */; };
-		FD857AD859D90ED3500324BC8642FA40 /* Player_解锁@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46CF5F4C53720F438FDD182E69D271D6 /* Player_解锁@2x.png */; };
+		F994EE3B8F1A7505DAB62ADD55004324 /* 播放 按下@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F21411824EC63684E7580A86D9B25525 /* 播放 按下@3x.png */; };
+		FA99D27B8F08810A994971F3E1D6442A /* btn_next.png in Resources */ = {isa = PBXBuildFile; fileRef = 63B51B5E36CE71C05E1EC55BD9523214 /* btn_next.png */; };
+		FBF80705670316A7791564577045D4AB /* 投屏@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E98151ECF129F3CA8E39652E337E6D5 /* 投屏@2x.png */; };
 		FE9874E59151C0B28E7F3C63D99C26B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0533E4EC2277AAAC8888328EC5A64B /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -193,177 +187,177 @@
 
 /* Begin PBXFileReference section */
 		00065358B37FC9A67AB4F10364234039 /* Pods-JHKVideoPlayer_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JHKVideoPlayer_Tests-dummy.m"; sourceTree = "<group>"; };
+		001A1B93E66883C8E328A7E75B4A5868 /* 全屏@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏@3x.png"; sourceTree = "<group>"; };
+		003A18C453F9BEF02F4690D6AC4E1A2E /* 全屏.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏.png"; sourceTree = "<group>"; };
+		01562CFF1C463189CC59371070CCD517 /* player_slider@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_slider@2x.png"; path = "JHKVideoPlayer/Assets/player_slider@2x.png"; sourceTree = "<group>"; };
+		037D18CDEB0B2FC5DCB719139B7990B3 /* Player_暂停@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_暂停@2x.png"; sourceTree = "<group>"; };
 		04F47F5C9CDB035C5AFADEBA5BF44F1C /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
-		09E6AAED07875E74FD98DBB4BC39BFBB /* 缩小.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小.png"; sourceTree = "<group>"; };
-		0B943AFD7C54C018C9BEA25D365DDDA4 /* pushScreen.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = pushScreen.png; sourceTree = "<group>"; };
-		0BE98BBE412CE3185DA13A3CBED6C7C7 /* Player_全屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_全屏@2x.png"; sourceTree = "<group>"; };
+		0A7C83DE981CE5F17BB873AD1E7113E7 /* Player_全屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_全屏@2x.png"; sourceTree = "<group>"; };
+		0AC98F5B993FD6FF127498D048E34234 /* iosHalfScreen */ = {isa = PBXFileReference; includeInIndex = 1; name = iosHalfScreen; path = JHKVideoPlayer/Assets/iosHalfScreen; sourceTree = "<group>"; };
+		0C32D290906E4D963033EC05A25A194B /* Player_解锁@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_解锁@2x.png"; sourceTree = "<group>"; };
+		0C74390C9CDE6BA53C9BF40D57E3868B /* 返回 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回 按下.png"; sourceTree = "<group>"; };
 		0D0533E4EC2277AAAC8888328EC5A64B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		0FCBF1EED873F61C6D46CE37FA5C39D3 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
-		1082FF1B86880C0B1BFF20A46C10AF2E /* player_pane.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = player_pane.png; path = JHKVideoPlayer/Assets/player_pane.png; sourceTree = "<group>"; };
+		0FFF79E8816F5F8F086692E5B88438E4 /* 播放 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放 按下.png"; sourceTree = "<group>"; };
+		111AFBB5D408134575C08B558DC24F10 /* 亮度icon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "亮度icon@2x.png"; sourceTree = "<group>"; };
 		13A0A663B36A229C69D5274A83E93F88 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		143B074B6F7D1706BBD1637B0CB19AC8 /* btn_backward.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_backward.png; path = JHKVideoPlayer/Assets/btn_backward.png; sourceTree = "<group>"; };
 		14E39D82AEF5238F14A062AD60B4B2D6 /* FormatConverting.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FormatConverting.swift; sourceTree = "<group>"; };
-		151FAB47A73F07C884602F1E11FB6068 /* 返回@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回@3x.png"; sourceTree = "<group>"; };
 		155538D91ACEEEDF82069ACF6C1A02E7 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
-		16C6D1F6142E0999551837AF672D44F3 /* pushScreen@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "pushScreen@2x.png"; sourceTree = "<group>"; };
-		17BA47BAA6666ECEC16CDC338200BE22 /* Player_返回按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_返回按下@2x.png"; sourceTree = "<group>"; };
+		159834C896ECB7872A12759403320F56 /* 投屏 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏 按下.png"; sourceTree = "<group>"; };
 		195D73DD9EF275A3C56569E2B1CA8026 /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
-		1C8D9132B33075988F00687EE8D9DE6C /* 返回Full 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full 按下@3x.png"; sourceTree = "<group>"; };
-		1D8DBAEA2140F303003DFA19 /* 横屏 收藏@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "横屏 收藏@2x.png"; sourceTree = "<group>"; };
-		1D8DBAEC2140F318003DFA19 /* 横屏 已收藏@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "横屏 已收藏@2x.png"; sourceTree = "<group>"; };
-		1D8DBAF021411070003DFA19 /* 左 选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "左 选中@2x.png"; sourceTree = "<group>"; };
-		1D8DBAF121411070003DFA19 /* 右 未选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右 未选中@2x.png"; sourceTree = "<group>"; };
-		1D8DBAF221411070003DFA19 /* 左 未选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "左 未选中@2x.png"; sourceTree = "<group>"; };
-		1D8DBAF321411071003DFA19 /* 右 选中@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "右 选中@2x.png"; sourceTree = "<group>"; };
 		1E230A0448B394DE26E688DAC8E6201E /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
-		218CE121E1646B3987E0EB6A159028FF /* 返回Full.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full.png"; sourceTree = "<group>"; };
+		201BE31F13CA82D05CC537A83AD92E9B /* 分享 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享 按下@3x.png"; sourceTree = "<group>"; };
+		20FFBC594577DA6E1C0648040B1EEC87 /* player_slider@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_slider@3x.png"; path = "JHKVideoPlayer/Assets/player_slider@3x.png"; sourceTree = "<group>"; };
 		22C1C119BCE81C53F76CAC2BE27C38E0 /* Alamofire-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Alamofire-dummy.m"; sourceTree = "<group>"; };
 		2337BC1BC553631AEEF3B1D6F73DB157 /* JHKVideoPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JHKVideoPlayer-dummy.m"; sourceTree = "<group>"; };
-		23C2B6BFCC9FBDE0D7590F29B0E6C84E /* 音量icon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "音量icon@2x.png"; sourceTree = "<group>"; };
-		247F4649E6D1E956CD0AA1FBD77EC2A4 /* player_volume@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_volume@3x.png"; path = "JHKVideoPlayer/Assets/player_volume@3x.png"; sourceTree = "<group>"; };
 		2522AA9DC3AA9BEB786DD593C0813432 /* JHKPlayerTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JHKPlayerTransport.swift; path = JHKVideoPlayer/Classes/JHKPlayerTransport.swift; sourceTree = "<group>"; };
-		25387479F5E707E458949E470ABF2939 /* pushScreen2.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = pushScreen2.png; path = JHKVideoPlayer/Assets/pushScreen2.png; sourceTree = "<group>"; };
-		2A38B4463130391D71E0C60A8FBE57B0 /* JHKVideoPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JHKVideoPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2ADFF707F9A854A25C96BCACC883F230 /* 分享.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享.png"; sourceTree = "<group>"; };
+		252DB23D938AAC42758255823DB5DE75 /* 投屏 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏 按下@3x.png"; sourceTree = "<group>"; };
+		269A137825A27D5B495F056CA37DCE61 /* Player_下一集@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_下一集@2x.png"; sourceTree = "<group>"; };
+		2A38B4463130391D71E0C60A8FBE57B0 /* JHKVideoPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JHKVideoPlayer.framework; path = JHKVideoPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C7AF8306587A0EB18D9527AD438F4F7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2CE38E26B2D44BAE5C61A9F11255AE82 /* 投屏 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏 按下@3x.png"; sourceTree = "<group>"; };
+		2F9DFE4918302BFCEEF9E567D72E8D8E /* Player_下载@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_下载@2x.png"; sourceTree = "<group>"; };
 		32B030D27CAC730C5EB0F22390645310 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
-		32FE94B23CA3B00D78E8D0B957E39A8C /* 投屏.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏.png"; sourceTree = "<group>"; };
-		3481095BCEF5B14B798235A31D81DF28 /* pushScreen2@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "pushScreen2@2x.png"; path = "JHKVideoPlayer/Assets/pushScreen2@2x.png"; sourceTree = "<group>"; };
-		376E833680BF72F25ECE24CE253E982B /* 暂停 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停 按下@2x.png"; sourceTree = "<group>"; };
+		337EE46C4E834C08D9A487FF9958BFD3 /* 返回.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回.png"; sourceTree = "<group>"; };
+		34CA81EEA3307405B97AB59A211EB4AE /* 分享@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享@3x.png"; sourceTree = "<group>"; };
+		36CC464685671A86F128207D1FF4B69C /* 缩小 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小 按下.png"; sourceTree = "<group>"; };
+		36E2F5E837FCD44189F2FCBE2A3C303A /* 音量icon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "音量icon.png"; sourceTree = "<group>"; };
+		36F9B0E06A7DBA565D259F832F0818B2 /* 缩小@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小@2x.png"; sourceTree = "<group>"; };
+		3A3513891FDCA990E5FBFAA4151C3C27 /* 全屏 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏 按下@3x.png"; sourceTree = "<group>"; };
+		3A50066E9A34BB9C1D6F887B3C69A856 /* 投屏 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏 按下@2x.png"; sourceTree = "<group>"; };
 		3AA1698AC831E1BDB4FBA7D57D00550E /* Pods-JHKVideoPlayer_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		3AB88B74E9D8123CBA53C3E6ED8E221C /* Player_分享@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_分享@2x.png"; sourceTree = "<group>"; };
 		3B2FDED640B4325C8D9E7466F414436F /* JHKVideoPlayer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JHKVideoPlayer.swift; path = JHKVideoPlayer/Classes/JHKVideoPlayer.swift; sourceTree = "<group>"; };
-		3D5AD70190D312DF5EADA7B6E9033738 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = JHKVideoPlayer/Assets/Info.plist; sourceTree = "<group>"; };
 		3D60BC9955B4F7FFA62D7440CB385C11 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
-		3DE85E07F49D7BFDBCA9ABA294F36D6B /* 暂停 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停 按下@3x.png"; sourceTree = "<group>"; };
+		3E1C0DE039F746B18B9E72CB1ED75C17 /* pushScreen2@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "pushScreen2@2x.png"; path = "JHKVideoPlayer/Assets/pushScreen2@2x.png"; sourceTree = "<group>"; };
+		3EB45CDAFDD7B0198E4FEF4CB2F97F2C /* 播放@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放@3x.png"; sourceTree = "<group>"; };
+		3FF173E94FFB5DEC6C51FDF5D5FCBC7F /* 分享@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享@2x.png"; sourceTree = "<group>"; };
+		40074401E8BE033B7625F1410AA55BE0 /* 亮度icon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "亮度icon.png"; sourceTree = "<group>"; };
+		401364FA8D2CB525E45DC1E5F04638C1 /* player_pane.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = player_pane.png; path = JHKVideoPlayer/Assets/player_pane.png; sourceTree = "<group>"; };
 		40D53ABEC025999B2901FE120E5F2C60 /* Pods-JHKVideoPlayer_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		411A7AF3D2B4ED0784BA7CFEDE51D031 /* 分享@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享@3x.png"; sourceTree = "<group>"; };
-		414C203E97F52B60A1ADC76A64732ABC /* Pods-JHKVideoPlayer_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-JHKVideoPlayer_Tests.modulemap"; sourceTree = "<group>"; };
+		414C203E97F52B60A1ADC76A64732ABC /* Pods-JHKVideoPlayer_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-JHKVideoPlayer_Tests.modulemap"; sourceTree = "<group>"; };
 		4346B390E86CA447EF0150817AC5DEA0 /* Pods-JHKVideoPlayer_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JHKVideoPlayer_Example-umbrella.h"; sourceTree = "<group>"; };
 		46CDAC6C1187C5467E576980E1062C8B /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
-		46CF5F4C53720F438FDD182E69D271D6 /* Player_解锁@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_解锁@2x.png"; sourceTree = "<group>"; };
 		48E4801DB15CAA8BA279CCD71D2D2C59 /* Extension+String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
-		499DA6DC0D434508C8E2E32FCAE43D00 /* Player_返回@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_返回@2x.png"; sourceTree = "<group>"; };
+		4A3B87CE40B23DBE9155DAAD48A30630 /* 缩小 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小 按下@2x.png"; sourceTree = "<group>"; };
 		4AF006B0AD5765D1BFA8253C2DCBB126 /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
-		4BE37D509302E78AFF649C02E6403DC5 /* 锁定@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "锁定@2x.png"; sourceTree = "<group>"; };
-		4C4D654DF2AE4F3F08AD3D6E72480E99 /* 播放@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放@2x.png"; sourceTree = "<group>"; };
-		4C8699ED86904D9EB3512A1BB53E654A /* 投屏 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏 按下.png"; sourceTree = "<group>"; };
-		535AF17EB5B625EEE7F38B3282E183B6 /* btn_forward.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_forward.png; path = JHKVideoPlayer/Assets/btn_forward.png; sourceTree = "<group>"; };
-		56F5D557DA97F7EC77D5D7B7FC02F438 /* 解锁.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "解锁.png"; sourceTree = "<group>"; };
-		580DC7922FD26C3556D841CE285E0497 /* 全屏 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏 按下@3x.png"; sourceTree = "<group>"; };
-		58637272978A9F51F2E2286D98849BE2 /* Player_投屏按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_投屏按下@2x.png"; sourceTree = "<group>"; };
-		589EE8D64FEEE35B38D19EFA7CEF9FF0 /* 暂停 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停 按下.png"; sourceTree = "<group>"; };
-		58F91061C3F2665EBDEAAAB86CF54272 /* icon_sound.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = icon_sound.png; path = JHKVideoPlayer/Assets/icon_sound.png; sourceTree = "<group>"; };
-		5A5861ECBBA850DC301F22A814AD7FF1 /* 返回 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回 按下@2x.png"; sourceTree = "<group>"; };
-		5BAE6645CF2EB04ADBAC65695431C7A3 /* 解锁@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "解锁@3x.png"; sourceTree = "<group>"; };
+		4C9CA0FD5DF7C43FC09472AE495FCC25 /* 投屏@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏@3x.png"; sourceTree = "<group>"; };
+		5386C305EB9F1BACA1ECA395EF21206D /* 分享 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享 按下@2x.png"; sourceTree = "<group>"; };
+		58EA8D8A1578916A5298D3E764E98A57 /* Player_投屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_投屏@2x.png"; sourceTree = "<group>"; };
+		5D54A5183DADB5E7F9E6A02AF19A55ED /* pushScreen.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = pushScreen.png; sourceTree = "<group>"; };
 		5F2BE4691479758C2184A355759F95B7 /* ResourceBundle-JHKVideoPlayer-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-JHKVideoPlayer-Info.plist"; sourceTree = "<group>"; };
-		60090928D52B5AF200202136064E795F /* 播放 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放 按下@2x.png"; sourceTree = "<group>"; };
-		64825E4EECEB0A2D4D24F0AB6F741F53 /* Player_投屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_投屏@2x.png"; sourceTree = "<group>"; };
+		6083F3F2F0846B9602BD36D85983B558 /* Player_锁屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_锁屏@2x.png"; sourceTree = "<group>"; };
+		60D5729A42266193A3698FA9A440D1D5 /* Player_分享按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_分享按下@2x.png"; sourceTree = "<group>"; };
+		6211342BB39D7D267C7039A5E6C031E2 /* icon_sound.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = icon_sound.png; path = JHKVideoPlayer/Assets/icon_sound.png; sourceTree = "<group>"; };
+		634F3BDAE36A64FC02407BC615C4E3BE /* iosFullScreen */ = {isa = PBXFileReference; includeInIndex = 1; name = iosFullScreen; path = JHKVideoPlayer/Assets/iosFullScreen; sourceTree = "<group>"; };
+		63B51B5E36CE71C05E1EC55BD9523214 /* btn_next.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_next.png; path = JHKVideoPlayer/Assets/btn_next.png; sourceTree = "<group>"; };
 		65BB6BA25FFD7CA83065F83547DC57AB /* Pods-JHKVideoPlayer_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JHKVideoPlayer_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		65C83226BFB31D9E32A8204562FFB060 /* 横屏 收藏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "横屏 收藏@2x.png"; sourceTree = "<group>"; };
+		65DA172C21EC111683D4129ABDA91C39 /* pushScreen@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "pushScreen@2x.png"; sourceTree = "<group>"; };
 		65EFD8EAEC1CCC307C1817BC7407F6B2 /* Pods-JHKVideoPlayer_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JHKVideoPlayer_Tests-resources.sh"; sourceTree = "<group>"; };
 		6639346628280A0D0FAD35196BF56108 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		66A46F517F0AF7E85A16D723F6406896 /* Notifications.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Source/Notifications.swift; sourceTree = "<group>"; };
+		66ED02904BDB6793C362E931A9D224D2 /* 音量icon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "音量icon@3x.png"; sourceTree = "<group>"; };
+		67F5577C3101522DBA3536B84AB785D8 /* 分享.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享.png"; sourceTree = "<group>"; };
 		68F69A5F9A6A816EBC11AA930071EF47 /* Pods-JHKVideoPlayer_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JHKVideoPlayer_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		69F7D178E11F3DED8EBB50CA2A742152 /* Player_全屏按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_全屏按下@2x.png"; sourceTree = "<group>"; };
-		6B9B14233741E2F0098C8C5B214D1997 /* iosFullScreen */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = iosFullScreen; path = JHKVideoPlayer/Assets/iosFullScreen; sourceTree = "<group>"; };
-		6CA1ECFE83297C8615A215B0C7F5BA1F /* menu_quit@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "menu_quit@3x.png"; path = "JHKVideoPlayer/Assets/menu_quit@3x.png"; sourceTree = "<group>"; };
+		6B1F9942860C1E285B9A4B4C6E62BB87 /* 返回@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回@2x.png"; sourceTree = "<group>"; };
+		6B8A754AAE7A404FC9BA095BCDF200CB /* menu_quit@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "menu_quit@2x.png"; path = "JHKVideoPlayer/Assets/menu_quit@2x.png"; sourceTree = "<group>"; };
+		6CA4624A791E899135FDFE67D9AD61D1 /* 锁定@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "锁定@2x.png"; sourceTree = "<group>"; };
+		6DBF7B68971709DBF75753CCC3BFA3F7 /* 音量icon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "音量icon@2x.png"; sourceTree = "<group>"; };
 		6F6FDF1DE9190D7ECCF58165D887B4EA /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FB3F1AF7928C6B61AB5402937ABA189 /* 暂停 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停 按下@2x.png"; sourceTree = "<group>"; };
 		706C7AFFE37BA158C3553250F4B5FAED /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		72147F32D1B7C974EBA66104248049B0 /* 投屏 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏 按下@2x.png"; sourceTree = "<group>"; };
-		722183574BC569E30B957E4857F2087A /* 返回.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回.png"; sourceTree = "<group>"; };
-		725B273D48FCB3FD8E2009515239F4CF /* JHKVideoPlayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = JHKVideoPlayer.modulemap; sourceTree = "<group>"; };
-		730876DD2E32922EE82B79B3E8A0D3E2 /* 返回 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回 按下.png"; sourceTree = "<group>"; };
-		755BD1AC49B52E6EA03C8C1CD6E2B4D0 /* Player_下载@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_下载@2x.png"; sourceTree = "<group>"; };
+		725B273D48FCB3FD8E2009515239F4CF /* JHKVideoPlayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = JHKVideoPlayer.modulemap; sourceTree = "<group>"; };
+		73F4DE3CCA8791ABD9B382ECB879FCFB /* 返回Full 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full 按下@3x.png"; sourceTree = "<group>"; };
+		758BD61C0FD209928541E68CCA8CE715 /* btn_previous.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_previous.png; path = JHKVideoPlayer/Assets/btn_previous.png; sourceTree = "<group>"; };
+		761D194C213F3734A2D1B87C90E5A45B /* 全屏 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏 按下@2x.png"; sourceTree = "<group>"; };
 		772D62601C47E4FFC709C1A6BF995819 /* Pods-JHKVideoPlayer_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JHKVideoPlayer_Example-resources.sh"; sourceTree = "<group>"; };
 		785CB53E2E4B54AC336ED2D07BFC6A7B /* Pods-JHKVideoPlayer_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Example.release.xcconfig"; sourceTree = "<group>"; };
-		789B99AEF02F8A56D1574A3478C9551D /* pushScreen@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "pushScreen@3x.png"; sourceTree = "<group>"; };
 		794F35A1F7742659E9D2C3FFED743C85 /* Pods-JHKVideoPlayer_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JHKVideoPlayer_Example-dummy.m"; sourceTree = "<group>"; };
 		7B64E22DDB95B5C89DB5ACCA5B64DC79 /* Extension+UIView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		7BABAF2AC7F5334C0BFCA18474931486 /* Pods-JHKVideoPlayer_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JHKVideoPlayer_Tests-umbrella.h"; sourceTree = "<group>"; };
-		7C7844C2B812506A400CEAE7013215FB /* Player_下载按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_下载按下@2x.png"; sourceTree = "<group>"; };
-		7D141D1953E5C6E67E362CE73090E48A /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Alamofire.modulemap; sourceTree = "<group>"; };
-		7DB75D25C984B8EDCC5C531E00CC0683 /* btn_pause@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "btn_pause@3x.png"; path = "JHKVideoPlayer/Assets/btn_pause@3x.png"; sourceTree = "<group>"; };
-		7DC825DBEBE55377CC144C75FD3074B5 /* 亮度icon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "亮度icon.png"; sourceTree = "<group>"; };
-		7EB14EF010EF161A775FAF27F6C3508C /* Pods-JHKVideoPlayer_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-JHKVideoPlayer_Example.modulemap"; sourceTree = "<group>"; };
-		80714D94C8BC17DB1CB9A412E7C642A7 /* Player_分享@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_分享@2x.png"; sourceTree = "<group>"; };
-		813574435415C4A009833044EFF214DE /* 播放 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放 按下@3x.png"; sourceTree = "<group>"; };
+		7D141D1953E5C6E67E362CE73090E48A /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Alamofire.modulemap; sourceTree = "<group>"; };
+		7D630FE3D50435F812F0F16A27707E04 /* 左 选中@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "左 选中@2x.png"; sourceTree = "<group>"; };
+		7E98151ECF129F3CA8E39652E337E6D5 /* 投屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏@2x.png"; sourceTree = "<group>"; };
+		7EB14EF010EF161A775FAF27F6C3508C /* Pods-JHKVideoPlayer_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-JHKVideoPlayer_Example.modulemap"; sourceTree = "<group>"; };
+		817B5F0B6DC2B48633502C412AC2F15D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = JHKVideoPlayer/Assets/Info.plist; sourceTree = "<group>"; };
 		81EC13A55240DA49DE55EFA5572320FC /* JHKVideoPlayer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JHKVideoPlayer-prefix.pch"; sourceTree = "<group>"; };
-		84A1BB08766957C9632884A2929F66AD /* 投屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏@2x.png"; sourceTree = "<group>"; };
+		872777C064A765DEF7CB76061B103496 /* 返回 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回 按下@2x.png"; sourceTree = "<group>"; };
 		87882A1F5A92C8138D54545E51D51E6F /* Timeline.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timeline.swift; path = Source/Timeline.swift; sourceTree = "<group>"; };
-		87EF60D514A2BFCC06AE54DAC644ECC5 /* btn_next.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_next.png; path = JHKVideoPlayer/Assets/btn_next.png; sourceTree = "<group>"; };
-		8A71C35205B5729A0314F7E4C64C3C5E /* 亮度icon@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "亮度icon@2x.png"; sourceTree = "<group>"; };
-		8B0C6DC3D4EA3A9B759E14D51C4FC697 /* 返回Full@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full@2x.png"; sourceTree = "<group>"; };
-		8CAE1BB8A372FF98BFD1B0E8339C73ED /* 分享 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享 按下@3x.png"; sourceTree = "<group>"; };
-		8D9EFBDAC528910F118B66F66C97BF88 /* 缩小@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小@3x.png"; sourceTree = "<group>"; };
+		89532E8E6BFDB95B413954EBAEA253D7 /* Player_投屏按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_投屏按下@2x.png"; sourceTree = "<group>"; };
+		8F75F57C8C2D521DE0F70C3CF9DD71FD /* 返回@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回@3x.png"; sourceTree = "<group>"; };
+		901E161721996BFF48A6040253FA4D33 /* 横屏 已收藏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "横屏 已收藏@2x.png"; sourceTree = "<group>"; };
+		9157FD09D506708B776FC9668BD1580D /* Player_全屏按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_全屏按下@2x.png"; sourceTree = "<group>"; };
 		9191D3E6AD6A3D3700BBCF87EA8C4369 /* Pods-JHKVideoPlayer_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JHKVideoPlayer_Example-frameworks.sh"; sourceTree = "<group>"; };
-		91A0424FE66CF95F4A4F5C4BC9EB9488 /* 返回Full 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full 按下@2x.png"; sourceTree = "<group>"; };
-		92ADF614F6DFFF444EAE8DC60CD32EA2 /* 全屏.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏.png"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9435019376E9FFCBC55EE2E60EDBD7C0 /* 音量icon.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "音量icon.png"; sourceTree = "<group>"; };
-		957CFA1584F58014C0DB2F1410052F43 /* 亮度icon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "亮度icon@3x.png"; sourceTree = "<group>"; };
-		9922BE1EF11D34CE36B414887C188010 /* btn_pause@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "btn_pause@2x.png"; path = "JHKVideoPlayer/Assets/btn_pause@2x.png"; sourceTree = "<group>"; };
+		92FAFDB8000D38FDE173A62CD52604FE /* 缩小.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小.png"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9472A54B9A2FEFA892CA227F7586DD0C /* btn_pause@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "btn_pause@3x.png"; path = "JHKVideoPlayer/Assets/btn_pause@3x.png"; sourceTree = "<group>"; };
+		95920068F4FAF3E72D23A00CFBD3774A /* pushScreen2@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "pushScreen2@3x.png"; path = "JHKVideoPlayer/Assets/pushScreen2@3x.png"; sourceTree = "<group>"; };
 		9A43DB6D5DEC0AB65E8C3D89FB5B1C96 /* Pods-JHKVideoPlayer_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JHKVideoPlayer_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9B986F83B2757FFABA939901538C9C44 /* Player_播放@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_播放@2x.png"; sourceTree = "<group>"; };
-		9BBB445DBFD757352F6A87BB30F40187 /* 返回Full 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full 按下.png"; sourceTree = "<group>"; };
+		9E6DB2D91F7C809875A054F38957DCD7 /* 全屏 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏 按下.png"; sourceTree = "<group>"; };
 		A01C037B4034EDA3D7955BC5E4E9D9D6 /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
-		A0229735384785C3B67103D7C4A045F1 /* Player_暂停@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_暂停@2x.png"; sourceTree = "<group>"; };
-		A1F503A99CEA03A2BA76B431060FBC3D /* Player_锁屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_锁屏@2x.png"; sourceTree = "<group>"; };
-		A53FFE5711FAC3D429E4F5FC05158E2C /* 返回@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回@2x.png"; sourceTree = "<group>"; };
-		A63B3642772FBA1354C829D06681BD26 /* 暂停@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停@3x.png"; sourceTree = "<group>"; };
-		A7BB985FECD5D72CB085CAC216D5C4D9 /* 全屏@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏@3x.png"; sourceTree = "<group>"; };
-		A8BD622A9A285F72B9E303DEA2BDA174 /* 播放 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放 按下.png"; sourceTree = "<group>"; };
-		ACAE92B99F88C31A59B9B29DD3521B0E /* 音量icon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "音量icon@3x.png"; sourceTree = "<group>"; };
-		ACF71A70E2CEF30190422437B20CA444 /* 锁定.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "锁定.png"; sourceTree = "<group>"; };
-		AED2FF0315E7B8F2B5238092733C29E3 /* 分享 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享 按下.png"; sourceTree = "<group>"; };
+		A78D6A8AE72ECB024E82DF9DD54EECFF /* 缩小@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小@3x.png"; sourceTree = "<group>"; };
 		B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
+		B119BED2D46A046E762DA4CBED076684 /* 分享 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享 按下.png"; sourceTree = "<group>"; };
 		B165C1E09B15F03AC59DD5E50AC08703 /* JHKVideoPlayer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JHKVideoPlayer.xcconfig; sourceTree = "<group>"; };
-		B2C3829BDC30825385E96CA1E5A0BBA4 /* 锁定@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "锁定@3x.png"; sourceTree = "<group>"; };
-		B440058B41207116A7CB6666AE7BD4D4 /* 返回Full@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full@3x.png"; sourceTree = "<group>"; };
-		B4451AAEC2C71C615C16BB431D39901A /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4451AAEC2C71C615C16BB431D39901A /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B44A27EFBB0DA84D738057B77F3413B1 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
-		B84FA27ACDEC06EB05B7D6EE28A4992C /* 播放.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放.png"; sourceTree = "<group>"; };
+		B47CA539BB96964EF4C3F563F650ABC6 /* 解锁@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "解锁@3x.png"; sourceTree = "<group>"; };
+		B8EC1FDE7DA8E96613E31A4EF7E9A278 /* 暂停 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停 按下.png"; sourceTree = "<group>"; };
 		B9213D0C081C49562D024E8D30023DDD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BBDC7C0CCA9D24A2058490BC9D33E98A /* 分享@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享@2x.png"; sourceTree = "<group>"; };
 		BCCA9CA7D9C1A2047BB93336C5708DFD /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
-		BF6C1531A443A687D22CC92C978B4651 /* Player_下一集@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_下一集@2x.png"; sourceTree = "<group>"; };
-		C3F738C49FEBF566EF1E86DBE32FB5E7 /* 暂停.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停.png"; sourceTree = "<group>"; };
+		BDF32315902D3A47A96ED2F05577869B /* 返回Full.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full.png"; sourceTree = "<group>"; };
+		C02235759A54C09177D4213358E8AFDB /* 右 未选中@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "右 未选中@2x.png"; sourceTree = "<group>"; };
 		C488A0504231E492F82F80A63ED8170B /* Pods-JHKVideoPlayer_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JHKVideoPlayer_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C6A2828C17F4B320697C57D3774BA52A /* 全屏 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏 按下@2x.png"; sourceTree = "<group>"; };
-		C795DE12B5D4AFC9362E559A4D2FA7A4 /* JHKVideoPlayer.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JHKVideoPlayer.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8488D447CF882BD6E51FBD89762C8F7 /* 暂停@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停@2x.png"; sourceTree = "<group>"; };
-		C9C39F040ACC3025B47622B3C70D8016 /* 解锁@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "解锁@2x.png"; sourceTree = "<group>"; };
+		C4A6176D6023AE95AB048A1D822CE40B /* 解锁.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "解锁.png"; sourceTree = "<group>"; };
+		C61D203C98184718BC1A5338FC6FEBFB /* 缩小 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小 按下@3x.png"; sourceTree = "<group>"; };
+		C795DE12B5D4AFC9362E559A4D2FA7A4 /* JHKVideoPlayer.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = JHKVideoPlayer.bundle; path = JHKVideoPlayer.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8C9C2C7FC0F78DCFADF46BEBFA75039 /* 返回Full 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full 按下.png"; sourceTree = "<group>"; };
+		CA4D4E23966595525B2BFC920207A3FB /* player_volume@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_volume@2x.png"; path = "JHKVideoPlayer/Assets/player_volume@2x.png"; sourceTree = "<group>"; };
 		CB86E2F7C283EE18356222F89FA3B6ED /* JHKPlayerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JHKPlayerView.swift; path = JHKVideoPlayer/Classes/JHKPlayerView.swift; sourceTree = "<group>"; };
-		CE54DD5E2CD9DAE78BE64DC301415DB4 /* 缩小 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小 按下@3x.png"; sourceTree = "<group>"; };
-		D092FF61D854623F209F6418EAD763C9 /* menu_quit@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "menu_quit@2x.png"; path = "JHKVideoPlayer/Assets/menu_quit@2x.png"; sourceTree = "<group>"; };
+		CC1C8BC235EE04C9BE29BA0EF165BD07 /* pushScreen@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "pushScreen@3x.png"; sourceTree = "<group>"; };
+		CC9FFFE36FC82107A9557F1331482D18 /* 投屏.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏.png"; sourceTree = "<group>"; };
+		CE348DE0D48F44D0C104C1227583255F /* 返回Full@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full@2x.png"; sourceTree = "<group>"; };
+		CF4126D04CE9D282BC7A151753C6691D /* menu_quit@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "menu_quit@3x.png"; path = "JHKVideoPlayer/Assets/menu_quit@3x.png"; sourceTree = "<group>"; };
+		CF7B89DCB5F8A86FFDB92174ED33D85F /* 返回Full 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full 按下@2x.png"; sourceTree = "<group>"; };
+		D0DBC4AB542A54A3B745F1AADB226A6F /* 锁定@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "锁定@3x.png"; sourceTree = "<group>"; };
 		D11A11F232E3C973D447E2B1602A3881 /* JHKPlayerFlowAlert.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JHKPlayerFlowAlert.swift; path = JHKVideoPlayer/Classes/JHKPlayerFlowAlert.swift; sourceTree = "<group>"; };
-		D3983E9389269A9B5069490E7342AB3F /* 全屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏@2x.png"; sourceTree = "<group>"; };
-		D3B210A6C3F88447A28335CE36123B40 /* btn_previous.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_previous.png; path = JHKVideoPlayer/Assets/btn_previous.png; sourceTree = "<group>"; };
-		D4C1B908A1B0545F63805137ACAF18C6 /* 全屏 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏 按下.png"; sourceTree = "<group>"; };
-		DD485B9B935685FD4DC4A2E39D023BB8 /* Pods_JHKVideoPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHKVideoPlayer_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D255E452629FE54D067815095102E7A7 /* 播放 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放 按下@2x.png"; sourceTree = "<group>"; };
+		D55EDD48065307301836D29985C603FD /* 暂停 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停 按下@3x.png"; sourceTree = "<group>"; };
+		D96E1B005F1A1B85328D4BF912B33625 /* 亮度icon@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "亮度icon@3x.png"; sourceTree = "<group>"; };
+		DD485B9B935685FD4DC4A2E39D023BB8 /* Pods_JHKVideoPlayer_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_JHKVideoPlayer_Example.framework; path = "Pods-JHKVideoPlayer_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFCB8C44DE758E906C0BCDA455937B85 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
-		E26349F982C9E9ED2BC2DBA47022BF9A /* 缩小 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小 按下@2x.png"; sourceTree = "<group>"; };
-		E2D26934A01425C772AA448602FE6B1A /* 分享 按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "分享 按下@2x.png"; sourceTree = "<group>"; };
+		E17B18BCBC938CA7238511D290D3BEE3 /* 暂停@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停@2x.png"; sourceTree = "<group>"; };
 		E2F9510473F6FFD7AA66524DB16C2263 /* ResponseSerialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseSerialization.swift; path = Source/ResponseSerialization.swift; sourceTree = "<group>"; };
-		E59EC01F29DC7698DFC3C29BC3F84C74 /* player_slider@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_slider@3x.png"; path = "JHKVideoPlayer/Assets/player_slider@3x.png"; sourceTree = "<group>"; };
+		E49EF71F99B64D53EA950E64268D35BE /* icon_brightness.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = icon_brightness.png; path = JHKVideoPlayer/Assets/icon_brightness.png; sourceTree = "<group>"; };
+		E5929DC366D255E1F6B98FC11AE1B1E3 /* pushScreen2.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = pushScreen2.png; path = JHKVideoPlayer/Assets/pushScreen2.png; sourceTree = "<group>"; };
 		E5A8AA5F9EDED0A0BDDE7E830BF4AEE0 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		E682CA63A0E1E65B3C9F2F727FAA37EF /* Player_下载按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_下载按下@2x.png"; sourceTree = "<group>"; };
 		E6F34CCF86067ED508C12C676E298C69 /* Alamofire.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.xcconfig; sourceTree = "<group>"; };
-		E7B07C309530CE9B7E12DB5A60D6C414 /* Player_分享按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_分享按下@2x.png"; sourceTree = "<group>"; };
-		E8D769006214A75C8FC486CDF4DAF5A2 /* 播放@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放@3x.png"; sourceTree = "<group>"; };
-		EA9308757E6DC936E3AD0291A09DC8C8 /* player_slider@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_slider@2x.png"; path = "JHKVideoPlayer/Assets/player_slider@2x.png"; sourceTree = "<group>"; };
-		EC187CE52CC09B3799261682A2BD960F /* 投屏@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "投屏@3x.png"; sourceTree = "<group>"; };
-		EEFCDF58A6777043666A4A58D3462B47 /* 缩小@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小@2x.png"; sourceTree = "<group>"; };
+		E73CF8BD7E5ECC3A37606134D01EA4B2 /* Player_返回@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_返回@2x.png"; sourceTree = "<group>"; };
+		E88AA0CFA6DB1DBFEFDA631D29F9D211 /* 右 选中@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "右 选中@2x.png"; sourceTree = "<group>"; };
+		ED2F0256070569BFD6094BD137D6E640 /* Player_返回按下@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_返回按下@2x.png"; sourceTree = "<group>"; };
+		ED7F29260D08CA5AE7B04502892D766C /* 锁定.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "锁定.png"; sourceTree = "<group>"; };
+		ED87CB2263E8AEF74B6E9A6C86895F05 /* btn_backward.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_backward.png; path = JHKVideoPlayer/Assets/btn_backward.png; sourceTree = "<group>"; };
+		EDBCB940E86C75C20C2492BAFD7806A5 /* 暂停.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停.png"; sourceTree = "<group>"; };
+		EDEE299E991840F3ECEB60ACB23D62DF /* btn_forward.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = btn_forward.png; path = JHKVideoPlayer/Assets/btn_forward.png; sourceTree = "<group>"; };
+		EE7C4052C0B8094276055FBB217657E9 /* 全屏@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "全屏@2x.png"; sourceTree = "<group>"; };
 		EF299B916D82BFC578171E3B4F61349D /* Pods-JHKVideoPlayer_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JHKVideoPlayer_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		F1BFC99490829DC71D3A6D349A8B82D8 /* 返回 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回 按下@3x.png"; sourceTree = "<group>"; };
-		F23663F6574D92C629B47066D3E676E2 /* 缩小 按下.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "缩小 按下.png"; sourceTree = "<group>"; };
-		F3BEED6BAF7D2039FF626222DEB34D85 /* player_volume@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_volume@2x.png"; path = "JHKVideoPlayer/Assets/player_volume@2x.png"; sourceTree = "<group>"; };
+		F0D1B3BAFBB396290E05535F146F77A7 /* 暂停@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "暂停@3x.png"; sourceTree = "<group>"; };
+		F145E548A7042E7994367C55043565CA /* 左 未选中@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "左 未选中@2x.png"; sourceTree = "<group>"; };
+		F21411824EC63684E7580A86D9B25525 /* 播放 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放 按下@3x.png"; sourceTree = "<group>"; };
 		F414F40A40062C5EB6A158338FC5DC45 /* SupportComponents.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SupportComponents.swift; path = JHKVideoPlayer/Classes/SupportComponents.swift; sourceTree = "<group>"; };
-		F4B3A99715286AC6BDD76B6695B3A427 /* icon_brightness.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = icon_brightness.png; path = JHKVideoPlayer/Assets/icon_brightness.png; sourceTree = "<group>"; };
 		F5957A0A5EBDB9E147A53CB2BE03A912 /* Pods-JHKVideoPlayer_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JHKVideoPlayer_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		F5FDFC33FA30F48D95D3C8D72E4C76E5 /* pushScreen2@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "pushScreen2@3x.png"; path = "JHKVideoPlayer/Assets/pushScreen2@3x.png"; sourceTree = "<group>"; };
 		F69D1B784248267EE1477C613B425035 /* JHKVideoPlayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JHKVideoPlayer-umbrella.h"; sourceTree = "<group>"; };
 		F7CE53B657508A1EE2E0A34018F77CDE /* Extension+UIBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Extension+UIBarButtonItem.swift"; sourceTree = "<group>"; };
-		FE377C53E8C786BB41E3E6F80C8D4F34 /* Pods_JHKVideoPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JHKVideoPlayer_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FECD2220C63776B681844FAAD666080E /* iosHalfScreen */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = iosHalfScreen; path = JHKVideoPlayer/Assets/iosHalfScreen; sourceTree = "<group>"; };
+		F8863374649096029F325BE92F98E16D /* Player_播放@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "Player_播放@2x.png"; sourceTree = "<group>"; };
+		F9506F17DA1549E294B0E45DB3FD7E78 /* 播放@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放@2x.png"; sourceTree = "<group>"; };
+		FD4B7B762D08BF7E539FB578CE4D11B3 /* 播放.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "播放.png"; sourceTree = "<group>"; };
+		FE075FED3540818C7D0E656CFC8B5C0E /* 返回Full@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回Full@3x.png"; sourceTree = "<group>"; };
+		FE377C53E8C786BB41E3E6F80C8D4F34 /* Pods_JHKVideoPlayer_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_JHKVideoPlayer_Tests.framework; path = "Pods-JHKVideoPlayer_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE9985910D4790F7FC750B93D62CCE3C /* btn_pause@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "btn_pause@2x.png"; path = "JHKVideoPlayer/Assets/btn_pause@2x.png"; sourceTree = "<group>"; };
+		FEBCDA2BA2A54A988187DC94541F8930 /* 返回 按下@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "返回 按下@3x.png"; sourceTree = "<group>"; };
+		FF994BC4D607ADCE5753B132E475EC67 /* player_volume@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "player_volume@3x.png"; path = "JHKVideoPlayer/Assets/player_volume@3x.png"; sourceTree = "<group>"; };
+		FFEB535C5401E63C6DBEA7F54F325579 /* 解锁@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "解锁@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,72 +426,8 @@
 				B029DBC43E49A740F12B5E4D2E6DD452 /* Validation.swift */,
 				55F14F994FE7AB51F028BFE66CEF3106 /* Support Files */,
 			);
+			name = Alamofire;
 			path = Alamofire;
-			sourceTree = "<group>";
-		};
-		25B6ACD1FB9F2CFC6F8211808C0A346C /* iosFullScreen */ = {
-			isa = PBXGroup;
-			children = (
-				BF6C1531A443A687D22CC92C978B4651 /* Player_下一集@2x.png */,
-				755BD1AC49B52E6EA03C8C1CD6E2B4D0 /* Player_下载@2x.png */,
-				7C7844C2B812506A400CEAE7013215FB /* Player_下载按下@2x.png */,
-				0BE98BBE412CE3185DA13A3CBED6C7C7 /* Player_全屏@2x.png */,
-				69F7D178E11F3DED8EBB50CA2A742152 /* Player_全屏按下@2x.png */,
-				80714D94C8BC17DB1CB9A412E7C642A7 /* Player_分享@2x.png */,
-				E7B07C309530CE9B7E12DB5A60D6C414 /* Player_分享按下@2x.png */,
-				64825E4EECEB0A2D4D24F0AB6F741F53 /* Player_投屏@2x.png */,
-				58637272978A9F51F2E2286D98849BE2 /* Player_投屏按下@2x.png */,
-				9B986F83B2757FFABA939901538C9C44 /* Player_播放@2x.png */,
-				A0229735384785C3B67103D7C4A045F1 /* Player_暂停@2x.png */,
-				46CF5F4C53720F438FDD182E69D271D6 /* Player_解锁@2x.png */,
-				499DA6DC0D434508C8E2E32FCAE43D00 /* Player_返回@2x.png */,
-				17BA47BAA6666ECEC16CDC338200BE22 /* Player_返回按下@2x.png */,
-				A1F503A99CEA03A2BA76B431060FBC3D /* Player_锁屏@2x.png */,
-				7DC825DBEBE55377CC144C75FD3074B5 /* 亮度icon.png */,
-				8A71C35205B5729A0314F7E4C64C3C5E /* 亮度icon@2x.png */,
-				957CFA1584F58014C0DB2F1410052F43 /* 亮度icon@3x.png */,
-				B84FA27ACDEC06EB05B7D6EE28A4992C /* 播放.png */,
-				A8BD622A9A285F72B9E303DEA2BDA174 /* 播放 按下.png */,
-				60090928D52B5AF200202136064E795F /* 播放 按下@2x.png */,
-				813574435415C4A009833044EFF214DE /* 播放 按下@3x.png */,
-				4C4D654DF2AE4F3F08AD3D6E72480E99 /* 播放@2x.png */,
-				E8D769006214A75C8FC486CDF4DAF5A2 /* 播放@3x.png */,
-				C3F738C49FEBF566EF1E86DBE32FB5E7 /* 暂停.png */,
-				589EE8D64FEEE35B38D19EFA7CEF9FF0 /* 暂停 按下.png */,
-				376E833680BF72F25ECE24CE253E982B /* 暂停 按下@2x.png */,
-				3DE85E07F49D7BFDBCA9ABA294F36D6B /* 暂停 按下@3x.png */,
-				C8488D447CF882BD6E51FBD89762C8F7 /* 暂停@2x.png */,
-				A63B3642772FBA1354C829D06681BD26 /* 暂停@3x.png */,
-				09E6AAED07875E74FD98DBB4BC39BFBB /* 缩小.png */,
-				F23663F6574D92C629B47066D3E676E2 /* 缩小 按下.png */,
-				E26349F982C9E9ED2BC2DBA47022BF9A /* 缩小 按下@2x.png */,
-				CE54DD5E2CD9DAE78BE64DC301415DB4 /* 缩小 按下@3x.png */,
-				EEFCDF58A6777043666A4A58D3462B47 /* 缩小@2x.png */,
-				8D9EFBDAC528910F118B66F66C97BF88 /* 缩小@3x.png */,
-				56F5D557DA97F7EC77D5D7B7FC02F438 /* 解锁.png */,
-				C9C39F040ACC3025B47622B3C70D8016 /* 解锁@2x.png */,
-				5BAE6645CF2EB04ADBAC65695431C7A3 /* 解锁@3x.png */,
-				218CE121E1646B3987E0EB6A159028FF /* 返回Full.png */,
-				9BBB445DBFD757352F6A87BB30F40187 /* 返回Full 按下.png */,
-				91A0424FE66CF95F4A4F5C4BC9EB9488 /* 返回Full 按下@2x.png */,
-				1C8D9132B33075988F00687EE8D9DE6C /* 返回Full 按下@3x.png */,
-				8B0C6DC3D4EA3A9B759E14D51C4FC697 /* 返回Full@2x.png */,
-				B440058B41207116A7CB6666AE7BD4D4 /* 返回Full@3x.png */,
-				ACF71A70E2CEF30190422437B20CA444 /* 锁定.png */,
-				4BE37D509302E78AFF649C02E6403DC5 /* 锁定@2x.png */,
-				B2C3829BDC30825385E96CA1E5A0BBA4 /* 锁定@3x.png */,
-				9435019376E9FFCBC55EE2E60EDBD7C0 /* 音量icon.png */,
-				23C2B6BFCC9FBDE0D7590F29B0E6C84E /* 音量icon@2x.png */,
-				ACAE92B99F88C31A59B9B29DD3521B0E /* 音量icon@3x.png */,
-				1D8DBAEA2140F303003DFA19 /* 横屏 收藏@2x.png */,
-				1D8DBAEC2140F318003DFA19 /* 横屏 已收藏@2x.png */,
-				1D8DBAF121411070003DFA19 /* 右 未选中@2x.png */,
-				1D8DBAF321411071003DFA19 /* 右 选中@2x.png */,
-				1D8DBAF221411070003DFA19 /* 左 未选中@2x.png */,
-				1D8DBAF021411070003DFA19 /* 左 选中@2x.png */,
-			);
-			name = iosFullScreen;
-			path = JHKVideoPlayer/Assets/iosFullScreen;
 			sourceTree = "<group>";
 		};
 		35F128EB69B6F7FB7DA93BBF6C130FAE /* Pods */ = {
@@ -533,6 +463,36 @@
 			);
 			name = "Pods-JHKVideoPlayer_Tests";
 			path = "Target Support Files/Pods-JHKVideoPlayer_Tests";
+			sourceTree = "<group>";
+		};
+		51701A70CD4E6752859B0726AABEE34B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ED87CB2263E8AEF74B6E9A6C86895F05 /* btn_backward.png */,
+				EDEE299E991840F3ECEB60ACB23D62DF /* btn_forward.png */,
+				63B51B5E36CE71C05E1EC55BD9523214 /* btn_next.png */,
+				FE9985910D4790F7FC750B93D62CCE3C /* btn_pause@2x.png */,
+				9472A54B9A2FEFA892CA227F7586DD0C /* btn_pause@3x.png */,
+				758BD61C0FD209928541E68CCA8CE715 /* btn_previous.png */,
+				E49EF71F99B64D53EA950E64268D35BE /* icon_brightness.png */,
+				6211342BB39D7D267C7039A5E6C031E2 /* icon_sound.png */,
+				817B5F0B6DC2B48633502C412AC2F15D /* Info.plist */,
+				634F3BDAE36A64FC02407BC615C4E3BE /* iosFullScreen */,
+				0AC98F5B993FD6FF127498D048E34234 /* iosHalfScreen */,
+				6B8A754AAE7A404FC9BA095BCDF200CB /* menu_quit@2x.png */,
+				CF4126D04CE9D282BC7A151753C6691D /* menu_quit@3x.png */,
+				401364FA8D2CB525E45DC1E5F04638C1 /* player_pane.png */,
+				01562CFF1C463189CC59371070CCD517 /* player_slider@2x.png */,
+				20FFBC594577DA6E1C0648040B1EEC87 /* player_slider@3x.png */,
+				CA4D4E23966595525B2BFC920207A3FB /* player_volume@2x.png */,
+				FF994BC4D607ADCE5753B132E475EC67 /* player_volume@3x.png */,
+				E5929DC366D255E1F6B98FC11AE1B1E3 /* pushScreen2.png */,
+				3E1C0DE039F746B18B9E72CB1ED75C17 /* pushScreen2@2x.png */,
+				95920068F4FAF3E72D23A00CFBD3774A /* pushScreen2@3x.png */,
+				DB83B0392BBB2D882EDFF742CBEC4375 /* iosFullScreen */,
+				DC796EBB5C439BAE09FCA4FE981348A7 /* iosHalfScreen */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		51A9B78D6A7E7FB5A465754528750815 /* iOS */ = {
@@ -575,7 +535,7 @@
 				3B2FDED640B4325C8D9E7466F414436F /* JHKVideoPlayer.swift */,
 				F414F40A40062C5EB6A158338FC5DC45 /* SupportComponents.swift */,
 				8D5DBC703ECF93D1C90B2D45A2FDDB9F /* Category */,
-				E88F9BAFE13DD2B95F5F73BD0CD6CF86 /* Resources */,
+				51701A70CD4E6752859B0726AABEE34B /* Resources */,
 				9B45201D0EBFF29C25A6A179C59C62A9 /* Support Files */,
 			);
 			name = JHKVideoPlayer;
@@ -633,69 +593,104 @@
 			path = "Example/Pods/Target Support Files/JHKVideoPlayer";
 			sourceTree = "<group>";
 		};
-		B2760F41BA5ACAC68D33D1143D68E3FE /* iosHalfScreen */ = {
+		DB83B0392BBB2D882EDFF742CBEC4375 /* iosFullScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0B943AFD7C54C018C9BEA25D365DDDA4 /* pushScreen.png */,
-				16C6D1F6142E0999551837AF672D44F3 /* pushScreen@2x.png */,
-				789B99AEF02F8A56D1574A3478C9551D /* pushScreen@3x.png */,
-				92ADF614F6DFFF444EAE8DC60CD32EA2 /* 全屏.png */,
-				D4C1B908A1B0545F63805137ACAF18C6 /* 全屏 按下.png */,
-				C6A2828C17F4B320697C57D3774BA52A /* 全屏 按下@2x.png */,
-				580DC7922FD26C3556D841CE285E0497 /* 全屏 按下@3x.png */,
-				D3983E9389269A9B5069490E7342AB3F /* 全屏@2x.png */,
-				A7BB985FECD5D72CB085CAC216D5C4D9 /* 全屏@3x.png */,
-				2ADFF707F9A854A25C96BCACC883F230 /* 分享.png */,
-				AED2FF0315E7B8F2B5238092733C29E3 /* 分享 按下.png */,
-				E2D26934A01425C772AA448602FE6B1A /* 分享 按下@2x.png */,
-				8CAE1BB8A372FF98BFD1B0E8339C73ED /* 分享 按下@3x.png */,
-				BBDC7C0CCA9D24A2058490BC9D33E98A /* 分享@2x.png */,
-				411A7AF3D2B4ED0784BA7CFEDE51D031 /* 分享@3x.png */,
-				32FE94B23CA3B00D78E8D0B957E39A8C /* 投屏.png */,
-				4C8699ED86904D9EB3512A1BB53E654A /* 投屏 按下.png */,
-				72147F32D1B7C974EBA66104248049B0 /* 投屏 按下@2x.png */,
-				2CE38E26B2D44BAE5C61A9F11255AE82 /* 投屏 按下@3x.png */,
-				84A1BB08766957C9632884A2929F66AD /* 投屏@2x.png */,
-				EC187CE52CC09B3799261682A2BD960F /* 投屏@3x.png */,
-				722183574BC569E30B957E4857F2087A /* 返回.png */,
-				730876DD2E32922EE82B79B3E8A0D3E2 /* 返回 按下.png */,
-				5A5861ECBBA850DC301F22A814AD7FF1 /* 返回 按下@2x.png */,
-				F1BFC99490829DC71D3A6D349A8B82D8 /* 返回 按下@3x.png */,
-				A53FFE5711FAC3D429E4F5FC05158E2C /* 返回@2x.png */,
-				151FAB47A73F07C884602F1E11FB6068 /* 返回@3x.png */,
+				269A137825A27D5B495F056CA37DCE61 /* Player_下一集@2x.png */,
+				2F9DFE4918302BFCEEF9E567D72E8D8E /* Player_下载@2x.png */,
+				E682CA63A0E1E65B3C9F2F727FAA37EF /* Player_下载按下@2x.png */,
+				0A7C83DE981CE5F17BB873AD1E7113E7 /* Player_全屏@2x.png */,
+				9157FD09D506708B776FC9668BD1580D /* Player_全屏按下@2x.png */,
+				3AB88B74E9D8123CBA53C3E6ED8E221C /* Player_分享@2x.png */,
+				60D5729A42266193A3698FA9A440D1D5 /* Player_分享按下@2x.png */,
+				58EA8D8A1578916A5298D3E764E98A57 /* Player_投屏@2x.png */,
+				89532E8E6BFDB95B413954EBAEA253D7 /* Player_投屏按下@2x.png */,
+				F8863374649096029F325BE92F98E16D /* Player_播放@2x.png */,
+				037D18CDEB0B2FC5DCB719139B7990B3 /* Player_暂停@2x.png */,
+				0C32D290906E4D963033EC05A25A194B /* Player_解锁@2x.png */,
+				E73CF8BD7E5ECC3A37606134D01EA4B2 /* Player_返回@2x.png */,
+				ED2F0256070569BFD6094BD137D6E640 /* Player_返回按下@2x.png */,
+				6083F3F2F0846B9602BD36D85983B558 /* Player_锁屏@2x.png */,
+				40074401E8BE033B7625F1410AA55BE0 /* 亮度icon.png */,
+				111AFBB5D408134575C08B558DC24F10 /* 亮度icon@2x.png */,
+				D96E1B005F1A1B85328D4BF912B33625 /* 亮度icon@3x.png */,
+				C02235759A54C09177D4213358E8AFDB /* 右 未选中@2x.png */,
+				E88AA0CFA6DB1DBFEFDA631D29F9D211 /* 右 选中@2x.png */,
+				F145E548A7042E7994367C55043565CA /* 左 未选中@2x.png */,
+				7D630FE3D50435F812F0F16A27707E04 /* 左 选中@2x.png */,
+				FD4B7B762D08BF7E539FB578CE4D11B3 /* 播放.png */,
+				0FFF79E8816F5F8F086692E5B88438E4 /* 播放 按下.png */,
+				D255E452629FE54D067815095102E7A7 /* 播放 按下@2x.png */,
+				F21411824EC63684E7580A86D9B25525 /* 播放 按下@3x.png */,
+				F9506F17DA1549E294B0E45DB3FD7E78 /* 播放@2x.png */,
+				3EB45CDAFDD7B0198E4FEF4CB2F97F2C /* 播放@3x.png */,
+				EDBCB940E86C75C20C2492BAFD7806A5 /* 暂停.png */,
+				B8EC1FDE7DA8E96613E31A4EF7E9A278 /* 暂停 按下.png */,
+				6FB3F1AF7928C6B61AB5402937ABA189 /* 暂停 按下@2x.png */,
+				D55EDD48065307301836D29985C603FD /* 暂停 按下@3x.png */,
+				E17B18BCBC938CA7238511D290D3BEE3 /* 暂停@2x.png */,
+				F0D1B3BAFBB396290E05535F146F77A7 /* 暂停@3x.png */,
+				901E161721996BFF48A6040253FA4D33 /* 横屏 已收藏@2x.png */,
+				65C83226BFB31D9E32A8204562FFB060 /* 横屏 收藏@2x.png */,
+				92FAFDB8000D38FDE173A62CD52604FE /* 缩小.png */,
+				36CC464685671A86F128207D1FF4B69C /* 缩小 按下.png */,
+				4A3B87CE40B23DBE9155DAAD48A30630 /* 缩小 按下@2x.png */,
+				C61D203C98184718BC1A5338FC6FEBFB /* 缩小 按下@3x.png */,
+				36F9B0E06A7DBA565D259F832F0818B2 /* 缩小@2x.png */,
+				A78D6A8AE72ECB024E82DF9DD54EECFF /* 缩小@3x.png */,
+				C4A6176D6023AE95AB048A1D822CE40B /* 解锁.png */,
+				FFEB535C5401E63C6DBEA7F54F325579 /* 解锁@2x.png */,
+				B47CA539BB96964EF4C3F563F650ABC6 /* 解锁@3x.png */,
+				BDF32315902D3A47A96ED2F05577869B /* 返回Full.png */,
+				C8C9C2C7FC0F78DCFADF46BEBFA75039 /* 返回Full 按下.png */,
+				CF7B89DCB5F8A86FFDB92174ED33D85F /* 返回Full 按下@2x.png */,
+				73F4DE3CCA8791ABD9B382ECB879FCFB /* 返回Full 按下@3x.png */,
+				CE348DE0D48F44D0C104C1227583255F /* 返回Full@2x.png */,
+				FE075FED3540818C7D0E656CFC8B5C0E /* 返回Full@3x.png */,
+				ED7F29260D08CA5AE7B04502892D766C /* 锁定.png */,
+				6CA4624A791E899135FDFE67D9AD61D1 /* 锁定@2x.png */,
+				D0DBC4AB542A54A3B745F1AADB226A6F /* 锁定@3x.png */,
+				36E2F5E837FCD44189F2FCBE2A3C303A /* 音量icon.png */,
+				6DBF7B68971709DBF75753CCC3BFA3F7 /* 音量icon@2x.png */,
+				66ED02904BDB6793C362E931A9D224D2 /* 音量icon@3x.png */,
+			);
+			name = iosFullScreen;
+			path = JHKVideoPlayer/Assets/iosFullScreen;
+			sourceTree = "<group>";
+		};
+		DC796EBB5C439BAE09FCA4FE981348A7 /* iosHalfScreen */ = {
+			isa = PBXGroup;
+			children = (
+				5D54A5183DADB5E7F9E6A02AF19A55ED /* pushScreen.png */,
+				65DA172C21EC111683D4129ABDA91C39 /* pushScreen@2x.png */,
+				CC1C8BC235EE04C9BE29BA0EF165BD07 /* pushScreen@3x.png */,
+				003A18C453F9BEF02F4690D6AC4E1A2E /* 全屏.png */,
+				9E6DB2D91F7C809875A054F38957DCD7 /* 全屏 按下.png */,
+				761D194C213F3734A2D1B87C90E5A45B /* 全屏 按下@2x.png */,
+				3A3513891FDCA990E5FBFAA4151C3C27 /* 全屏 按下@3x.png */,
+				EE7C4052C0B8094276055FBB217657E9 /* 全屏@2x.png */,
+				001A1B93E66883C8E328A7E75B4A5868 /* 全屏@3x.png */,
+				67F5577C3101522DBA3536B84AB785D8 /* 分享.png */,
+				B119BED2D46A046E762DA4CBED076684 /* 分享 按下.png */,
+				5386C305EB9F1BACA1ECA395EF21206D /* 分享 按下@2x.png */,
+				201BE31F13CA82D05CC537A83AD92E9B /* 分享 按下@3x.png */,
+				3FF173E94FFB5DEC6C51FDF5D5FCBC7F /* 分享@2x.png */,
+				34CA81EEA3307405B97AB59A211EB4AE /* 分享@3x.png */,
+				CC9FFFE36FC82107A9557F1331482D18 /* 投屏.png */,
+				159834C896ECB7872A12759403320F56 /* 投屏 按下.png */,
+				3A50066E9A34BB9C1D6F887B3C69A856 /* 投屏 按下@2x.png */,
+				252DB23D938AAC42758255823DB5DE75 /* 投屏 按下@3x.png */,
+				7E98151ECF129F3CA8E39652E337E6D5 /* 投屏@2x.png */,
+				4C9CA0FD5DF7C43FC09472AE495FCC25 /* 投屏@3x.png */,
+				337EE46C4E834C08D9A487FF9958BFD3 /* 返回.png */,
+				0C74390C9CDE6BA53C9BF40D57E3868B /* 返回 按下.png */,
+				872777C064A765DEF7CB76061B103496 /* 返回 按下@2x.png */,
+				FEBCDA2BA2A54A988187DC94541F8930 /* 返回 按下@3x.png */,
+				6B1F9942860C1E285B9A4B4C6E62BB87 /* 返回@2x.png */,
+				8F75F57C8C2D521DE0F70C3CF9DD71FD /* 返回@3x.png */,
 			);
 			name = iosHalfScreen;
 			path = JHKVideoPlayer/Assets/iosHalfScreen;
-			sourceTree = "<group>";
-		};
-		E88F9BAFE13DD2B95F5F73BD0CD6CF86 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				143B074B6F7D1706BBD1637B0CB19AC8 /* btn_backward.png */,
-				535AF17EB5B625EEE7F38B3282E183B6 /* btn_forward.png */,
-				87EF60D514A2BFCC06AE54DAC644ECC5 /* btn_next.png */,
-				9922BE1EF11D34CE36B414887C188010 /* btn_pause@2x.png */,
-				7DB75D25C984B8EDCC5C531E00CC0683 /* btn_pause@3x.png */,
-				D3B210A6C3F88447A28335CE36123B40 /* btn_previous.png */,
-				F4B3A99715286AC6BDD76B6695B3A427 /* icon_brightness.png */,
-				58F91061C3F2665EBDEAAAB86CF54272 /* icon_sound.png */,
-				3D5AD70190D312DF5EADA7B6E9033738 /* Info.plist */,
-				6B9B14233741E2F0098C8C5B214D1997 /* iosFullScreen */,
-				FECD2220C63776B681844FAAD666080E /* iosHalfScreen */,
-				D092FF61D854623F209F6418EAD763C9 /* menu_quit@2x.png */,
-				6CA1ECFE83297C8615A215B0C7F5BA1F /* menu_quit@3x.png */,
-				1082FF1B86880C0B1BFF20A46C10AF2E /* player_pane.png */,
-				EA9308757E6DC936E3AD0291A09DC8C8 /* player_slider@2x.png */,
-				E59EC01F29DC7698DFC3C29BC3F84C74 /* player_slider@3x.png */,
-				F3BEED6BAF7D2039FF626222DEB34D85 /* player_volume@2x.png */,
-				247F4649E6D1E956CD0AA1FBD77EC2A4 /* player_volume@3x.png */,
-				25387479F5E707E458949E470ABF2939 /* pushScreen2.png */,
-				3481095BCEF5B14B798235A31D81DF28 /* pushScreen2@2x.png */,
-				F5FDFC33FA30F48D95D3C8D72E4C76E5 /* pushScreen2@3x.png */,
-				25B6ACD1FB9F2CFC6F8211808C0A346C /* iosFullScreen */,
-				B2760F41BA5ACAC68D33D1143D68E3FE /* iosHalfScreen */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		ED7F6E3ADEB011FBF351C5B7BD5F7E54 /* Development Pods */ = {
@@ -841,7 +836,7 @@
 			buildPhases = (
 				8949DDEB987E374BE3CE81F3F7246F5B /* Sources */,
 				1ADF6D2C44C6ABEA6BE42C12F81E5101 /* Frameworks */,
-				EAF42F6A770130FC89B12D60FE219CB3 /* Resources */,
+				85BF99718A7AC1F16EB075C8EA6ED72E /* Resources */,
 			);
 			buildRules = (
 			);
@@ -883,129 +878,123 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		85BF99718A7AC1F16EB075C8EA6ED72E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80AD3E7425EDFF674D3159F6EB91D3CA /* btn_backward.png in Resources */,
+				418214F610273D310A3A6B565D4C857F /* btn_forward.png in Resources */,
+				FA99D27B8F08810A994971F3E1D6442A /* btn_next.png in Resources */,
+				6751C0121C9895CA67820D491DAE0C77 /* btn_pause@2x.png in Resources */,
+				85E1E27CF3815AEB6AC4EF5922BB7070 /* btn_pause@3x.png in Resources */,
+				84189ED69F26881F301CD3A26E8692EE /* btn_previous.png in Resources */,
+				748E5788D6177660C25CA735F02F7119 /* icon_brightness.png in Resources */,
+				13746180D5CEEF7D3C32812DC5A3C016 /* icon_sound.png in Resources */,
+				36FFAFA4F9BFBD436F43CFF229EC1573 /* Info.plist in Resources */,
+				59C3F20BAFE10A8E182C6DAD7CD038A7 /* iosFullScreen in Resources */,
+				F3974732241CC867CFF4809370350B31 /* iosHalfScreen in Resources */,
+				8C3D92312E50502DF7A011F72AC982D5 /* menu_quit@2x.png in Resources */,
+				0E4F6BAD47BEB611FEFF2DDD7B669D0F /* menu_quit@3x.png in Resources */,
+				B1453F3517B355FF2BD535FC6FDA0DBB /* player_pane.png in Resources */,
+				499415616961EFEC5B126C51A3F833C3 /* player_slider@2x.png in Resources */,
+				353591B9152B270730676769B8387C5A /* player_slider@3x.png in Resources */,
+				CA46B8F0CA3FCB234B3E899D6776DB0B /* player_volume@2x.png in Resources */,
+				1E299BD6020F82D5910DDD8479586619 /* player_volume@3x.png in Resources */,
+				712638A4A48169648A6E578612ECF307 /* Player_下一集@2x.png in Resources */,
+				6FBE4BEDC83EF3F64A7150277B0C203B /* Player_下载@2x.png in Resources */,
+				ECF391D3F6E4212652822ADD1D3E110D /* Player_下载按下@2x.png in Resources */,
+				A93AC2EAB328324E14A8E9868D9F804A /* Player_全屏@2x.png in Resources */,
+				0AD9DA155DFC499E4F44A6F0772858CC /* Player_全屏按下@2x.png in Resources */,
+				833DA7E02B53958212F78B88100E254E /* Player_分享@2x.png in Resources */,
+				92D98073B3452FEFB6C354A46DD98A92 /* Player_分享按下@2x.png in Resources */,
+				0A3AF0A7CD78DE60C3D55B356D1F5138 /* Player_投屏@2x.png in Resources */,
+				6A8F4167CCE5772BF35DFEAF91523B9C /* Player_投屏按下@2x.png in Resources */,
+				3C02ADFF2D0141AC992DD65992F5EB79 /* Player_播放@2x.png in Resources */,
+				CACC9F351E540688AF921D046A4573C6 /* Player_暂停@2x.png in Resources */,
+				1C74659E33566093B862A253BA40EA90 /* Player_解锁@2x.png in Resources */,
+				B6B58A0B7B3CB8BA05DA1C09408B0679 /* Player_返回@2x.png in Resources */,
+				EB26AEE57D41B4D2D8FFDD322E01C59A /* Player_返回按下@2x.png in Resources */,
+				0B73A8D13E87C9C8B023EBFA14A06085 /* Player_锁屏@2x.png in Resources */,
+				99D684C6E8428C4C6569BB567487FDAC /* pushScreen.png in Resources */,
+				F37C5E034447344CFF1913B4A69FA916 /* pushScreen2.png in Resources */,
+				328588D9376BA5D5B099ACD82C1B6A0F /* pushScreen2@2x.png in Resources */,
+				89D0CD355965F57AB1A18B742F150789 /* pushScreen2@3x.png in Resources */,
+				AFE5D8ADC8349E013692EC6B36A0BEB5 /* pushScreen@2x.png in Resources */,
+				7974E8535B806D4D23717635C5B7AD59 /* pushScreen@3x.png in Resources */,
+				6A982754DFF1E1D25A56A3F0C6AD6CA9 /* 亮度icon.png in Resources */,
+				8E340F6B220111A531ED96567C119531 /* 亮度icon@2x.png in Resources */,
+				3DC6F2B0CED8BE54B3181E396348248D /* 亮度icon@3x.png in Resources */,
+				1FC7CF32EF4E4945051618E76D2731E9 /* 全屏 按下.png in Resources */,
+				A1149AE5CE33A6CB107B9F0926519BAA /* 全屏 按下@2x.png in Resources */,
+				85B6566B3B837ADAD0AFEE7807BA811B /* 全屏 按下@3x.png in Resources */,
+				06ECFECB08B435D76CEEC2F5891CCCF0 /* 全屏.png in Resources */,
+				31C59AC15CD73F4F45071BAA3AC98F66 /* 全屏@2x.png in Resources */,
+				7D79EF3F61F5958A623AAFB432C616EC /* 全屏@3x.png in Resources */,
+				2663CEE998B507FE0909527662A560FB /* 分享 按下.png in Resources */,
+				6E8C3D2CE8C8B8EF5360B3FEC8888921 /* 分享 按下@2x.png in Resources */,
+				7431D27DF6319D5A97355E817E43EF10 /* 分享 按下@3x.png in Resources */,
+				859413456D5E35D5C45558DE3134B004 /* 分享.png in Resources */,
+				D6DEBEE771B969D4C7D8621AD4CA9D16 /* 分享@2x.png in Resources */,
+				CCA2CCE30D7BD936C8ADF2EC9F8DE1A1 /* 分享@3x.png in Resources */,
+				6538E7C1959D42897D8574E93B1B673A /* 右 未选中@2x.png in Resources */,
+				C091E04BB52C96CE4C5C50E0C1D7BA9A /* 右 选中@2x.png in Resources */,
+				A5935F3600D9E2D5085AF2117482879A /* 左 未选中@2x.png in Resources */,
+				3B937B988CB556E463208339CE673D34 /* 左 选中@2x.png in Resources */,
+				6CC2D9930886233219FCC6CE46BDFC92 /* 投屏 按下.png in Resources */,
+				024E9F5F64BF1A7CE9BAEC89B5BDFDEF /* 投屏 按下@2x.png in Resources */,
+				2723D8B059087E500F9593C31220A869 /* 投屏 按下@3x.png in Resources */,
+				3E1F7673583FC06090BCA9B84B7D054E /* 投屏.png in Resources */,
+				FBF80705670316A7791564577045D4AB /* 投屏@2x.png in Resources */,
+				718DE76D9D94E2567CAAB83601D65326 /* 投屏@3x.png in Resources */,
+				F06A5D14786A0806B15BF2EAA81EA47B /* 播放 按下.png in Resources */,
+				8A3B774194A0FCFAC347055D7C7ED077 /* 播放 按下@2x.png in Resources */,
+				F994EE3B8F1A7505DAB62ADD55004324 /* 播放 按下@3x.png in Resources */,
+				B9FE372220ABAF2043FEB91D83CD2093 /* 播放.png in Resources */,
+				5646B0B4A6CC1B7F929E062D8967D6A6 /* 播放@2x.png in Resources */,
+				CB8032945C0977C2D40B16EC7A79E8D3 /* 播放@3x.png in Resources */,
+				897284E58CE7293BE57F16E55CC50D1C /* 暂停 按下.png in Resources */,
+				51AB0FE989D7B516325E0D5822A69CE9 /* 暂停 按下@2x.png in Resources */,
+				6A45B20842797629FAC5EE270C919542 /* 暂停 按下@3x.png in Resources */,
+				380F67208007101FBEF3CC3CCE35359A /* 暂停.png in Resources */,
+				6A7E0F4821EA856699DDF96FDBDDB00D /* 暂停@2x.png in Resources */,
+				193A95B597CEBDDACE4D17FB054BDCBE /* 暂停@3x.png in Resources */,
+				5E7AAC0B43C19EF6E6C954D9A3BF150E /* 横屏 已收藏@2x.png in Resources */,
+				A31EC2C809F8DFC90ABC3C34BAADD752 /* 横屏 收藏@2x.png in Resources */,
+				838E5F997FB5623A240819DAAA1121F0 /* 缩小 按下.png in Resources */,
+				22CF79FE9A569ABDE6D11DC18CD2247E /* 缩小 按下@2x.png in Resources */,
+				A1BB242AEE8A8A8579E56A87222211F5 /* 缩小 按下@3x.png in Resources */,
+				D0C8727F15FC663AF3E48FC5BE8C7FCF /* 缩小.png in Resources */,
+				A23DF2303D6320D8AD9A512D0C529B00 /* 缩小@2x.png in Resources */,
+				CA5CF2629440857AEBC628561A81BCCA /* 缩小@3x.png in Resources */,
+				BA2FF92C8B058BF613B6F14B09A08069 /* 解锁.png in Resources */,
+				72A6E751AF60B6B875D1D91A1C68EB65 /* 解锁@2x.png in Resources */,
+				D751ACB6CCE52BB1BD0282718B525B96 /* 解锁@3x.png in Resources */,
+				D545F6302800914785144E64BA920C4D /* 返回 按下.png in Resources */,
+				407EE412FA0DA1A8753CE98516878244 /* 返回 按下@2x.png in Resources */,
+				7C4B8D50770129FB71A4199FA7FD0D66 /* 返回 按下@3x.png in Resources */,
+				F6D7211D39D42551C31672EA532619EE /* 返回.png in Resources */,
+				F40575DA1D6C332F6B99D2FE210DE714 /* 返回@2x.png in Resources */,
+				E022561A7C03169FB6CD240D197965A0 /* 返回@3x.png in Resources */,
+				2A51915F8C00AA1FE4736C1C505BA598 /* 返回Full 按下.png in Resources */,
+				090C03B811D5FFC405A85A8D1D9BB4EA /* 返回Full 按下@2x.png in Resources */,
+				581F7BE03E8238345BD376643925D33C /* 返回Full 按下@3x.png in Resources */,
+				946FF66BB181E3CAB2A3249E6CD71C6C /* 返回Full.png in Resources */,
+				8FCDA20F343AEFF772A36639390AD740 /* 返回Full@2x.png in Resources */,
+				D875FA5637F7FD351103F98B43AF98E9 /* 返回Full@3x.png in Resources */,
+				A70BAA932E861CE1EE98C0216CACCFD6 /* 锁定.png in Resources */,
+				B5151B07547DCE052A438E45AE3A69EB /* 锁定@2x.png in Resources */,
+				0E6A39DC8AF5E9C1B78CAB3FC6C4C027 /* 锁定@3x.png in Resources */,
+				809EDB7847278A6D9F626E1B3DFA9B1C /* 音量icon.png in Resources */,
+				DB6AC044DF77C427170472DA30079B04 /* 音量icon@2x.png in Resources */,
+				1D77C4E21F0723DF37753EC85B2EC0D5 /* 音量icon@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEE03C8FEFD230A7995E92CB9355612D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D8DBAF521411072003DFA19 /* 右 未选中@2x.png in Resources */,
-				1D8DBAF421411072003DFA19 /* 左 选中@2x.png in Resources */,
 				4E041839C43109F369DEA0A111B6FA96 /* JHKVideoPlayer.bundle in Resources */,
-				1D8DBAEB2140F305003DFA19 /* 横屏 收藏@2x.png in Resources */,
-				1D8DBAED2140F319003DFA19 /* 横屏 已收藏@2x.png in Resources */,
-				1D8DBAF621411072003DFA19 /* 左 未选中@2x.png in Resources */,
-				1D8DBAF721411072003DFA19 /* 右 选中@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		EAF42F6A770130FC89B12D60FE219CB3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1D8DBAF82141109D003DFA19 /* 右 未选中@2x.png in Resources */,
-				1D8DBAF92141109D003DFA19 /* 右 选中@2x.png in Resources */,
-				1D8DBAFA2141109D003DFA19 /* 左 未选中@2x.png in Resources */,
-				1D8DBAFB2141109D003DFA19 /* 左 选中@2x.png in Resources */,
-				1D8DBAEE2140FD53003DFA19 /* 横屏 收藏@2x.png in Resources */,
-				1D8DBAEF2140FD53003DFA19 /* 横屏 已收藏@2x.png in Resources */,
-				575AFD5A133AF3195F106797C880B952 /* btn_backward.png in Resources */,
-				5F2DA97069A0376517A58AC48406EFF7 /* btn_forward.png in Resources */,
-				9C69934C4DA6C8DCCCEC0CAD447E07D4 /* btn_next.png in Resources */,
-				1987114E2EFBD754807616E7CF043F9C /* btn_pause@2x.png in Resources */,
-				CED31FE521781B71798159C4005C2407 /* btn_pause@3x.png in Resources */,
-				20017D09C88BE22B418CBB4AA8CCD755 /* btn_previous.png in Resources */,
-				701711191636828440062516AE3F2856 /* icon_brightness.png in Resources */,
-				DDA116DDF9D7FEEA4D672462B6C6439E /* icon_sound.png in Resources */,
-				A9C2723E9E3D83A80C435D0E92C3F160 /* Info.plist in Resources */,
-				295189C785550B2067DD0E56D6A9586E /* iosFullScreen in Resources */,
-				F34477B9CC5C803089411BAF636FD570 /* iosHalfScreen in Resources */,
-				CB8AE0C4A11291316EDDCCFEE4BA7182 /* menu_quit@2x.png in Resources */,
-				02DCA8B35794D2D3AE9B2EC1176D6D56 /* menu_quit@3x.png in Resources */,
-				60E9A80D2A9ECE1D794D787F81E232FA /* player_pane.png in Resources */,
-				6FFBE8D08BEE8F8E748B116BE0396795 /* player_slider@2x.png in Resources */,
-				8D1B9D1CF9E4E544C48E1AF2BD4BA3A2 /* player_slider@3x.png in Resources */,
-				8A62AB812EA0CC57BC1419E3CFD6E87E /* player_volume@2x.png in Resources */,
-				DF0D47934A09D7B5F9998B211F37F9F2 /* player_volume@3x.png in Resources */,
-				78F9F8091B789C00C756133744C53A9F /* Player_下一集@2x.png in Resources */,
-				849EDFFB880EB1A53F6D1ED9D7445E48 /* Player_下载@2x.png in Resources */,
-				53D74B59D793EFB6DA29F7003F4CF509 /* Player_下载按下@2x.png in Resources */,
-				FC60B9B85B32DA468C9163C59A94C659 /* Player_全屏@2x.png in Resources */,
-				19583B466B7B935546C72A7B14E98AAB /* Player_全屏按下@2x.png in Resources */,
-				A088346AAFBD9660CC1566F405309AB2 /* Player_分享@2x.png in Resources */,
-				852EF58962CBDFA72C399E42E053B411 /* Player_分享按下@2x.png in Resources */,
-				853A1207B321B1228E46A3338F429862 /* Player_投屏@2x.png in Resources */,
-				6C496D8EAF10ABF9CD4BE5971E3EDCAA /* Player_投屏按下@2x.png in Resources */,
-				F6EB98E0AD29AB3A539D0BF6E4B0FDF0 /* Player_播放@2x.png in Resources */,
-				57C339FF9401902E3DFEA4AF49B9DBBA /* Player_暂停@2x.png in Resources */,
-				FD857AD859D90ED3500324BC8642FA40 /* Player_解锁@2x.png in Resources */,
-				934D6A6523868D6B92D2AFA116359245 /* Player_返回@2x.png in Resources */,
-				12B2C277CBF114CF923B91A7FCB76E5E /* Player_返回按下@2x.png in Resources */,
-				AE017EA4E08A8706BC8D7793187FF093 /* Player_锁屏@2x.png in Resources */,
-				F9968197799865FE8C358A81BE46BA00 /* pushScreen.png in Resources */,
-				2ED03BDA0C3A83E749CCFA01BD32A5B7 /* pushScreen2.png in Resources */,
-				E2666D7532CE382794CA600369A6F078 /* pushScreen2@2x.png in Resources */,
-				1B481706448A87C2CC5B839D4868DD5E /* pushScreen2@3x.png in Resources */,
-				E5689B76BB11184D50DF49C821797E7D /* pushScreen@2x.png in Resources */,
-				9DB97B363EF5D5AA955868B877F28F9F /* pushScreen@3x.png in Resources */,
-				432D07A8741712A6BC367FA4160F2BEC /* 亮度icon.png in Resources */,
-				396D646D1834088EFC6BF87C6296B30A /* 亮度icon@2x.png in Resources */,
-				16D2D6E5B452C7255B5C353B8CFA3E1D /* 亮度icon@3x.png in Resources */,
-				D12B2E3B98312842AB740E8A7F5BB6DC /* 全屏 按下.png in Resources */,
-				B26D8DCC37A60DA1E10165ACDA16509A /* 全屏 按下@2x.png in Resources */,
-				A7BFDF56C35A12771A6644EDC68ADFAA /* 全屏 按下@3x.png in Resources */,
-				075F3AE6F46DF7D5E8D96BC7F35DF929 /* 全屏.png in Resources */,
-				9A77733C3151E52FE256FE3BADD3A29F /* 全屏@2x.png in Resources */,
-				B2FEB3956C0AA3D8192DE911D00DC824 /* 全屏@3x.png in Resources */,
-				D6D371CD695572FACB53E2E1ACE3A991 /* 分享 按下.png in Resources */,
-				1AE0A91B9CB12633E7DC9A35B693ADEF /* 分享 按下@2x.png in Resources */,
-				3CB502734CDD9A8CF9621B3B51862D7C /* 分享 按下@3x.png in Resources */,
-				99D4A8FA382777C3F2E07DB15AFF9A88 /* 分享.png in Resources */,
-				069CFF7F69B7694A7ABB042C8E46A72B /* 分享@2x.png in Resources */,
-				711D2F5CD78BB12791A08588F632B34E /* 分享@3x.png in Resources */,
-				A43536FEA0B762C9F5CD2D20EF67A84E /* 投屏 按下.png in Resources */,
-				484F5DAD64F423CB1AFF18501AFC5369 /* 投屏 按下@2x.png in Resources */,
-				15FE1C518894FB74841448903ED6425F /* 投屏 按下@3x.png in Resources */,
-				1E2F2C0F8C17B35210C7AAD4F7300276 /* 投屏.png in Resources */,
-				23EEB5F512D978BE352FDB818E385FF6 /* 投屏@2x.png in Resources */,
-				5001A0AC2AD64A0C9C6C48311B5E02C4 /* 投屏@3x.png in Resources */,
-				DF4CFB40058E942063635B7C551A491C /* 播放 按下.png in Resources */,
-				C8963A0DE3AB6424DB925BA1BEFD5A42 /* 播放 按下@2x.png in Resources */,
-				8933B9190571C46B82D5757308186FAF /* 播放 按下@3x.png in Resources */,
-				91DB7A57659DDC6FE364185B9AD408B3 /* 播放.png in Resources */,
-				2EAB94BAE8EF112D8D87CDB62D63B1D2 /* 播放@2x.png in Resources */,
-				C0E2C1E583B22264E71A2DEEABFDF383 /* 播放@3x.png in Resources */,
-				2EC39452EAD2FE90D3F2338AF80808B0 /* 暂停 按下.png in Resources */,
-				4B6783855E959F948C8105D35DD0F8A4 /* 暂停 按下@2x.png in Resources */,
-				B1FB373F0E43E97B1BF7259ED4F05697 /* 暂停 按下@3x.png in Resources */,
-				39358AD0FF8D522CA8F094EAC8A40735 /* 暂停.png in Resources */,
-				BE7EF8C24067D26A400751A8C06FEC87 /* 暂停@2x.png in Resources */,
-				20346F43785B4B5DDF8BC34BC7356DB6 /* 暂停@3x.png in Resources */,
-				47CB889C166ED5B4DA9C4222276FBBF7 /* 缩小 按下.png in Resources */,
-				36D13C350FA2E5F984D8C4C192AAC459 /* 缩小 按下@2x.png in Resources */,
-				E97FC9236FC9996EE1FBA1546BD7AE8F /* 缩小 按下@3x.png in Resources */,
-				F2035F45239289ABAA575ED31AE55780 /* 缩小.png in Resources */,
-				3B88E71880E25BFFAC705F86951B090D /* 缩小@2x.png in Resources */,
-				C2DB11CAA6253E82CECB699116171BD7 /* 缩小@3x.png in Resources */,
-				5CBEA0FEE6B24E456058873F122711D7 /* 解锁.png in Resources */,
-				7EDE867DEBA0891F050C9AA927B73712 /* 解锁@2x.png in Resources */,
-				828F96FB59994BFB196EF1C1AE73914B /* 解锁@3x.png in Resources */,
-				E67D21A1DF9B95AB85CCD90F2C723C5F /* 返回 按下.png in Resources */,
-				4BCCC989ECE5D09FC6E560C91CB27F2C /* 返回 按下@2x.png in Resources */,
-				2349E0DC0117FC31B18C303677573E08 /* 返回 按下@3x.png in Resources */,
-				690C62924863F1DB6DA1CFE33243E0D8 /* 返回.png in Resources */,
-				707ADA2263F4D1AB0AB76CB200342754 /* 返回@2x.png in Resources */,
-				B5689FDBE0D06F816E9BE755D619C592 /* 返回@3x.png in Resources */,
-				C82C17E14724AE1DF6BA9A1119F3CBBB /* 返回Full 按下.png in Resources */,
-				9F71F98F1A8CD4C7C3BB40BFDA6A0FF9 /* 返回Full 按下@2x.png in Resources */,
-				9B80FBE5196752E207D2C184DD32F3D7 /* 返回Full 按下@3x.png in Resources */,
-				E7112B2C59F14EFBC3E4252E4F63692D /* 返回Full.png in Resources */,
-				D9A39CE2F3697040DF481A8EFBEA12E9 /* 返回Full@2x.png in Resources */,
-				07F2B7F7EA1DFF0ABE8CF030D9EC61DB /* 返回Full@3x.png in Resources */,
-				886B58C205E3E3A7389B0A298B0FAF48 /* 锁定.png in Resources */,
-				822918FED8A6EE27502F09342D6F53D9 /* 锁定@2x.png in Resources */,
-				FC5BF7E5DABD7894209CB1A22B675D31 /* 锁定@3x.png in Resources */,
-				56BCF2E2EC6595C44B64CBD27550D159 /* 音量icon.png in Resources */,
-				359E6F4B0939A1418E7858D6F3CEACFA /* 音量icon@2x.png in Resources */,
-				AFB6252DF655023DD677F2CB2F939AFF /* 音量icon@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

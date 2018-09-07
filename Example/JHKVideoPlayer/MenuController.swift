@@ -28,7 +28,9 @@ class MenuController: UIViewController, JHKPlayerActionsDelegate {
         let player = JHKVideoPlayer(frame:CGRect(x:10, y:40, width:300, height:180))
         player.actionDelegate = self
         player.backgroundColor = .black
-        player.playerType = .JHK_PLAYERVIEW_JHKTYPE
+        player.setPlayer(playerType: .JHK_PLAYERVIEW_JHKTYPE, collectState: .JHK_PLAYERVIEW_COLLECTSTATE)
+//        player.playerType = .JHK_PLAYERVIEW_JHKTYPE
+//        player.playerCollectState = .JHK_PLAYERVIEW_COLLECTSTATE
         return player
     }()
 
@@ -44,6 +46,7 @@ class MenuController: UIViewController, JHKPlayerActionsDelegate {
         playerView.videoTitle = "This is a temp title"
         playerView.actionDelegate = self
         playerView.startPoint = CGFloat.init(15)
+        playerView.cutCollectState(collectState: .JHK_PLAYERVIEW_CANCELCOLLERCTSTATE)
         self.view.addSubview(playerView)
 //        UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
     }

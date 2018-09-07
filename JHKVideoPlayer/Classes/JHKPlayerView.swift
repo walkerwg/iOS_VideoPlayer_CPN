@@ -126,7 +126,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     public lazy var fullScreenBtn: UIButton = {
         let button = UIButton()
         button.setTitle("全屏", for: .normal)
-        button.setTitleColor(UIColor.init("FFFFFF"), for: .normal)
+        button.setTitleColor(UIColor.init(white: 1.0, alpha: 0.5), for: .normal)
         let imageNormal = UIImage.imageInBundle(named: "右 未选中")
         button.setBackgroundImage(imageNormal, for: .normal)
         let imagePressDown = UIImage.imageInBundle(named: "右 选中")
@@ -932,31 +932,47 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }
     
     @objc func collagenBtnAction() {
-        let collImageNormal = UIImage.imageInBundle(named: "左 选中")
-        let collImagePressDown = UIImage.imageInBundle(named: "左 未选中")
-        collagenBtn.setBackgroundImage(collImageNormal, for: .normal)
-        collagenBtn.setBackgroundImage(collImagePressDown, for: .highlighted)
-
-        let fullImageNormal = UIImage.imageInBundle(named: "右 未选中")
-        let fullImagePressDown = UIImage.imageInBundle(named: "右 选中")
-        fullScreenBtn.setBackgroundImage(fullImageNormal, for: .normal)
-        fullScreenBtn.setBackgroundImage(fullImagePressDown, for: .highlighted)
-
-        internalDelegate?.collagenScreen()
+        setScreenBtnState(state: 0)
     }
     
     @objc func fullScreenBtnAction() {
-        let collImageNormal = UIImage.imageInBundle(named: "左 未选中")
-        let collImagePressDown = UIImage.imageInBundle(named: "左 选中")
+        setScreenBtnState(state: 1)
+    }
+    
+    private func setScreenBtnState(state: Int) {
+        var collImageNormal: UIImage?
+        var collImagePressDown: UIImage?
+        
+        var fullImageNormal: UIImage?
+        var fullImagePressDown: UIImage?
+        
+        if state == 0 {
+            internalDelegate?.collagenScreen()
+            collagenBtn.setTitleColor(.white, for: .normal)
+            fullScreenBtn.setTitleColor(UIColor.init(white: 1.0, alpha: 0.5), for: .normal)
+            
+            collImageNormal = UIImage.imageInBundle(named: "左 选中")
+            collImagePressDown = UIImage.imageInBundle(named: "左 未选中")
+            
+            fullImageNormal = UIImage.imageInBundle(named: "右 未选中")
+            fullImagePressDown = UIImage.imageInBundle(named: "右 选中")
+        } else {
+            internalDelegate?.fullScreen()
+            collagenBtn.setTitleColor(UIColor.init(white: 1.0, alpha: 0.5), for: .normal)
+            fullScreenBtn.setTitleColor(.white, for: .normal)
+            
+            collImageNormal = UIImage.imageInBundle(named: "左 未选中")
+            collImagePressDown = UIImage.imageInBundle(named: "左 选中")
+            
+            fullImageNormal = UIImage.imageInBundle(named: "右 选中")
+            fullImagePressDown = UIImage.imageInBundle(named: "右 未选中")
+        }
+        
         collagenBtn.setBackgroundImage(collImageNormal, for: .normal)
         collagenBtn.setBackgroundImage(collImagePressDown, for: .highlighted)
         
-        let fullImageNormal = UIImage.imageInBundle(named: "右 选中")
-        let fullImagePressDown = UIImage.imageInBundle(named: "右 未选中")
         fullScreenBtn.setBackgroundImage(fullImageNormal, for: .normal)
         fullScreenBtn.setBackgroundImage(fullImagePressDown, for: .highlighted)
-
-        internalDelegate?.fullScreen()
     }
 
     @objc func returnButtonAction() {
