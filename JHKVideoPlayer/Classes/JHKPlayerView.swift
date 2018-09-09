@@ -83,6 +83,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     public lazy var topBar: UIView = {
         let view = UIView()
         view.backgroundColor = self.menuContentColor
+        let color1 = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.8)
+        let color2 = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0)
+        view.gradientColor(CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 1), [color1.cgColor, color2.cgColor])
         return view
     }()
 
@@ -90,6 +93,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     public lazy var bottomBar: UIView = {
         let view = UIView()
         view.backgroundColor = self.menuContentColor
+        let color1 = UIColor(red: 255/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0)
+        let color2 = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.8)
+        view.gradientColor(CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 1), [color1.cgColor, color2.cgColor])
         return view
     }()
 
@@ -554,6 +560,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 暂时不加了
             lockPlayScreenButton.isHidden = true
             lockPlayScreenButton.removeFromSuperview()
+            nextButton.isHidden = true
 //
 //            playOrPauseButton.removeFromSuperview()
 //            self.addSubview(playOrPauseButton)
@@ -561,7 +568,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            moreButton.removeFromSuperview()
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 4)
-            returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 1.3, height: returnButtonHeight * 1.3)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 1.4, height: returnButtonHeight * 1.4)
             returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: returnButton.frame.size.width, height: returnButton.frame.size.height)
 
             if topControlsArray.count > 0 {
@@ -602,7 +609,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             currentTimeLabel.textColor = UIColor.init("e7e8ed")
             currentTimeLabel.textAlignment = .right
 
-            playSlider.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 2)
+            playSlider.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5 + 1.0, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 1)
             let insetH: CGFloat = playSlider.frame.height
             loadProgressView.frame = CGRect(x: playOrPauseButton.frame.maxX + space + 2, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 0.8)
             loadProgressView.layer.cornerRadius = 1;
@@ -641,7 +648,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             lockPlayScreenButton.isHidden = false
             fullOrSmallButton.isHidden = true
             moreButton.isHidden = false
-            returnButtonHalfOnScreen.isHidden = true    
+            returnButtonHalfOnScreen.isHidden = true
+            nextButton.isHidden = false
+            titleLabel.isHidden = false
 
 //            topBar.addSubview(moreButton)
             // 添加锁屏按钮
@@ -650,7 +659,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 80)
             // TODO:  增添三元条件分支匹配最小值
-            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*1.3, height: returnButtonHeight*1.3)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*1.4, height: returnButtonHeight*1.4)
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
@@ -696,14 +705,13 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             }
 
             titleLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
-            titleLabel.frame = CGRect(x: returnButton.frame.maxX + space, y: returnButton.frame.minY - 2, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 5) - (curWidth - (topBar.width - imgWidth - imgWidth)) - 5, height: titleLableHeight)
+            titleLabel.frame = CGRect(x: returnButton.frame.maxX + space, y: returnButton.frame.minY, width: curWidth - (returnButton.origin.x + returnButton.frame.size.width + 5) - (curWidth - (topBar.width - imgWidth - imgWidth)) - 5, height: titleLableHeight)
             
             let bottom_height:CGFloat = 84.0/375 * self.frame.height
             // 底部导航栏
             bottomBar.frame = CGRect(x: 0, y: self.frame.height - bottom_height, width: self.frame.width, height: bottom_height)
             // 进度条
-            playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 2)
-//            let insetH: CGFloat = playSlider.frame.height
+            playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0 + 0.8, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height:0)
             loadProgressView.frame = CGRect(x: space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 0.8)
             loadProgressView.layer.cornerRadius = 1;
             loadProgressView.layer.masksToBounds = true
@@ -1380,4 +1388,47 @@ extension String {
 //        }
 //    }
 //}
+
+public extension UIView {
+    
+    // MARK: 添加渐变色图层
+    public func gradientColor(_ startPoint: CGPoint, _ endPoint: CGPoint, _ colors: [Any]) {
+        
+        guard startPoint.x >= 0, startPoint.x <= 1, startPoint.y >= 0, startPoint.y <= 1, endPoint.x >= 0, endPoint.x <= 1, endPoint.y >= 0, endPoint.y <= 1 else {
+            return
+        }
+        
+        // 外界如果改变了self的大小，需要先刷新
+        layoutIfNeeded()
+        
+        var gradientLayer: CAGradientLayer!
+        
+        removeGradientLayer()
+        
+        gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.layer.bounds
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        gradientLayer.colors = colors
+        gradientLayer.cornerRadius = self.layer.cornerRadius
+        gradientLayer.masksToBounds = true
+        // 渐变图层插入到最底层，避免在uibutton上遮盖文字图片
+        self.layer.insertSublayer(gradientLayer, at: 0)
+        self.backgroundColor = UIColor.clear
+        // self如果是UILabel，masksToBounds设为true会导致文字消失
+        self.layer.masksToBounds = false
+    }
+    
+    // MARK: 移除渐变图层
+    // （当希望只使用backgroundColor的颜色时，需要先移除之前加过的渐变图层）
+    public func removeGradientLayer() {
+        if let sl = self.layer.sublayers {
+            for layer in sl {
+                if layer.isKind(of: CAGradientLayer.self) {
+                    layer.removeFromSuperlayer()
+                }
+            }
+        }
+    }
+}
 
