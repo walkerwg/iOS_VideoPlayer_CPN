@@ -335,13 +335,16 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     open lazy var playSlider: UISlider = {
         let slider = UISlider()
         slider.minimumValue = 0.0
-        //wg:
+        slider.minimumTrackTintColor = UIColor.init("19cf8d")
         if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+//            slider.minimumTrackTintColor = UIColor.init("19cf8d")
             slider.minimumTrackTintColor = UIColor.init("19cf8d")
+            slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
         } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
             slider.minimumTrackTintColor = UIColor.init("EC1D39")
+            slider.setThumbImage(UIImage.imageInBundle(named: "player_slider_movie_small"), for: .normal)
         }
-        slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
+//        slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
         slider.maximumTrackTintColor = UIColor.clear
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchDown)
@@ -583,12 +586,19 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //          topBar.addSubview(titleLabel) 竖屏标题需求去掉
             topBar.addSubview(returnButton)
             
+            collagenBtn.isHidden = true
+            fullScreenBtn.isHidden = true
+            
             shareButtonHalf.frame = CGRect(x: topBar.width - imgWidth - space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - space - imgHorizontalSpace, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
-                downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+                downloadButton.isHidden = false
+                collectButton.isHidden = true
             } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
-                collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+                downloadButton.isHidden = true
+                collectButton.isHidden = false
             }
             //竖屏标题需求去掉
 //            var curWidth = kScreenWidth
@@ -669,16 +679,22 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             }
             
             if isIPhoneX {
+                collagenBtn.isHidden = false
+                fullScreenBtn.isHidden = false
                 collagenBtn.frame = CGRect(x: topBar.width / 2 -  fullScreenButtonWidth, y: 24, width: fullScreenButtonWidth, height: fullScreenButtonHeight)
                 fullScreenBtn.frame = CGRect(x: topBar.width / 2, y: 24, width: fullScreenButtonWidth, height: fullScreenButtonHeight)
             }
 
             shareButtonHalf.frame = CGRect(x: topBar.width - imgWidth - m_space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             pushButtonHalf.frame = CGRect(x: topBar.width - imgWidth * 2 - m_space - b_space, y: returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+            collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
-                downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+                downloadButton.isHidden = false
+                collectButton.isHidden = true
             } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
-                collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
+                downloadButton.isHidden = true
+                collectButton.isHidden = false
             }
 
 //            separaterLineView1.frame = CGRect(x: moreButton.origin.x - 6, y: 0, width: 1, height: 8)
@@ -815,12 +831,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         self.addSubview(topBar)
         topBar.addSubview(titleLabel)
         topBar.addSubview(returnButton)
-        if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
-            topBar.addSubview(downloadButton)
-        } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
-            topBar.addSubview(collectButton)
-        }
-        if isIPhoneX {
+        topBar.addSubview(downloadButton)
+        topBar.addSubview(collectButton)
+        if isIPhoneX && playerViewType != .JHK_PLAYERVIEW_EDUTYPE { // 聚好学不显示 异形屏
             topBar.addSubview(collagenBtn)
             topBar.addSubview(fullScreenBtn)
         }
@@ -1307,6 +1320,7 @@ extension JHKPlayerView {
                 let str = NSString(string: string!)
                 let theRange = str.range(of: "/")
                 let range = NSRange.init(location: 0, length: theRange.location)
+                attrstring.addAttribute(.foregroundColor, value: UIColor.init("19cf8d"), range: range)
                 if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
                     attrstring.addAttribute(.foregroundColor, value: UIColor.init("19cf8d"), range: range)
                 } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
