@@ -36,6 +36,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                 }
             }
             isSideMenuShow = false
+            returnButtonHalfOnScreen.isHidden = isMenuHidden
         }
     }
 

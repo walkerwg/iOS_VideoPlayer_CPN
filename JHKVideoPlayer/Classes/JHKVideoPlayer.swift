@@ -266,6 +266,9 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             
         }
     }
+    //保存跳过片尾的长度
+    public var tail_length: CGFloat?
+
     public var startPoint: CGFloat?
     //跳过片尾时间
     public var endPoint: CGFloat? {
@@ -274,6 +277,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             let cmTime = CMTime(seconds: Double(endPoint), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
             let timeValue = NSValue.init(time: cmTime)
            observer = player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
+                print("player: \(self.player)")
                 print("### 跳过片尾 ###")
             self.player?.removeTimeObserver(self.observer)
             self.playState = .stop
@@ -290,6 +294,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             let timeTotal = formatTimer(totalTime)
             controlView?.totalTimeLabel.text = "\(timeTotal)"
             controlView?.playSlider.maximumValue = Float(totalTime)
+            if tail_length != nil && tail_length! > CGFloat(0) {
+                endPoint = totalTime - tail_length!
+            }
+
         }
     }
 
@@ -375,6 +383,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             player?.removeTimeObserver(playbackTimeObserver!)
             playbackTimeObserver = nil
         }
+        if observer != nil {
+            player?.removeTimeObserver(playbackTimeObserver!)
+            observer = nil
+        }
         if link != nil {
             link?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
             link = nil
@@ -452,6 +464,8 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 
         if player != nil {
             player = nil
+            tail_length = CGFloat(0)
+            endPoint = nil
             RemoveObservers()
         }
         if controlView == nil {
@@ -547,6 +561,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 self?.actionDelegate?.breakPointListener(time: currentSecond)
             })
             if startPoint != nil {
+                SwiftNotice.showNoticeWithText(.info, text: "已为您自动跳过片头", autoClear: true, autoClearTime: 2)
                 player?.seek(to: CMTime(seconds: Double(startPoint!), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
                 startPoint = nil
             }
