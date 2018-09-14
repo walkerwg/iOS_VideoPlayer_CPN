@@ -276,15 +276,16 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             guard let endPoint = endPoint else { return }
             let cmTime = CMTime(seconds: Double(endPoint), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
             let timeValue = NSValue.init(time: cmTime)
-           observer = player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
-                print("player: \(self.player)")
-                print("### 跳过片尾 ###")
-            self.player?.removeTimeObserver(self.observer)
-            self.playState = .stop
-                if self.autoNext {
-                    self.actionDelegate?.playNextAction()
-                }
-            })
+            if observer == nil {
+                observer = player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
+                    print("player: \(self.player)")
+                    print("### 跳过片尾 ###")
+                    self.playState = .stop
+                    if self.autoNext {
+                        self.actionDelegate?.playNextAction()
+                    }
+                })
+            }
         }
     }
     // Total video length
@@ -384,7 +385,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             playbackTimeObserver = nil
         }
         if observer != nil {
-            player?.removeTimeObserver(playbackTimeObserver!)
+            player?.removeTimeObserver(observer!)
             observer = nil
         }
         if link != nil {
@@ -561,7 +562,6 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 self?.actionDelegate?.breakPointListener(time: currentSecond)
             })
             if startPoint != nil {
-                SwiftNotice.showNoticeWithText(.info, text: "已为您自动跳过片头", autoClear: true, autoClearTime: 2)
                 player?.seek(to: CMTime(seconds: Double(startPoint!), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
                 startPoint = nil
             }
