@@ -42,6 +42,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                 }
             }
             isSideMenuShow = false
+            returnButtonHalfOnScreen.isHidden = isMenuHidden
         }
     }
 
@@ -146,7 +147,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let button = UIButton()
         // TODO: 暂时设置半屏
         let imageNormal = UIImage.imageInBundle(named: "Player_返回")
-        button.setBackgroundImage(imageNormal, for: .normal)
+        button.setImage(imageNormal, for: .normal)
         let imagePressDown = UIImage.imageInBundle(named: "Player_返回按下")
         button.setImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
@@ -345,6 +346,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             slider.setThumbImage(UIImage.imageInBundle(named: "player_slider_movie_small"), for: .normal)
         }
 //        slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
+
         slider.maximumTrackTintColor = UIColor.clear
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchDown)
@@ -696,6 +698,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                 downloadButton.isHidden = true
                 collectButton.isHidden = false
             }
+
 
 //            separaterLineView1.frame = CGRect(x: moreButton.origin.x - 6, y: 0, width: 1, height: 8)
 //            shareButton.frame = CGRect(x: separaterLineView1.origin.x - 50, y: 0, width: 50, height: topBar.frame.height)

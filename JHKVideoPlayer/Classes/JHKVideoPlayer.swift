@@ -293,6 +293,9 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             
         }
     }
+    //保存跳过片尾的长度
+    public var tail_length: CGFloat?
+
     public var startPoint: CGFloat?
     //跳过片尾时间
     public var endPoint: CGFloat? {
@@ -300,14 +303,16 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             guard let endPoint = endPoint else { return }
             let cmTime = CMTime(seconds: Double(endPoint), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
             let timeValue = NSValue.init(time: cmTime)
-           observer = player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
-                print("### 跳过片尾 ###")
-            self.player?.removeTimeObserver(self.observer)
-            self.playState = .stop
-                if self.autoNext {
-                    self.actionDelegate?.playNextAction()
-                }
-            })
+            if observer == nil {
+                observer = player?.addBoundaryTimeObserver(forTimes: [timeValue], queue: nil, using: {
+                    print("player: \(self.player)")
+                    print("### 跳过片尾 ###")
+                    self.playState = .stop
+                    if self.autoNext {
+                        self.actionDelegate?.playNextAction()
+                    }
+                })
+            }
         }
     }
     // Total video length
@@ -317,6 +322,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             let timeTotal = formatTimer(totalTime)
             controlView?.totalTimeLabel.text = "\(timeTotal)"
             controlView?.playSlider.maximumValue = Float(totalTime)
+            if tail_length != nil && tail_length! > CGFloat(0) {
+                endPoint = totalTime - tail_length!
+            }
+
         }
     }
 
@@ -401,6 +410,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         if playbackTimeObserver != nil {
             player?.removeTimeObserver(playbackTimeObserver!)
             playbackTimeObserver = nil
+        }
+        if observer != nil {
+            player?.removeTimeObserver(observer!)
+            observer = nil
         }
         if link != nil {
             link?.remove(from: RunLoop.main, forMode: .defaultRunLoopMode)
@@ -520,6 +533,8 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 
         if player != nil {
             player = nil
+            tail_length = CGFloat(0)
+            endPoint = nil
             RemoveObservers()
         }
         if controlView == nil {
@@ -784,13 +799,18 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             guard let sself = self else { return }
             if sself.actionDelegate != nil {
                 sself.actionDelegate?.shareAction()
-                
-                if self?.isFull == .full {
-                    // 点击分享按钮时，如果是全屏状态，则退出全屏
-                    UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
-                }
-
-//                dPrint("弹窗分享窗口")
+                sself.exitFullScreen()
+                print("弹窗分享窗口")
+            }
+        }
+        
+        /// Share info button closure
+        JHKPlayerClosure.downloadClosure = { [weak self] in
+            guard let sself = self else { return }
+            if sself.actionDelegate != nil {
+                sself.actionDelegate?.downloadAction()
+                sself.exitFullScreen()
+                print("下载窗口")
             }
         }
         
@@ -857,6 +877,8 @@ extension JHKVideoPlayer {
             self.playerStopPlaying()
         }
         self.actionDelegate?.playerQuitAction()
+        // 配合H5处理课程较少时界面变形问题
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clickBackButtonNotify"), object: controlView?.openVIPBtn.titleLabel?.text)
     }
     
     func openVIPButtonAction() {
@@ -886,6 +908,18 @@ extension JHKVideoPlayer {
             if controlView?.topBar.isHidden == false {
                 controlView?.playOrPauseButton.isHidden = false
             }
+        }
+    }
+    
+    func exitFullScreen() {
+        if self.isFull == .full {
+            // 防止方向未发生变化不执行 shouldAutorotate 代理
+            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation")
+            // 控制屏幕是否自动旋转 --- 让旋转
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerAutorotateStateNotification"), object: "1")
+            // 全屏时，点击返回，跳转到播放详情页面
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation")
+            self.isFull = .normal
         }
     }
 }
