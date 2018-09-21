@@ -29,14 +29,16 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     public var isMenuHidden: Bool = false {
         didSet{
             for subView in subviews {
-                if subView != loadingIndicator && subView != lockMaskView {
-                    if subView.tag != 880221 {
+                if subView != loadingIndicator && subView != lockMaskView{
+                    if subView.tag != 880221 && subView.tag != 100100 {
                       subView.isHidden = isMenuHidden
                     }
                 }
+               
             }
+            
+
             isSideMenuShow = false
-            returnButtonHalfOnScreen.isHidden = isMenuHidden
         }
     }
 
@@ -297,7 +299,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         slider.setMinimumTrackImage(image, for: .normal)
         slider.maximumTrackTintColor = UIColor.clear
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
-        slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchDown)
+        slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(playSliderSeeked(_:)), for: .touchDown)
         return slider
     }()
@@ -932,9 +934,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     @objc func playSliderSeeked(_ sender: AnyObject) {
         JHKPlayerView.self.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideMenu), object: nil)
         for gesture in self.gestureRecognizers! {
-            gesture.isEnabled = true
+            gesture.isEnabled = false
         }
-        sliderGesture?.isEnabled = true
+        sliderGesture?.isEnabled = false
     }
 
 // MARK: - Dependant functions
@@ -1082,7 +1084,7 @@ extension JHKPlayerView {
                 return true
             }
         }
-        return false
+        return true
     }
 
     func tapGestureHandler(_ tap: UITapGestureRecognizer) {
