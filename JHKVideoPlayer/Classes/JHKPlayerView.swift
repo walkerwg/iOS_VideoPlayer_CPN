@@ -623,9 +623,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             currentTimeLabel.textColor = UIColor.init("e7e8ed")
             currentTimeLabel.textAlignment = .right
 
-            playSlider.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5 + 1.0, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 1)
-            let insetH: CGFloat = playSlider.frame.height
-            loadProgressView.frame = CGRect(x: playOrPauseButton.frame.maxX + space + 2, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 0.8)
+            playSlider.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5 , width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height: 2)
+            loadProgressView.frame = CGRect(x: playOrPauseButton.frame.maxX + space + 2, y: playOrPauseButton.frame.minY + playOrPauseButtonWidth * 0.5, width: currentTimeLabel.frame.minX - space - (playOrPauseButton.frame.maxX + space), height:0.5)
             loadProgressView.layer.cornerRadius = 1;
             loadProgressView.layer.masksToBounds = true
 
@@ -732,10 +731,11 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 底部导航栏
             bottomBar.frame = CGRect(x: 0, y: self.frame.height - bottom_height, width: self.frame.width, height: bottom_height)
             // 进度条
-            playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0 + 0.8, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height:0)
-            loadProgressView.frame = CGRect(x: space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 0.8)
+            playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0 , width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height:2)
+            loadProgressView.frame = CGRect(x: space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 0.5)
             loadProgressView.layer.cornerRadius = 1;
             loadProgressView.layer.masksToBounds = true
+
 
             // 时间指示器
 //            currentTimeLabel.frame = CGRect(x: 16 + X_fullScreen, y: insetH - 2, width: 55, height: 14)
