@@ -829,13 +829,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playOrPauseBTNNotify"), object: nil)
         if isPlayerLocked {
             print("用户点击了播放器上的播放或者暂停按钮 playOrPauseAction")
-            
-            
             return
         }
-        
         JHKPlayerClosure.playOrPauseClosure?()
-
     }
     
     @objc public func lockPlayScreenAction() {

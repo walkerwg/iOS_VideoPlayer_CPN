@@ -802,6 +802,7 @@ extension JHKVideoPlayer {
     }
     
     func openVIPButtonAction() {
+        exitFullScreen()
         if self.playLockState != .locked {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "openVIPMemberBtnClickedNoti"), object: controlView?.openVIPBtn.titleLabel?.text)
         }
