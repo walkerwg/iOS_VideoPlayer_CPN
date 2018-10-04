@@ -34,10 +34,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                       subView.isHidden = isMenuHidden
                     }
                 }
-               
             }
-            
-
             isSideMenuShow = false
         }
     }
@@ -336,7 +333,6 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }()
 
     /// Next vidoe button on bottom menu
-    // 上一集 下一集按钮 聚好学3.3版本暂时不使用了，先保留着
     open lazy var nextButton: UIButton = {
         let button = UIButton()
         let imageNormal = UIImage.imageInBundle(named: "Player_下一集") // btn_pane  投屏
@@ -653,7 +649,6 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             loadProgressView.layer.cornerRadius = 1;
             loadProgressView.layer.masksToBounds = true
 
-
             // 时间指示器
 //            currentTimeLabel.frame = CGRect(x: 16 + X_fullScreen, y: insetH - 2, width: 55, height: 14)
 //            totalTimeLabel.isHidden = false
@@ -731,7 +726,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
         lockMaskView.addSubview(lockMessageView)
         // 与第三方视频源进行适配
-        if let appType = UserDefaults.standard.object(forKey: "curWebViewAppType") as? String {
+        if let appType = UserDefaults.standard.object(forKey: "kCurDetailPageWebViewType") as? String {
             if appType != "0" { // 如果不是教育，隐藏播放器上很多按钮
                 lockPlayScreenButton.isHidden = true
                 pushButtonHalf.isHidden = true
@@ -745,6 +740,14 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                 lockPlayScreenButton.isHidden = true
                 definitionButton.isHidden = true
                 lockPlayScreenButton.isHidden = true
+                downloadButton.isHidden = true
+                // 下一集置灰
+                nextButton.isUserInteractionEnabled = false
+                nextButton.alpha = 0.4
+            }else {
+                // 下一集恢复正常
+            nextButton.isUserInteractionEnabled = true
+                nextButton.alpha = 1
             }
         }
     }
