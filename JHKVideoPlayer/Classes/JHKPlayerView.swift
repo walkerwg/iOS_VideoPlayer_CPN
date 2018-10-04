@@ -599,10 +599,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
                 downloadButton.isHidden = false
-                collectButton.isHidden = true
+//                collectButton.isHidden = true
             } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
                 downloadButton.isHidden = true
-                collectButton.isHidden = false
+//                collectButton.isHidden = false
             }
             //竖屏标题需求去掉
 //            var curWidth = kScreenWidth
@@ -694,10 +694,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
                 downloadButton.isHidden = false
-                collectButton.isHidden = true
+//                collectButton.isHidden = true
             } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
                 downloadButton.isHidden = true
-                collectButton.isHidden = false
+//                collectButton.isHidden = false
             }
 
 
@@ -813,6 +813,22 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         lockMaskView.addSubview(openVIPBtn)
 
         lockMaskView.addSubview(lockMessageView)
+        
+        if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+            if isFullOrHalfScreen() == .normal {
+                collectButton.isHidden = true
+                pushButtonHalf.isHidden = true
+                shareButtonHalf.isHidden = true
+                pushButton.isHidden = true
+                shareButton.isHidden = true
+            }else {
+                collectButton.isHidden = false
+                pushButtonHalf.isHidden = false
+                shareButtonHalf.isHidden = false
+                pushButton.isHidden = false
+                shareButton.isHidden = false
+            }
+        }
     }
 
     open func addAllViews() {
@@ -888,19 +904,20 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 // MARK: - First response action
     
     @objc public func collectAction() {
+        print("收藏: 取消点击用户收藏响应功能!")
         if self.playerViewCollectState == JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE { // 取消收藏
-            let imageNormal = UIImage.imageInBundle(named: "横屏 收藏")
-            let imagePressCollect = UIImage.imageInBundle(named: "横屏 收藏")
-            collectButton.setBackgroundImage(imageNormal, for: .normal)
-            collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
-            playerViewCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE
+//            let imageNormal = UIImage.imageInBundle(named: "横屏 收藏")
+//            let imagePressCollect = UIImage.imageInBundle(named: "横屏 收藏")
+//            collectButton.setBackgroundImage(imageNormal, for: .normal)
+//            collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+//            playerViewCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE
             JHKPlayerClosure.collectClosure?(.JHK_PLAYERVIEW_CANCELCOLLERCTSTATE)
         } else { // 收藏
-            let imageNormal = UIImage.imageInBundle(named: "横屏 已收藏")
-            let imagePressCollect = UIImage.imageInBundle(named: "横屏 已收藏")
-            collectButton.setBackgroundImage(imageNormal, for: .normal)
-            collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
-            playerViewCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE
+//            let imageNormal = UIImage.imageInBundle(named: "横屏 已收藏")
+//            let imagePressCollect = UIImage.imageInBundle(named: "横屏 已收藏")
+//            collectButton.setBackgroundImage(imageNormal, for: .normal)
+//            collectButton.setBackgroundImage(imagePressCollect, for: .highlighted)
+//            playerViewCollectState = JHKPlayerCollectState.JHK_PLAYERVIEW_COLLECTSTATE
             JHKPlayerClosure.collectClosure?(.JHK_PLAYERVIEW_COLLECTSTATE)
         }
     }
