@@ -40,10 +40,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                       subView.isHidden = isMenuHidden
                     }
                 }
-               
             }
-            
-
             isSideMenuShow = false
         }
     }
@@ -153,6 +150,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let imagePressDown = UIImage.imageInBundle(named: "Player_返回按下")
         button.setImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
+        button.imageEdgeInsets = UIEdgeInsetsMake(-12, 0, 0, 0) //为了topbar排控件对齐
         return button
     }()
 
@@ -161,11 +159,12 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let button = UIButton()
         // TODO: 暂时设置半屏
         let imageNormal = UIImage.imageInBundle(named: "Player_返回")
-        button.setBackgroundImage(imageNormal, for: .normal)
+        button.setImage(imageNormal, for: .normal)
         let imagePressDown = UIImage.imageInBundle(named: "Player_返回按下")
-        button.setBackgroundImage(imagePressDown, for: .highlighted)
+        button.setImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
         button.tag = 880221
+        button.imageEdgeInsets = UIEdgeInsetsMake(-12, 0, 0, 0) //为了topbar排控件对齐
         return button
     }()
     
@@ -324,6 +323,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Load progressor
     open lazy var loadProgressView: UIProgressView = {
         let progressView = UIProgressView()
+	progressView.progressTintColor =  UIColor(red: 255.0/255.0, green: 255.0/255.0, blue:255.0/255.0, alpha: 0.8)
+        progressView.trackTintColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue:255.0/255.0, alpha: 0.4)
+	/*
         progressView.backgroundColor = UIColor.clear
         progressView.progressTintColor = JHKPlayerView.sliderMaxColor
         progressView.trackTintColor = UIColor.lightGray
@@ -331,6 +333,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         progressView.contentMode = .center
         progressView.progress = 0.0
         progressView.trackTintColor = UIColor.lightGray
+	*/
         return progressView
     }()
 
@@ -340,9 +343,14 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         slider.minimumValue = 0.0
         slider.minimumTrackTintColor = UIColor.init("19cf8d")
         if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+	/*
 //            slider.minimumTrackTintColor = UIColor.init("19cf8d")
             slider.minimumTrackTintColor = UIColor.init("19cf8d")
             slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
+	    */
+ 	slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
+        slider.minimumTrackTintColor = JHKPlayerView.sliderMinColor
+
         } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
             slider.minimumTrackTintColor = UIColor.init("EC1D39")
             slider.setThumbImage(UIImage.imageInBundle(named: "player_slider_movie_small"), for: .normal)
@@ -514,6 +522,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     init(delegate: JHKPlayerActionsDelegate?) {
         super.init(frame: .zero)
         customizeActionHandler = delegate
+        
+        hideTopMenuRightBTN()
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -539,7 +549,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let returnButtonTop: CGFloat = 28.0;
         let titleLableHeight : CGFloat = 18.0;
         let returnButtonHeight : CGFloat = 15.0;
-        let returnButtonWidth : CGFloat = 9.0;
+        let returnButtonWidth : CGFloat = 15.0;
         let fullScreenButtonWidth : CGFloat = 90.0;
         let fullScreenButtonHeight : CGFloat = 36.0
         
@@ -548,6 +558,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let playOrPauseButtonTop: CGFloat = 16.0
         let playOrPauseButtonWidth: CGFloat = 16.0
         let currentTimeLabelWidth: CGFloat = 80.0
+        
+        hideTopMenuRightBTN()
+
         if isFullOrHalfScreen() == .normal { // 竖屏
 
             // 显示半屏所特有的
@@ -575,7 +588,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            moreButton.removeFromSuperview()
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 4)
-            returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 1.4, height: returnButtonHeight * 1.4)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 2, height: returnButtonHeight * 2)
             returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: returnButton.frame.size.width, height: returnButton.frame.size.height)
 
             if topControlsArray.count > 0 {
@@ -672,7 +685,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 80)
             // TODO:  增添三元条件分支匹配最小值
-            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*1.4, height: returnButtonHeight*1.4)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*2, height: returnButtonHeight*2)
+            returnButtonHalfOnScreen.frame = returnButton.frame
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
@@ -735,7 +749,6 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             loadProgressView.frame = CGRect(x: space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 0.5)
             loadProgressView.layer.cornerRadius = 1;
             loadProgressView.layer.masksToBounds = true
-
 
             // 时间指示器
 //            currentTimeLabel.frame = CGRect(x: 16 + X_fullScreen, y: insetH - 2, width: 55, height: 14)
@@ -932,13 +945,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playOrPauseBTNNotify"), object: nil)
         if isPlayerLocked {
             print("用户点击了播放器上的播放或者暂停按钮 playOrPauseAction")
-            
-            
             return
         }
-        
         JHKPlayerClosure.playOrPauseClosure?()
-
     }
     
     @objc public func lockPlayScreenAction() {
@@ -1199,6 +1208,26 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         lockMessageView.contentSizeToFit()
         if lockMaskView.superview != self {
             self.insertSubview(lockMaskView, at: 0)
+        }
+    }
+    
+    private func hideTopMenuRightBTN() {
+        if playerViewType != JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+            if isFullOrHalfScreen() == .normal {
+                collectButton.isHidden = true
+                pushButtonHalf.isHidden = true
+                shareButtonHalf.isHidden = true
+                pushButton.isHidden = true
+                shareButton.isHidden = true
+            }else {
+                collectButton.isHidden = false
+                pushButtonHalf.isHidden = false
+                shareButtonHalf.isHidden = false
+                pushButton.isHidden = false
+                shareButton.isHidden = false
+            }
+        }else {
+            collectButton.isHidden = true
         }
     }
 }

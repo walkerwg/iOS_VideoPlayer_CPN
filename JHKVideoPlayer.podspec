@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JHKVideoPlayer'
-  s.version          = '4.0.15'
+  s.version          = '4.0.17'
   s.summary          = 'JHKVideoPlayer - A video player for JHK company.'
 
 # This description is used to generate tags and improve search results.

@@ -152,15 +152,15 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 //                let image = UIImage.imageInBundle(named: "btn_pause")
 //                controlView?.playOrPauseButton.setBackgroundImage(image, for: .normal)
                 // 返回退出按钮
-                let imageNormal_Back = UIImage.imageInBundle(named: "Player_返回")
-                controlView?.returnButton.setBackgroundImage(imageNormal_Back, for: .normal)
-                let imagePressDown_Back = UIImage.imageInBundle(named: "Player_返回按下")
-                controlView?.returnButton.setBackgroundImage(imagePressDown_Back, for: .highlighted)
+//                let imageNormal_Back = UIImage.imageInBundle(named: "Player_返回")
+//                controlView?.returnButton.setBackgroundImage(imageNormal_Back, for: .normal)
+//                let imagePressDown_Back = UIImage.imageInBundle(named: "Player_返回按下")
+//                controlView?.returnButton.setBackgroundImage(imagePressDown_Back, for: .highlighted)
                 // 位于主屏幕上的按钮
-                let imageNormal_BackScreen = UIImage.imageInBundle(named: "Player_返回")
-                controlView?.returnButtonHalfOnScreen.setBackgroundImage(imageNormal_BackScreen, for: .normal)
-                let imagePressDown_BackScreen = UIImage.imageInBundle(named: "Player_返回按下")
-                controlView?.returnButtonHalfOnScreen.setBackgroundImage(imagePressDown_BackScreen, for: .highlighted)
+//                let imageNormal_BackScreen = UIImage.imageInBundle(named: "Player_返回")
+//                controlView?.returnButtonHalfOnScreen.setBackgroundImage(imageNormal_BackScreen, for: .normal)
+//                let imagePressDown_BackScreen = UIImage.imageInBundle(named: "Player_返回按下")
+//                controlView?.returnButtonHalfOnScreen.setBackgroundImage(imagePressDown_BackScreen, for: .highlighted)
 
                 controlView?.definitionButton.removeFromSuperview()
                 controlView?.bottomControlsArray.remove(self.controlView!.definitionButton)
@@ -181,10 +181,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 let imagePressDown = UIImage.imageInBundle(named: "缩小 按下")
                 controlView?.fullOrSmallButton.setBackgroundImage(imagePressDown, for: .highlighted)
                 // 返回退出按钮
-                let imageNormal_Back = UIImage.imageInBundle(named: "Player_返回")
-                controlView?.returnButton.setBackgroundImage(imageNormal_Back, for: .normal)
-                let imagePressDown_Back = UIImage.imageInBundle(named: "Player_返回")
-                controlView?.returnButton.setBackgroundImage(imagePressDown_Back, for: .highlighted)
+//                let imageNormal_Back = UIImage.imageInBundle(named: "Player_返回")
+//                controlView?.returnButton.setBackgroundImage(imageNormal_Back, for: .normal)
+//                let imagePressDown_Back = UIImage.imageInBundle(named: "Player_返回")
+//                controlView?.returnButton.setBackgroundImage(imagePressDown_Back, for: .highlighted)
 
                 controlView?.bottomControlsArray.add(self.controlView!.definitionButton)
 //                controlView?.topControlsArray.add(self.controlView!.moreButton)
@@ -882,6 +882,7 @@ extension JHKVideoPlayer {
     }
     
     func openVIPButtonAction() {
+        exitFullScreen()
         if self.playLockState != .locked {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "openVIPMemberBtnClickedNoti"), object: controlView?.openVIPBtn.titleLabel?.text)
         }
