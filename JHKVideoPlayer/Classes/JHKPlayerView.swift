@@ -117,6 +117,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let imagePressDown = UIImage.imageInBundle(named: "Player_返回按下")
         button.setImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
+        button.imageEdgeInsets = UIEdgeInsetsMake(-12, 0, 0, 0) //为了topbar排控件对齐
         return button
     }()
 
@@ -125,11 +126,12 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let button = UIButton()
         // TODO: 暂时设置半屏
         let imageNormal = UIImage.imageInBundle(named: "Player_返回")
-        button.setBackgroundImage(imageNormal, for: .normal)
+        button.setImage(imageNormal, for: .normal)
         let imagePressDown = UIImage.imageInBundle(named: "Player_返回按下")
-        button.setBackgroundImage(imagePressDown, for: .highlighted)
+        button.setImage(imagePressDown, for: .highlighted)
         button.addTarget(self, action: #selector(returnButtonAction), for: .touchUpInside)
         button.tag = 880221
+        button.imageEdgeInsets = UIEdgeInsetsMake(-12, 0, 0, 0) //为了topbar排控件对齐
         return button
     }()
     
@@ -270,13 +272,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     /// Load progressor
     open lazy var loadProgressView: UIProgressView = {
         let progressView = UIProgressView()
-        progressView.backgroundColor = UIColor.clear
-        progressView.progressTintColor = JHKPlayerView.sliderMaxColor
-        progressView.trackTintColor = UIColor.lightGray
-        progressView.progressViewStyle = .bar
-        progressView.contentMode = .center
+        progressView.progressTintColor =  UIColor(red: 255.0/255.0, green: 255.0/255.0, blue:255.0/255.0, alpha: 0.8)
+        progressView.trackTintColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue:255.0/255.0, alpha: 0.4)
         progressView.progress = 0.0
-        progressView.trackTintColor = UIColor.lightGray
         return progressView
     }()
 
@@ -285,15 +283,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let slider = UISlider()
         slider.minimumValue = 0.0
         //wg:
-        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 2.0)
-        UIGraphicsBeginImageContext(rect.size)
-        let context:CGContext = UIGraphicsGetCurrentContext()!
-        context.setFillColor(JHKPlayerView.sliderMinColor.cgColor)
-        context.fill(rect);
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
         slider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
-        slider.setMinimumTrackImage(image, for: .normal)
+        slider.minimumTrackTintColor = JHKPlayerView.sliderMinColor
         slider.maximumTrackTintColor = UIColor.clear
         slider.addTarget(self, action: #selector(playSliderChanging(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(playSliderDraged(_:)), for: .touchUpInside)
@@ -481,7 +472,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let returnButtonTop: CGFloat = 28.0;
         let titleLableHeight : CGFloat = 18.0;
         let returnButtonHeight : CGFloat = 15.0;
-        let returnButtonWidth : CGFloat = 9.0;
+        let returnButtonWidth : CGFloat = 15.0;
         
         let bottomBarHeightScale: CGFloat = 0.187
         let bottomBarHeight: CGFloat = self.frame.height * bottomBarHeightScale
@@ -515,7 +506,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            moreButton.removeFromSuperview()
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 4)
-            returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 1.4, height: returnButtonHeight * 1.4)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 2, height: returnButtonHeight * 2)
             returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: returnButton.frame.size.width, height: returnButton.frame.size.height)
 
             if topControlsArray.count > 0 {
@@ -601,7 +592,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 80)
             // TODO:  增添三元条件分支匹配最小值
-            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*1.4, height: returnButtonHeight*1.4)
+            returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*2, height: returnButtonHeight*2)
+            returnButtonHalfOnScreen.frame = returnButton.frame
             if topControlsArray.count > 0 {
                 for i in 1...topControlsArray.count {
                     let view: UIView = topControlsArray[i - 1] as! UIView
