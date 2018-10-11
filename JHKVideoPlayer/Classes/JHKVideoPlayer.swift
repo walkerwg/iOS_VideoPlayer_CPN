@@ -173,6 +173,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 controlView?.setNeedsLayout()
                 // 控制屏幕是否自动旋转 --- 不让旋转
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerAutorotateStateNotification"), object: "0")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerFullOrSmallNotification"), object: "0")
             }
             else {// 全屏时
                 // 缩小至小屏幕按钮
@@ -198,6 +199,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 controlView?.setNeedsLayout()
                 // 控制屏幕是否自动旋转 --- 不让旋转
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerAutorotateStateNotification"), object: "0")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "JHKPlayerFullOrSmallNotification"), object: "1")
             }
         }
     }

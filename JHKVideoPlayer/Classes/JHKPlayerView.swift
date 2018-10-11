@@ -517,6 +517,19 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         self.playerViewCollectState = collectState
         self.addAllViews()
         self.addGuestures()
+        
+        if playerViewType != JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+            collectButton.isHidden = true
+            pushButtonHalf.isHidden = true
+            shareButtonHalf.isHidden = true
+            pushButton.isHidden = true
+            shareButton.isHidden = true
+        }
+        
+        let bundleIdentifier:String = Bundle.main.bundleIdentifier!
+        if bundleIdentifier == "com.hisense.HsShare3P5" {
+            downloadButton.isHidden = true
+        }
     }
 
     init(delegate: JHKPlayerActionsDelegate?) {
@@ -827,7 +840,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
         lockMaskView.addSubview(lockMessageView)
         
-        if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+        if playerViewType != JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
             if isFullOrHalfScreen() == .normal {
                 collectButton.isHidden = true
                 pushButtonHalf.isHidden = true
@@ -841,6 +854,13 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                 pushButton.isHidden = false
                 shareButton.isHidden = false
             }
+        }else {
+            collectButton.isHidden = true
+        }
+        
+        let bundleIdentifier:String = Bundle.main.bundleIdentifier!
+        if bundleIdentifier == "com.hisense.HsShare3P5" {
+            downloadButton.isHidden = true
         }
     }
 
@@ -1261,6 +1281,8 @@ extension JHKPlayerView {
         } else if gestureRecognizer is UITapGestureRecognizer {
             if playSlider == hitView || lockMaskView == hitView {
                 return true
+            }else if bottomBar == hitView || topBar == hitView {
+                return false
             }
         }
         return true
