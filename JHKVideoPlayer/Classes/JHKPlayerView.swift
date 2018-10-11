@@ -1073,6 +1073,8 @@ extension JHKPlayerView {
         } else if gestureRecognizer is UITapGestureRecognizer {
             if playSlider == hitView || lockMaskView == hitView {
                 return true
+            }else if bottomBar == hitView || topBar == hitView {
+                return false
             }
         }
         return true
