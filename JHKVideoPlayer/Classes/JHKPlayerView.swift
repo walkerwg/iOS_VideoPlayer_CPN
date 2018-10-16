@@ -494,7 +494,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             fullOrSmallButton.isHidden = false
             titleLabel.isHidden = true
 
-            returnButtonHalfOnScreen.isHidden = false
+            returnButtonHalfOnScreen.isHidden = true
             // 暂时不加了
             lockPlayScreenButton.isHidden = true
             lockPlayScreenButton.removeFromSuperview()
@@ -506,6 +506,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            moreButton.removeFromSuperview()
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height / 4)
+            let color1 = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.8)
+            let color2 = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0)
+            topBar.gradientColor(CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 1), [color1.cgColor, color2.cgColor])
             returnButton.frame = CGRect(x: space, y: returnButtonTop - 2, width: returnButtonWidth * 2, height: returnButtonHeight * 2)
             returnButtonHalfOnScreen.frame = CGRect(x: space, y: returnButton.frame.minY, width: returnButton.frame.size.width, height: returnButton.frame.size.height)
 
@@ -535,6 +538,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
             // 底部导航栏
             bottomBar.frame = CGRect(x: 0, y: self.frame.height - bottomBarHeight, width: self.frame.width, height: bottomBarHeight)
+            bottomBar.gradientColor(CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 1), [color2.cgColor, color1.cgColor])
             playOrPauseButton.frame = CGRect(x: space, y: playOrPauseButtonTop, width: playOrPauseButtonWidth, height: playOrPauseButtonWidth)
             fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - space - playOrPauseButtonWidth, y: playOrPauseButton.frame.minY, width: playOrPauseButtonWidth, height: playOrPauseButtonWidth)
 
@@ -591,6 +595,9 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 
             // 顶部导航栏
             topBar.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 80)
+            let color1 = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.8)
+            let color2 = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.0)
+            topBar.gradientColor(CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 1), [color1.cgColor, color2.cgColor])
             // TODO:  增添三元条件分支匹配最小值
             returnButton.frame = CGRect(x: space, y: returnButtonTop, width: returnButtonWidth*2, height: returnButtonHeight*2)
             returnButtonHalfOnScreen.frame = returnButton.frame
@@ -635,6 +642,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             let bottom_height:CGFloat = 84.0/375 * self.frame.height
             // 底部导航栏
             bottomBar.frame = CGRect(x: 0, y: self.frame.height - bottom_height, width: self.frame.width, height: bottom_height)
+            bottomBar.gradientColor(CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 1), [color2.cgColor, color1.cgColor])
             // 进度条
             playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0 , width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height:2)
             loadProgressView.frame = CGRect(x: space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 0.5)
@@ -796,6 +804,12 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         tapGesture.numberOfTapsRequired = 1
         tapGesture.numberOfTouchesRequired = 1
         tapGesture.delegate = self
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
+        doubleTapGesture.numberOfTapsRequired = 2
+        doubleTapGesture.numberOfTouchesRequired = 1
+        doubleTapGesture.delegate = self
+        tapGesture.require(toFail: doubleTapGesture)
 
         sliderGesture = UITapGestureRecognizer(target: self, action: #selector((customizeGestureHandler ?? self).sliderGestureHandler))
         sliderGesture!.numberOfTapsRequired = 1
@@ -807,8 +821,14 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         panGesture.delegate = self
         self.addGestureRecognizer(tapGesture)
         self.addGestureRecognizer(panGesture)
-    }
+        self.addGestureRecognizer(doubleTapGesture)
 
+    }
+    
+    @objc func doubleTap() {
+        JHKPlayerClosure.playOrPauseClosure?()
+    }
+    
 // MARK: - First response action
     
     @objc public func downloadAction() {
@@ -1041,6 +1061,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         if lockMaskView.superview != self {
             self.insertSubview(lockMaskView, at: 0)
         }
+        returnButtonHalfOnScreen.isHidden = false
     }
 }
 
@@ -1077,7 +1098,7 @@ extension JHKPlayerView {
                 return false
             }
         }
-        return true
+        return false
     }
 
     func tapGestureHandler(_ tap: UITapGestureRecognizer) {
@@ -1100,7 +1121,12 @@ extension JHKPlayerView {
             internalDelegate?.fullOrShrinkAction()
         }
     }
-
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.numberOfTouches == 2 || otherGestureRecognizer.numberOfTouches == 2 {
+            return false
+        }
+        return true
+    }
     func sliderGestureHandler(_ slide: UITapGestureRecognizer) {
         if isPlayerLocked {
             print("屏幕已经锁定，不做任何处理 sliderGestureHandler")
