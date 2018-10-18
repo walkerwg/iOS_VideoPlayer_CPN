@@ -781,10 +781,13 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             case .notLocked:
                 sself.playLockState = .locked
                 sself.controlView?.isPlayerLocked = true
+                sself.controlView?.returnButtonHalfOnScreen.isHidden = true
 
             case .locked:
                 sself.playLockState = .notLocked
                 sself.controlView?.isPlayerLocked = false
+                sself.controlView?.returnButtonHalfOnScreen.isHidden = false
+
             }
         }
 

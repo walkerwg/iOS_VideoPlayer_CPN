@@ -588,7 +588,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             fullOrSmallButton.isHidden = false
             titleLabel.isHidden = true
 
-            returnButtonHalfOnScreen.isHidden = true
+            returnButtonHalfOnScreen.isHidden = false
             // 暂时不加了
             lockPlayScreenButton.isHidden = true
             lockPlayScreenButton.removeFromSuperview()
@@ -648,7 +648,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             fullOrSmallButton.frame = CGRect(x: bottomBar.frame.width - space - playOrPauseButtonWidth, y: playOrPauseButton.frame.minY, width: playOrPauseButtonWidth, height: playOrPauseButtonWidth)
 
             currentTimeLabel.frame = CGRect(x: bottomBar.frame.width - 2 * space - playOrPauseButtonWidth - currentTimeLabelWidth, y: playOrPauseButton.frame.minY, width: currentTimeLabelWidth, height: playOrPauseButtonWidth)
-            currentTimeLabel.font = UIFont.systemFont(ofSize: 10)
+            currentTimeLabel.font = UIFont.systemFont(ofSize: 12)
             currentTimeLabel.textColor = UIColor.init("e7e8ed")
             currentTimeLabel.textAlignment = .right
 
@@ -765,8 +765,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             bottomBar.frame = CGRect(x: 0, y: self.frame.height - bottom_height, width: self.frame.width, height: bottom_height)
             bottomBar.gradientColor(CGPoint(x: 0, y: 0), CGPoint(x: 0, y: 1), [color2.cgColor, color1.cgColor])
             // 进度条
-            playSlider.frame = CGRect(x: space, y: bottomBar.height * 26.0 / 84.0 , width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height:2)
-            loadProgressView.frame = CGRect(x: space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * space - 2 * X_fullScreen, height: 0.5)
+            playSlider.frame = CGRect(x: m_space, y: bottomBar.height * 26.0 / 84.0 , width: bottomBar.frame.width - 2 * m_space, height:2)
+            loadProgressView.frame = CGRect(x: m_space + 2, y: bottomBar.height * 26.0 / 84.0, width: bottomBar.frame.width - 2 * m_space, height: 0.5)
             loadProgressView.layer.cornerRadius = 1;
             loadProgressView.layer.masksToBounds = true
 
@@ -781,7 +781,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
 //            totalTimeLabel.textAlignment = .center
             
             playOrPauseButton.isHidden = false
-            playOrPauseButton.frame = CGRect(x: space, y: playSlider.frame.maxY + 18/84.0 * bottomBar.height, width: img_w, height: img_w)
+            playOrPauseButton.frame = CGRect(x: m_space, y: playSlider.frame.maxY + 18/84.0 * bottomBar.height, width: img_w, height: img_w)
             
             nextButton.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY, width: img_w, height: img_w)
             
@@ -950,6 +950,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
     }
     
     @objc func doubleTap() {
+        if isPlayerLocked && isPlayerScreenLocked {
+            print("屏幕已经锁定，左侧锁屏 tapGestureHandler")
+            return
+        }
         JHKPlayerClosure.playOrPauseClosure?()
     }
     
