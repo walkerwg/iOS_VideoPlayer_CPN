@@ -41,6 +41,13 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
                     }
                 }
             }
+            if isFullOrHalfScreen() == .normal {
+                //小屏时返回键一直显示
+                self.returnButtonHalfOnScreen.isHidden = false
+            } else {
+                //全屏时返回键可隐藏
+                self.returnButtonHalfOnScreen.isHidden = isMenuHidden
+            }
             isSideMenuShow = false
         }
     }
