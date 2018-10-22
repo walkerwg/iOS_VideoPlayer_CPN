@@ -1370,9 +1370,9 @@ extension JHKPlayerView {
         // Input gesture signal when touch began
         case .began:
             // 开始拖动时隐藏播放暂停按钮
-            if isFullOrHalfScreen() == .normal {
-                playOrPauseButton.isHidden = true
-            }
+//            if isFullOrHalfScreen() == .normal {
+//                playOrPauseButton.isHidden = true
+//            }
             JHKPlayerView.self.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hideMenu), object: nil)
             let x: CGFloat = fabs(velocityPoint.x)
             let y: CGFloat = fabs(velocityPoint.y)
@@ -1383,9 +1383,9 @@ extension JHKPlayerView {
             self.gestureLeftSignal = startPoint.x < self.bounds.size.width / 2
             self.addSubview(dragHud)
         case .changed:
-            if isFullOrHalfScreen() == .normal {
-                playOrPauseButton.isHidden = true
-            }
+//            if isFullOrHalfScreen() == .normal {
+//                playOrPauseButton.isHidden = true
+//            }
             let valueX: CGFloat = velocityPoint.x
             let valueY: CGFloat = velocityPoint.y
             if horizontalSignal {
@@ -1435,11 +1435,11 @@ extension JHKPlayerView {
                 dragLabel.text = String(format: "%.0f%%", ((volumeViewSlider?.value)! * 100))
             }
         case .ended:
-            if self.topBar.isHidden == false {
-                self.playOrPauseButton.isHidden = false
-            }else {
-                self.playOrPauseButton.isHidden = true
-            }
+//            if self.topBar.isHidden == false {
+//                self.playOrPauseButton.isHidden = false
+//            }else {
+//                self.playOrPauseButton.isHidden = true
+//            }
             if internalDelegate?.autoHiddenMenu == true {
                 self.perform(#selector(hideMenu), with: nil, afterDelay: 5)
             }
