@@ -481,7 +481,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
         if playerType == .JHK_PLAYERVIEW_EDUTYPE {
             // 收藏 下载
 //            self.controlView?.collectButton.isHidden = true
-            self.controlView?.downloadButton.isHidden = false
+            self.controlView?.downloadButton.isHidden = true
             // slider
             self.controlView?.playSlider.minimumTrackTintColor = UIColor.init("19cf8d")
         }

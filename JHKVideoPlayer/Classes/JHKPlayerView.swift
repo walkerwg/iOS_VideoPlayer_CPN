@@ -633,7 +633,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - space - imgHorizontalSpace * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
-                downloadButton.isHidden = false
+                downloadButton.isHidden = true
 //                collectButton.isHidden = true
             } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
                 downloadButton.isHidden = true
@@ -733,7 +733,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             downloadButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             collectButton.frame = CGRect(x: topBar.width - imgWidth * 3 - m_space - b_space * 2, y:returnButton.frame.minY - 2, width: imgWidth, height: imgWidth)
             if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
-                downloadButton.isHidden = false
+                downloadButton.isHidden = true
 //                collectButton.isHidden = true
             } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
                 downloadButton.isHidden = true
