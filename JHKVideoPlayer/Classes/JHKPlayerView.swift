@@ -43,7 +43,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             }
             if isFullOrHalfScreen() == .normal {
                 //小屏时返回键一直显示
-                self.returnButtonHalfOnScreen.isHidden = false
+                 self.returnButtonHalfOnScreen.isHidden = false
             } else {
                 //全屏时返回键可隐藏
                 self.returnButtonHalfOnScreen.isHidden = isMenuHidden
@@ -314,6 +314,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
         let label = UILabel()
         label.textColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 10.0)
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.6
         label.textAlignment = .left
         return label
     }()
@@ -698,7 +700,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             fullOrSmallButton.isHidden = true
             moreButton.isHidden = false
             returnButtonHalfOnScreen.isHidden = true
-            nextButton.isHidden = false
+            
+            nextButton.isHidden = true
             titleLabel.isHidden = false
 
 //            topBar.addSubview(moreButton)
@@ -794,7 +797,7 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             
             // 设置全屏时字体大小
             currentTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
-            currentTimeLabel.frame = CGRect(x: nextButton.frame.maxX + space , y:  playOrPauseButton.frame.minY, width: 200, height: img_w)
+            currentTimeLabel.frame = CGRect(x: playOrPauseButton.frame.maxX + space , y:  playOrPauseButton.frame.minY, width: 200, height: img_w)
             currentTimeLabel.textAlignment = .left
 
             moreButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
@@ -1195,6 +1198,8 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             let q: CGFloat
             if self.sideMenuForDefinition! { q = 4 } else { q = 3 }
             self.sideMenu.frame = CGRect(x: kScreenHeight * q / 5, y: 0, width: kScreenHeight * 2 / 5, height: kScreenWidth)
+        }, completion: { (_) in
+            self.lockPlayScreenButton.isHidden = true
         })
     }
 

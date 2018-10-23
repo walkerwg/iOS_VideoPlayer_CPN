@@ -220,7 +220,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
 
     // MARK: - Core component
     // Lazy load AVPlayer as the core media player
-    private var player: AVPlayer?
+    open var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
     private var playerItem: AVPlayerItem?
     private var playerAsset: AVURLAsset?
@@ -280,7 +280,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     // Played video length
     public var currentTime: CGFloat? {
         didSet {
-            guard let currentTime = currentTime else { return }
+            guard var currentTime = currentTime else { return }
+            if currentTime < 0.001 {
+                currentTime = 0.0
+            }
             controlView?.playSlider.setValue(Float(currentTime), animated: true)
             let timeCurrent :String = formatTimer(currentTime)
             if isFull == .full {
@@ -347,9 +350,10 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     
     // MARK: - Public Util Function
     public func formatTimer(_ time: CGFloat) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(time))
+        let t = time - 8 * 60 * 60
+        let date = Date(timeIntervalSince1970: TimeInterval(t))
         let formatter = DateFormatter()
-        if time / 3600 > 1 {
+        if time / 3600 >= 1 {
             formatter.dateFormat = "HH:mm:ss"
         } else {
             formatter.dateFormat = "mm:ss"
@@ -633,7 +637,7 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
                 self?.actionDelegate?.breakPointListener(time: currentSecond)
             })
             if startPoint != nil {
-                player?.seek(to: CMTime(seconds: Double(startPoint!), preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
+                self.player?.seek(to: CMTime(seconds: Double(startPoint!), preferredTimescale: CMTimeScale(NSEC_PER_SEC)), toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
                 startPoint = nil
             }
         }
