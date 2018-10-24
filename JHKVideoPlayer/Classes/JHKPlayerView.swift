@@ -1415,6 +1415,9 @@ extension JHKPlayerView {
                 if (string == nil) {return}
                 let attrstring:NSMutableAttributedString = NSMutableAttributedString(string:string!)
                 let str = NSString(string: string!)
+                if !str.contains("/") {
+                    return
+                }
                 let theRange = str.range(of: "/")
                 let range = NSRange.init(location: 0, length: theRange.location)
                 attrstring.addAttribute(.foregroundColor, value: UIColor.init("19cf8d"), range: range)

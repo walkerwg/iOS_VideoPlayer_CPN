@@ -326,7 +326,11 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             guard let totalTime = totalTime else { return }
             let timeTotal = formatTimer(totalTime)
             controlView?.totalTimeLabel.text = "\(timeTotal)"
-            controlView?.playSlider.maximumValue = Float(totalTime)
+            let a = Float(totalTime)
+            if a.isNaN {
+                return
+            }
+            controlView?.playSlider.maximumValue = a
             if tail_length != nil && tail_length! > CGFloat(0) {
                 endPoint = totalTime - tail_length!
             }
@@ -350,15 +354,15 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
     
     // MARK: - Public Util Function
     public func formatTimer(_ time: CGFloat) -> String {
-        let t = time - 8 * 60 * 60
-        let date = Date(timeIntervalSince1970: TimeInterval(t))
-        let formatter = DateFormatter()
-        if time / 3600 >= 1 {
-            formatter.dateFormat = "HH:mm:ss"
+        let t = Int(time)
+        let h = String.init(format: "%02d", t/3600)
+        let m = String.init(format: "%02d", t%3600/60)
+        let s = String.init(format: "%02d", t%60)
+        if t >= 3600 {
+            return String.init(format: "%@:%@:%@",h,m,s )
         } else {
-            formatter.dateFormat = "mm:ss"
+            return String.init(format: "%@:%@",m,s )
         }
-        return formatter.string(from: date)
     }
 
     // Check if network is in lag
