@@ -792,12 +792,17 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             
             playOrPauseButton.isHidden = false
             playOrPauseButton.frame = CGRect(x: m_space, y: playSlider.frame.maxY + 18/84.0 * bottomBar.height, width: img_w, height: img_w)
-            
-            nextButton.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY, width: img_w, height: img_w)
-            
+        
+            if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_EDUTYPE {
+                nextButton.isHidden = false
+                nextButton.frame = CGRect(x: playOrPauseButton.frame.maxX + space, y: playOrPauseButton.frame.minY, width: img_w, height: img_w)
+            } else if playerViewType == JHKPlayerViewType.JHK_PLAYERVIEW_JHKTYPE {
+                nextButton.isHidden = true
+                nextButton.frame = CGRect(x: playOrPauseButton.frame.maxX, y: playOrPauseButton.frame.minY, width: 0, height: 0)
+            }
             // 设置全屏时字体大小
             currentTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
-            currentTimeLabel.frame = CGRect(x: playOrPauseButton.frame.maxX + space , y:  playOrPauseButton.frame.minY, width: 200, height: img_w)
+            currentTimeLabel.frame = CGRect(x: nextButton.frame.maxX + space , y:  playOrPauseButton.frame.minY, width: 200, height: img_w)
             currentTimeLabel.textAlignment = .left
 
             moreButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
