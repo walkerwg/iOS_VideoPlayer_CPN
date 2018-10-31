@@ -806,10 +806,10 @@ open class JHKPlayerView: UIView, UITextViewDelegate {
             currentTimeLabel.textAlignment = .left
 
             moreButton.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeFull)
-            moreButton.frame = CGRect(x: bottomBar.frame.width - 35 - m_space  , y:  playOrPauseButton.frame.minY, width: 35, height: nextButton.frame.height)
+            moreButton.frame = CGRect(x: bottomBar.frame.width - 35 - m_space  , y:  playOrPauseButton.frame.minY, width: 35, height: playOrPauseButton.frame.height)
             // 清晰度切换
             definitionButton.titleLabel!.font = UIFont.systemFont(ofSize: fontSizeFull)
-            definitionButton.frame = CGRect(x: bottomBar.frame.width - 30 - m_space - b_space - 30 , y: playOrPauseButton.frame.minY, width: moreButton.frame.width, height: nextButton.frame.height)
+            definitionButton.frame = CGRect(x: bottomBar.frame.width - 30 - m_space - b_space - 30 , y: playOrPauseButton.frame.minY, width: moreButton.frame.width, height: playOrPauseButton.frame.height)
             
 //            totalTimeLabel.font = UIFont.systemFont(ofSize: fontSizeFull)
             // 导航栏右侧

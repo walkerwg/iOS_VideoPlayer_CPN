@@ -492,6 +492,8 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             self.controlView?.downloadButton.isHidden = true
             // slider
             self.controlView?.playSlider.minimumTrackTintColor = UIColor.init("19cf8d")
+            self.controlView?.playSlider.setThumbImage(UIImage.imageInBundle(named: "player_slider"), for: .normal)
+            self.controlView?.playSlider.minimumTrackTintColor = JHKPlayerView.sliderMinColor
         }
         if playerType == .JHK_PLAYERVIEW_JHKTYPE {
             // 收藏 下载
@@ -499,6 +501,8 @@ open class JHKVideoPlayer: UIView, JHKInternalTransport {
             self.controlView?.downloadButton.isHidden = true
             // slider
             self.controlView?.playSlider.minimumTrackTintColor = UIColor.init("EC1D39")
+            self.controlView?.playSlider.minimumTrackTintColor = UIColor.init("EC1D39")
+            self.controlView?.playSlider.setThumbImage(UIImage.imageInBundle(named: "player_slider_movie_small"), for: .normal)
         }
     }
     
