@@ -31,6 +31,7 @@ protocol JHKInternalTransport: class {
     func isFullScreen() -> JHKPlayerFullScreenMode
     func collagenScreen()
     func fullScreen()
+    func volumeChange(value: Float)
 }
 
 /// Handler on screen guesture. if you plan on customize own intereaction, simply modify playerView.customizeGestureHandler which default as 'self'.

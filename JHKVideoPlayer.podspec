@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JHKVideoPlayer'
-  s.version          = '4.11.7'
+  s.version          = '30.0.0'
   s.summary          = 'JHKVideoPlayer - A video player for JHK company.'
 
 # This description is used to generate tags and improve search results.
@@ -27,10 +27,19 @@ This is a video player control written by Swift, which achieved a highly complet
   s.author           = { 'luis_gin' => 'hanqing93@gmail.com' }
   s.source           = { :git => 'http://10.18.207.188/iOSModules/iOS_VideoPlayer_CPN', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
   s.ios.deployment_target = '9.0'
-
-  s.source_files = 'JHKVideoPlayer/Classes/**/*'
+  s.source_files = 'JHKVideoPlayer/Classes/*'
+  
+  
+  #-----------------------文件分级-------------------#
+  s.subspec 'Category' do |ss|
+      ss.source_files = 'JHKVideoPlayer/Classes/Category/*'
+  end
+  s.subspec 'JHKVideoPlayer' do |ss|
+      ss.source_files = 'JHKVideoPlayer/Classes/JHKVideoPlayer/*'
+      ss.dependency 'JHKVideoPlayer/Category'
+  end
+  #-----------------------文件分级-------------------#
   
   s.resource_bundles = {
     'JHKVideoPlayer' => ['JHKVideoPlayer/Assets/**/*']
