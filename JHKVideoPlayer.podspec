@@ -33,10 +33,10 @@ This is a video player control written by Swift, which achieved a highly complet
   
   #-----------------------文件分级-------------------#
   s.subspec 'Category' do |ss|
-      ss.source_files = 'JHKVideoPlayer/Classes/Category/*'
+      ss.source_files = 'JHKVideoPlayer/Classes/Category/**/*'
   end
   s.subspec 'JHKVideoPlayer' do |ss|
-      ss.source_files = 'JHKVideoPlayer/Classes/JHKVideoPlayer/*'
+      ss.source_files = 'JHKVideoPlayer/Classes/JHKVideoPlayer/**/*'
       ss.dependency 'JHKVideoPlayer/Category'
   end
   #-----------------------文件分级-------------------#
