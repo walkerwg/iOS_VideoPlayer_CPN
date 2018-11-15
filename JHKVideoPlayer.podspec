@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JHKVideoPlayer'
-  s.version          = '30.0.3'
+  s.version          = '30.0.5'
   s.summary          = 'JHKVideoPlayer - A video player for JHK company.'
 
 # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ This is a video player control written by Swift, which achieved a highly complet
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'luis_gin' => 'hanqing93@gmail.com' }
-  s.source           = { :git => 'http://10.18.207.188/iOSModules/iOS_VideoPlayer_CPN', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/walkerwg/Spec.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   s.pod_target_xcconfig = {
       'SWIFT_VERSION' => '4.1',
