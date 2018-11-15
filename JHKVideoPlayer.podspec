@@ -27,23 +27,28 @@ This is a video player control written by Swift, which achieved a highly complet
   s.author           = { 'luis_gin' => 'hanqing93@gmail.com' }
   s.source           = { :git => 'http://10.18.207.188/iOSModules/iOS_VideoPlayer_CPN', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.pod_target_xcconfig = {
+      'SWIFT_VERSION' => '4.1',
+  }
   s.ios.deployment_target = '9.0'
-  s.source_files = 'JHKVideoPlayer/Classes/**/*'
+  # s.source_files = 'JHKVideoPlayer/Classes/**/*'
   
   
   #-----------------------文件分级-------------------#
-  s.subspec 'Category' do |ss|
-      ss.source_files = 'JHKVideoPlayer/Classes/Category/**/*'
-  end
-  s.subspec 'JHKVideoPlayer' do |ss|
-      ss.source_files = 'JHKVideoPlayer/Classes/JHKVideoPlayer/**/*'
+  s.default_subspec = 'AVPlayer'
+  s.subspec 'AVPlayer' do |ss|
+      ss.source_files = 'JHKVideoPlayer/Classes/AVPlayer/*.swift'
       ss.dependency 'JHKVideoPlayer/Category'
   end
+  s.subspec 'Category' do |ss|
+      ss.source_files = 'JHKVideoPlayer/Classes/Category/*.swift'
+  end
+
   #-----------------------文件分级-------------------#
   
   s.resource_bundles = {
     'JHKVideoPlayer' => ['JHKVideoPlayer/Assets/**/*']
 }
-  s.dependency 'Alamofire', '4.7.2'
+  # s.dependency 'Alamofire', '4.7.2'
 
 end
